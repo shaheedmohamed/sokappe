@@ -48,4 +48,30 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // العلاقات
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
+    }
+
+    public function bids()
+    {
+        return $this->hasMany(Bid::class);
+    }
+
+    public function works()
+    {
+        return $this->hasMany(Work::class);
+    }
+
+    public function freelancerProfile()
+    {
+        return $this->hasOne(FreelancerProfile::class);
+    }
 }

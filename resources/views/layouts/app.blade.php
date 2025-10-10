@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Sokappe') }}</title>
+        <title>Sokappe</title>
 
         <style>
             :root { 
@@ -132,6 +132,10 @@
                 .nav-links { gap:12px; }
                 .features-grid { grid-template-columns: 1fr; }
             }
+            
+            /* Tab System */
+            .tab.active { color: var(--primary) !important; border-bottom-color: var(--primary) !important; }
+            .hidden { display: none !important; }
         </style>
     </head>
     <body>

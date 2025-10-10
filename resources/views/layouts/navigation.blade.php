@@ -3,8 +3,9 @@
     <a class="brand" href="/">Sokappe</a>
     <div class="nav-links">
       <a href="/">الرئيسية</a>
-      <a href="#">تصفح المشاريع</a>
-      <a href="#">تصفح الخدمات</a>
+      <a href="{{ route('projects.index') }}">تصفح المشاريع</a>
+      <a href="{{ route('services.index') }}">تصفح الخدمات</a>
+      <a href="{{ route('deals.index') }}">💎 الصفقات</a>
       @auth
         @if(Auth::user()->role === 'freelancer')
           <a href="#">خدماتي</a>
@@ -21,9 +22,9 @@
             <span style="font-size: 12px;">▼</span>
           </button>
           <div id="userDropdown" style="display: none; position: absolute; top: 100%; right: 0; background: white; border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow); min-width: 200px; z-index: 1000;">
+            <a href="{{ route('dashboard') }}" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border);">📊 لوحة التحكم</a>
             <a href="{{ route('profile.show', Auth::user()) }}" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border);">👤 الملف الشخصي</a>
             <a href="{{ route('profile.edit') }}" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border);">⚙️ الإعدادات</a>
-            <a href="{{ route('dashboard') }}" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border);">📊 لوحة التحكم</a>
             <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
               @csrf
               <button type="submit" style="width: 100%; text-align: right; padding: 12px 16px; background: none; border: none; color: var(--danger); cursor: pointer;">🚪 تسجيل الخروج</button>

@@ -11,7 +11,9 @@ class BidController extends Controller
 {
     public function create(Project $project)
     {
-        return view('bids.create', compact('project'));
+        $project->load('user', 'bids.user');
+        $otherBids = $project->bids()->where('user_id', '!=', Auth::id())->latest()->take(5)->get();
+        return view('bids.create', compact('project', 'otherBids'));
     }
 
     public function store(Request $request, Project $project)
@@ -22,12 +24,18 @@ class BidController extends Controller
             'message' => 'nullable|string|max:2000',
         ]);
 
-        Bid::create($data + [
+        Bid::create([
             'project_id' => $project->id,
-            'freelancer_id' => Auth::id(),
+            'user_id' => Auth::id(),
+            'freelancer_id' => Auth::id(), // للتوافق مع النسخة القديمة
+            'amount' => $data['price'],
+            'price' => $data['price'], // للتوافق مع النسخة القديمة
+            'delivery_time' => $data['days'],
+            'days' => $data['days'], // للتوافق مع النسخة القديمة
+            'message' => $data['message'],
             'status' => 'pending',
         ]);
 
-        return redirect('/')->with('status', 'bid-submitted');
+        return redirect()->route('projects.show', $project)->with('success', 'تم تقديم عرضك بنجاح!');
     }
 }

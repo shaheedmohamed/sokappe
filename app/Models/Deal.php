@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class Deal extends Model
 {
     use HasFactory;
 
@@ -13,10 +13,15 @@ class Service extends Model
         'user_id',
         'title',
         'description',
-        'price',
-        'delivery_time',
         'category',
-        'image',
+        'price',
+        'type', // 'offer' or 'request'
+        'status',
+        'images',
+    ];
+
+    protected $casts = [
+        'images' => 'array',
     ];
 
     public function user()

@@ -10,17 +10,22 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'employer_id',
+        'user_id',
         'title',
         'description',
         'budget_min',
         'budget_max',
-        'duration_days',
-        'status',
+        'duration',
+        'skills',
     ];
 
-    public function employer()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'employer_id');
+        return $this->belongsTo(User::class);
+    }
+
+    public function bids()
+    {
+        return $this->hasMany(Bid::class);
     }
 }

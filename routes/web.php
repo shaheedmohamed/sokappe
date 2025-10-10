@@ -2,15 +2,19 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BidController;
+use App\Http\Controllers\DealController;
 
 Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $user = Auth::user();
+    $myBids = \App\Models\Bid::where('user_id', $user->id)->with('project')->latest()->get();
+    return view('dashboard', compact('myBids'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -23,6 +27,14 @@ Route::middleware('auth')->group(function () {
 Route::get('/u/{user}', [ProfileController::class, 'show'])->name('profile.show');
 Route::get('/u/{user}/portfolio', [ProfileController::class, 'portfolio'])->name('profile.portfolio');
 
+// Public routes
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+Route::get('/services/{service}', [ServiceController::class, 'show'])->name('services.show');
+Route::get('/deals', [DealController::class, 'index'])->name('deals.index');
+Route::get('/deals/{deal}', [DealController::class, 'show'])->name('deals.show');
+
 Route::middleware('auth')->group(function () {
     // Projects
     Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
@@ -33,6 +45,10 @@ Route::middleware('auth')->group(function () {
     // Services
     Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
     Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
+    
+    // Deals
+    Route::get('/deals/create', [DealController::class, 'create'])->name('deals.create');
+    Route::post('/deals', [DealController::class, 'store'])->name('deals.store');
 });
 
 require __DIR__.'/auth.php';

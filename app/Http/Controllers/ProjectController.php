@@ -8,6 +8,18 @@ use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
+    public function index()
+    {
+        $projects = Project::with('user')->latest()->paginate(12);
+        return view('projects.index', compact('projects'));
+    }
+
+    public function show(Project $project)
+    {
+        $project->load('user', 'bids.user');
+        return view('projects.show', compact('project'));
+    }
+
     public function create()
     {
         return view('projects.create');
@@ -15,17 +27,17 @@ class ProjectController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'budget_min' => 'nullable|integer|min:0',
-            'budget_max' => 'nullable|integer|min:0',
-            'duration_days' => 'nullable|integer|min:1',
+            'budget_min' => 'required|numeric|min:0',
+            'budget_max' => 'required|numeric|min:0|gte:budget_min',
+            'duration' => 'nullable|string',
+            'skills' => 'nullable|string',
         ]);
 
-        $data['employer_id'] = Auth::id();
-        Project::create($data);
+        Project::create($validated + ['user_id' => Auth::id()]);
 
-        return redirect('/')->with('status', 'project-created');
+        return redirect()->route('projects.index')->with('success', 'تم نشر المشروع بنجاح!');
     }
 }

@@ -35,9 +35,18 @@
           @error('budget_max')<span class="form-error">{{ $message }}</span>@enderror
         </div>
         <div class="form-group">
-          <label class="form-label" for="duration_days">⏰ مدة التنفيذ (أيام)</label>
-          <input class="form-input @error('duration_days') error @enderror" type="number" id="duration_days" name="duration_days" value="{{ old('duration_days') }}" placeholder="14">
-          @error('duration_days')<span class="form-error">{{ $message }}</span>@enderror
+          <label class="form-label" for="duration">⏰ مدة التنفيذ</label>
+          <input class="form-input @error('duration') error @enderror" type="text" id="duration" name="duration" value="{{ old('duration') }}" placeholder="14 يوم">
+          @error('duration')<span class="form-error">{{ $message }}</span>@enderror
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="skills">🛠️ المهارات المطلوبة</label>
+        <input class="form-input @error('skills') error @enderror" type="text" id="skills" name="skills" value="{{ old('skills') }}" placeholder="HTML, CSS, JavaScript, PHP">
+        @error('skills')<span class="form-error">{{ $message }}</span>@enderror
+        <div style="font-size: 12px; color: var(--muted); margin-top: 6px;">
+          💡 اكتب المهارات مفصولة بفواصل
         </div>
       </div>
 
