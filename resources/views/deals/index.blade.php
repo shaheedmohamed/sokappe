@@ -15,11 +15,11 @@
             </p>
             
             <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                <a href="{{ route('projects.create') }}" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.3); padding: 16px 32px; font-size: 18px; font-weight: 600; text-decoration: none; border-radius: 12px; transition: all 0.3s;" onmouseover="this.style.background='white'; this.style.color='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.color='white'">
+                <a href="{{ route('projects.create.new') }}" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.3); padding: 16px 32px; font-size: 18px; font-weight: 600; text-decoration: none; border-radius: 12px; transition: all 0.3s;" onmouseover="this.style.background='white'; this.style.color='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.color='white'">
                     ✍️ أنشئ مشروع جديد
                 </a>
-                <a href="{{ route('services.create') }}" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.3); padding: 16px 32px; font-size: 18px; font-weight: 600; text-decoration: none; border-radius: 12px; transition: all 0.3s;" onmouseover="this.style.background='white'; this.style.color='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.color='white'">
-                    🚀 اعرض خدمتك
+                <a href="{{ route('services.create.new') }}" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.3); padding: 16px 32px; font-size: 18px; font-weight: 600; text-decoration: none; border-radius: 12px; transition: all 0.3s;" onmouseover="this.style.background='white'; this.style.color='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.color='white'">
+                    🚀 اعرض خدمة جاهزة
                 </a>
                 <a href="{{ route('deals.create') }}" class="btn" style="background: var(--warning); color: white; border: 2px solid var(--warning); padding: 16px 32px; font-size: 18px; font-weight: 600; text-decoration: none; border-radius: 12px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px -5px rgba(245, 158, 11, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                     💎 الصفقات

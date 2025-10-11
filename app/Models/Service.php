@@ -15,6 +15,7 @@ class Service extends Model
         'description',
         'price',
         'delivery_time',
+        'delivery_days',
         'category',
         'image',
     ];
@@ -22,5 +23,15 @@ class Service extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_service');
+    }
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class, 'service_skill');
     }
 }

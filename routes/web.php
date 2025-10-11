@@ -11,6 +11,15 @@ use App\Http\Controllers\DealController;
 
 Route::get('/', [HomeController::class, 'index']);
 
+// Create routes (working)
+Route::get('/projects-create', function() {
+    return view('projects.create');
+})->name('projects.create.new');
+
+Route::get('/services-create', function() {
+    return view('services.create');
+})->name('services.create.new');
+
 Route::get('/dashboard', function () {
     $user = Auth::user();
     $myBids = \App\Models\Bid::where('user_id', $user->id)->with('project')->latest()->get();
@@ -35,23 +44,61 @@ Route::get('/services/{service}', [ServiceController::class, 'show'])->name('ser
 Route::get('/deals', [DealController::class, 'index'])->name('deals.index');
 Route::get('/deals/{deal}', [DealController::class, 'show'])->name('deals.show');
 
+// Projects (temporarily without auth for testing)
+Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
+Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
+
 Route::middleware('auth')->group(function () {
     // Projects
-    Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
     Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/projects/{project}/bid', [BidController::class, 'create'])->name('projects.bid.create');
     Route::post('/projects/{project}/bid', [BidController::class, 'store'])->name('projects.bid.store');
 
     // Services
-    Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
     Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
     
     // Deals
     Route::get('/deals/create', [DealController::class, 'create'])->name('deals.create');
     Route::post('/deals', [DealController::class, 'store'])->name('deals.store');
+
+    // Conversations & Messages
+    Route::get('/inbox', [\App\Http\Controllers\ConversationController::class, 'index'])->name('conversations.index');
+    Route::get('/inbox/{conversation}', [\App\Http\Controllers\ConversationController::class, 'show'])->name('conversations.show');
+    Route::post('/inbox/{conversation}', [\App\Http\Controllers\ConversationController::class, 'store'])->name('conversations.store');
+
+    // Contracts
+    Route::post('/bids/{bid}/accept', [\App\Http\Controllers\ContractController::class, 'acceptBid'])->name('bids.accept');
+    Route::post('/contracts/{contract}/complete', [\App\Http\Controllers\ContractController::class, 'complete'])->name('contracts.complete');
 });
 
 require __DIR__.'/auth.php';
+
+// Admin Routes
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Dashboard
+    Route::get('/', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/analytics', [\App\Http\Controllers\Admin\AdminDashboardController::class, 'analytics'])->name('analytics');
+    
+    // Users Management
+    Route::get('/users', [\App\Http\Controllers\Admin\AdminUsersController::class, 'index'])->name('users.index');
+    Route::get('/users/{user}', [\App\Http\Controllers\Admin\AdminUsersController::class, 'show'])->name('users.show');
+    Route::delete('/users/{user}', [\App\Http\Controllers\Admin\AdminUsersController::class, 'destroy'])->name('users.destroy');
+    Route::patch('/users/{user}/toggle-status', [\App\Http\Controllers\Admin\AdminUsersController::class, 'toggleStatus'])->name('users.toggle-status');
+    
+    // Projects Management
+    Route::get('/projects', function() { return view('admin.projects.index'); })->name('projects.index');
+    Route::get('/services', function() { return view('admin.services.index'); })->name('services.index');
+    Route::get('/bids', function() { return view('admin.bids.index'); })->name('bids.index');
+    
+    // Conversations Monitoring
+    Route::get('/conversations', [\App\Http\Controllers\Admin\AdminConversationsController::class, 'index'])->name('conversations.index');
+    Route::get('/conversations/{conversation}', [\App\Http\Controllers\Admin\AdminConversationsController::class, 'show'])->name('conversations.show');
+    Route::delete('/conversations/{conversation}', [\App\Http\Controllers\Admin\AdminConversationsController::class, 'destroy'])->name('conversations.destroy');
+    
+    // Reports & Settings
+    Route::get('/reports', function() { return view('admin.reports.index'); })->name('reports.index');
+    Route::get('/settings', function() { return view('admin.settings'); })->name('settings');
+});
 
 // Onboarding (authenticated users)
 Route::middleware('auth')->prefix('onboarding')->name('onboarding.')->group(function () {

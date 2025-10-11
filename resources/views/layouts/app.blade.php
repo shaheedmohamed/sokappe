@@ -160,11 +160,31 @@
             @endif
             
             @if(session('error'))
-                <div style="background: var(--danger); color: white; padding: 16px; margin: 20px auto; max-width: 1200px; border-radius: 8px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow);">
+                <div id="errorAlert" style="background: var(--danger); color: white; padding: 16px; margin: 20px auto; max-width: 1200px; border-radius: 8px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow); animation: slideDown 0.5s ease-out;">
                     <span style="font-size: 20px;">❌</span>
                     <span style="font-weight: 600;">{{ session('error') }}</span>
                     <button onclick="this.parentElement.style.display='none'" style="margin-right: auto; background: none; border: none; color: white; font-size: 18px; cursor: pointer; padding: 4px;">×</button>
                 </div>
+                <script>
+                    // Auto-hide error message after 8 seconds
+                    setTimeout(function() {
+                        const errorAlert = document.getElementById('errorAlert');
+                        if (errorAlert) {
+                            errorAlert.style.animation = 'slideUp 0.5s ease-out';
+                            setTimeout(() => errorAlert.style.display = 'none', 500);
+                        }
+                    }, 8000);
+                </script>
+                <style>
+                    @keyframes slideDown {
+                        from { opacity: 0; transform: translateY(-20px); }
+                        to { opacity: 1; transform: translateY(0); }
+                    }
+                    @keyframes slideUp {
+                        from { opacity: 1; transform: translateY(0); }
+                        to { opacity: 0; transform: translateY(-20px); }
+                    }
+                </style>
             @endif
             
             {{ $slot ?? '' }}

@@ -16,7 +16,9 @@ class Project extends Model
         'budget_min',
         'budget_max',
         'duration',
+        'category',
         'skills',
+        'status',
     ];
 
     public function user()
@@ -27,5 +29,15 @@ class Project extends Model
     public function bids()
     {
         return $this->hasMany(Bid::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'category_project');
+    }
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class, 'project_skill');
     }
 }

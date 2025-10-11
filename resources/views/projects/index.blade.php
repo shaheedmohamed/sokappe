@@ -15,7 +15,7 @@
             </p>
             
             @auth
-                <a href="{{ route('projects.create') }}" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.3); padding: 14px 28px; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 12px; transition: all 0.3s;" onmouseover="this.style.background='white'; this.style.color='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.color='white'">
+                <a href="{{ route('projects.create.new') }}" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.3); padding: 14px 28px; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 12px; transition: all 0.3s;" onmouseover="this.style.background='white'; this.style.color='var(--primary)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.color='white'">
                     ✍️ أنشئ مشروع جديد
                 </a>
             @endauth
@@ -86,7 +86,7 @@
                 <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
                     <div style="flex: 1;">
                         <h3 style="margin: 0 0 8px; color: var(--dark); font-size: 18px; line-height: 1.4;">
-                            <a href="{{ route('projects.show', $project) }}" style="color: inherit; text-decoration: none;">
+                            <a href="{{ route('projects.bid.create', $project) }}" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='inherit'">
                                 {{ $project->title }}
                             </a>
                         </h3>
@@ -176,7 +176,7 @@
                 <h3 style="margin: 0 0 12px; color: var(--dark);">لا توجد مشاريع متاحة حالياً</h3>
                 <p style="margin: 0 0 24px; font-size: 16px;">كن أول من ينشر مشروع جديد!</p>
                 @auth
-                    <a href="{{ route('projects.create') }}" class="btn btn-primary" style="text-decoration: none;">
+                    <a href="{{ route('projects.create.new') }}" class="btn btn-primary" style="text-decoration: none;">
                         ✍️ أنشئ مشروع جديد
                     </a>
                 @endauth

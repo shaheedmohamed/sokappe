@@ -281,7 +281,7 @@
       <h1>منصة Sokappe للعمل الحر</h1>
       <p>اعرض مشروعك أو اطلب خدمتك الآن – Sokappe يوصلك بأفضل المحترفين والمواهب العربية في جميع المجالات</p>
       <div class="hero-buttons">
-        <a href="{{ route('projects.create') }}" class="btn primary">ابدأ مشروعك الآن</a>
+        <a href="{{ route('projects.create.new') }}" class="btn primary">ابدأ مشروعك الآن</a>
         <a href="{{ route('register') }}" class="btn outline" style="background:rgba(255,255,255,0.1); border-color:white; color:white;">انضم كمحترف</a>
       </div>
     </div>
@@ -339,7 +339,7 @@
           <div class="grid">
             @foreach($projects as $p)
               <div class="card">
-                <h3>{{ $p->title }}</h3>
+                <h3><a href="{{ route('projects.bid.create', $p) }}" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='inherit'">{{ $p->title }}</a></h3>
                 <div class="meta">
                   💰 {{ $p->budget_min ?? 'غير محدد' }} - {{ $p->budget_max ?? 'غير محدد' }} ج
                   • ⏱️ {{ $p->duration_days ?? 'مرن' }} يوم
@@ -385,7 +385,7 @@
             <div style="font-size:48px; margin-bottom:16px;">🛍️</div>
             <h3>لا توجد خدمات متاحة حالياً</h3>
             <p class="muted">انضم كمحترف وابدأ في عرض خدماتك</p>
-            <a href="{{ route('services.create') }}" class="btn primary">اعرض خدمتك</a>
+            <a href="{{ route('services.create.new') }}" class="btn primary">اعرض خدمتك</a>
           </div>
         @endif
       </div>

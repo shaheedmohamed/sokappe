@@ -17,7 +17,9 @@
                 <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
                     <div>
                         <h1 style="margin: 0 0 12px; color: var(--dark); font-size: 28px; line-height: 1.3;">
-                            {{ $project->title }}
+                            <a href="{{ route('projects.bid.create', $project) }}" style="color: inherit; text-decoration: none; transition: color 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='inherit'">
+                                {{ $project->title }}
+                            </a>
                         </h1>
                         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
                             <span style="background: var(--secondary); color: white; padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;">
@@ -120,8 +122,24 @@
                             @auth
                                 @if(Auth::id() === $project->user_id)
                                     <div style="display: flex; gap: 8px;">
-                                        <button style="background: var(--secondary); color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">
-                                            قبول العرض
+                                        @if($project->status === 'open' && $bid->status === 'pending')
+                                            <form action="{{ route('bids.accept', $bid) }}" method="POST" style="display: inline;">
+                                                @csrf
+                                                <button type="submit" style="background: var(--secondary); color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" onclick="return confirm('هل أنت متأكد من قبول هذا العرض؟ سيتم رفض باقي العروض تلقائياً.')">
+                                                    ✅ قبول العرض
+                                                </button>
+                                            </form>
+                                        @elseif($bid->status === 'accepted')
+                                            <span style="background: #10b981; color: white; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600;">
+                                                ✅ مقبول
+                                            </span>
+                                        @elseif($bid->status === 'rejected')
+                                            <span style="background: #ef4444; color: white; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600;">
+                                                ❌ مرفوض
+                                            </span>
+                                        @else
+                                            <button style="background: var(--secondary); color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" disabled>
+                                                قبول العرض
                                         </button>
                                         <button style="background: transparent; color: var(--primary); border: 1px solid var(--primary); padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">
                                             مراسلة

@@ -22,6 +22,11 @@ class ProjectController extends Controller
 
     public function create()
     {
+        // Check if user is authenticated
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'يجب تسجيل الدخول أولاً لإنشاء مشروع');
+        }
+        
         return view('projects.create');
     }
 
@@ -33,10 +38,41 @@ class ProjectController extends Controller
             'budget_min' => 'required|numeric|min:0',
             'budget_max' => 'required|numeric|min:0|gte:budget_min',
             'duration' => 'nullable|string',
+            'category' => 'required|string',
             'skills' => 'nullable|string',
         ]);
 
-        Project::create($validated + ['user_id' => Auth::id()]);
+        // Create the project
+        $project = Project::create([
+            'user_id' => Auth::id(),
+            'title' => $validated['title'],
+            'description' => $validated['description'],
+            'budget_min' => $validated['budget_min'],
+            'budget_max' => $validated['budget_max'],
+            'duration' => $validated['duration'],
+            'category' => $validated['category'],
+            'status' => 'open',
+        ]);
+
+        // Handle skills if provided
+        if (!empty($validated['skills'])) {
+            $skillNames = array_map('trim', explode(',', $validated['skills']));
+            $skillIds = [];
+            
+            foreach ($skillNames as $skillName) {
+                if (!empty($skillName)) {
+                    $skill = \App\Models\Skill::firstOrCreate(
+                        ['name' => $skillName],
+                        ['slug' => \Illuminate\Support\Str::slug($skillName)]
+                    );
+                    $skillIds[] = $skill->id;
+                }
+            }
+            
+            if (!empty($skillIds)) {
+                $project->skills()->sync($skillIds);
+            }
+        }
 
         return redirect()->route('projects.index')->with('success', 'تم نشر المشروع بنجاح!');
     }

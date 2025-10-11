@@ -15,7 +15,7 @@
             </p>
             
             @auth
-                <a href="{{ route('services.create') }}" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.3); padding: 14px 28px; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 12px; transition: all 0.3s;" onmouseover="this.style.background='white'; this.style.color='var(--secondary)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.color='white'">
+                <a href="{{ route('services.create.new') }}" class="btn" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid rgba(255,255,255,0.3); padding: 14px 28px; font-size: 16px; font-weight: 600; text-decoration: none; border-radius: 12px; transition: all 0.3s;" onmouseover="this.style.background='white'; this.style.color='var(--secondary)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.color='white'">
                     🚀 اعرض خدمتك
                 </a>
             @endauth
@@ -163,7 +163,7 @@
                 <h3 style="margin: 0 0 12px; color: var(--dark);">لا توجد خدمات متاحة حالياً</h3>
                 <p style="margin: 0 0 24px; font-size: 16px;">كن أول من يعرض خدمة احترافية!</p>
                 @auth
-                    <a href="{{ route('services.create') }}" class="btn" style="background: var(--secondary); color: white; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600;">
+                    <a href="{{ route('services.create.new') }}" class="btn" style="background: var(--secondary); color: white; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-weight: 600;">
                         🚀 اعرض خدمتك
                     </a>
                 @endauth
@@ -220,7 +220,7 @@
             اعرض خدماتك واكسب المال من مهاراتك
         </p>
         @auth
-            <a href="{{ route('services.create') }}" class="btn" style="background: white; color: var(--secondary); padding: 16px 32px; font-size: 16px; font-weight: 700; text-decoration: none; border-radius: 12px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px -5px rgba(0, 0, 0, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            <a href="{{ route('services.create.new') }}" class="btn" style="background: white; color: var(--secondary); padding: 16px 32px; font-size: 16px; font-weight: 700; text-decoration: none; border-radius: 12px; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px -5px rgba(0, 0, 0, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
                 🚀 اعرض خدمتك الآن
             </a>
         @else

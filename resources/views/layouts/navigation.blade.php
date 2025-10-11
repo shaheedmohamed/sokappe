@@ -7,6 +7,9 @@
       <a href="{{ route('services.index') }}">تصفح الخدمات</a>
       <a href="{{ route('deals.index') }}">💎 الصفقات</a>
       @auth
+        <a href="{{ route('conversations.index') }}">📬 الرسائل</a>
+        <!-- <a href="{{ route('projects.create.new') }}" class="btn primary" style="padding: 8px 16px; margin: 0 5px;">+ إنشاء مشروع</a>
+        <a href="{{ route('services.create.new') }}" class="btn outline" style="padding: 8px 16px; margin: 0 5px;">+ إنشاء خدمة</a> -->
         @if(Auth::user()->role === 'freelancer')
           <a href="#">خدماتي</a>
         @endif

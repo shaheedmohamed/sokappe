@@ -113,13 +113,13 @@
         </a>
         
         @if(Auth::user()->role === 'freelancer')
-            <a href="{{ route('services.create') }}" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); padding: 24px; border-radius: 16px; text-align: center; color: white; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+            <a href="{{ route('services.create.new') }}" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); padding: 24px; border-radius: 16px; text-align: center; color: white; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
                 <div style="font-size: 48px; margin-bottom: 12px;">⚡</div>
                 <h3 style="margin: 0 0 8px; font-size: 18px; font-weight: 700;">اعرض خدمة</h3>
                 <p style="margin: 0; opacity: 0.9; font-size: 14px;">أضف خدمة جديدة</p>
             </a>
         @else
-            <a href="{{ route('projects.create') }}" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); padding: 24px; border-radius: 16px; text-align: center; color: white; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+            <a href="{{ route('projects.create.new') }}" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); padding: 24px; border-radius: 16px; text-align: center; color: white; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
                 <div style="font-size: 48px; margin-bottom: 12px;">✍️</div>
                 <h3 style="margin: 0 0 8px; font-size: 18px; font-weight: 700;">أنشئ مشروع</h3>
                 <p style="margin: 0; opacity: 0.9; font-size: 14px;">انشر مشروع جديد</p>

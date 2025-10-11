@@ -22,6 +22,11 @@ class ServiceController extends Controller
 
     public function create()
     {
+        // Check if user is authenticated
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'يجب تسجيل الدخول أولاً لإنشاء خدمة');
+        }
+        
         return view('services.create');
     }
 
@@ -30,17 +35,43 @@ class ServiceController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'delivery_time' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:5',
+            'delivery_days' => 'required|integer|min:1',
             'category' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|url',
+            'skills' => 'nullable|string',
         ]);
 
-        if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('services', 'public');
-        }
+        // Create the service
+        $service = Service::create([
+            'user_id' => Auth::id(),
+            'title' => $validated['title'],
+            'description' => $validated['description'],
+            'price' => $validated['price'],
+            'delivery_days' => $validated['delivery_days'],
+            'category' => $validated['category'],
+            'image' => $validated['image'] ?? null,
+        ]);
 
-        Service::create($validated + ['user_id' => Auth::id()]);
+        // Handle skills if provided
+        if (!empty($validated['skills'])) {
+            $skillNames = array_map('trim', explode(',', $validated['skills']));
+            $skillIds = [];
+            
+            foreach ($skillNames as $skillName) {
+                if (!empty($skillName)) {
+                    $skill = \App\Models\Skill::firstOrCreate(
+                        ['name' => $skillName],
+                        ['slug' => \Illuminate\Support\Str::slug($skillName)]
+                    );
+                    $skillIds[] = $skill->id;
+                }
+            }
+            
+            if (!empty($skillIds)) {
+                $service->skills()->sync($skillIds);
+            }
+        }
 
         return redirect()->route('services.index')->with('success', 'تم نشر الخدمة بنجاح!');
     }
