@@ -150,6 +150,23 @@
         @endisset
 
         <main>
+            <!-- Flash Messages -->
+            @if(session('success'))
+                <div style="background: var(--secondary); color: white; padding: 16px; margin: 20px auto; max-width: 1200px; border-radius: 8px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow);">
+                    <span style="font-size: 20px;">✅</span>
+                    <span style="font-weight: 600;">{{ session('success') }}</span>
+                    <button onclick="this.parentElement.style.display='none'" style="margin-right: auto; background: none; border: none; color: white; font-size: 18px; cursor: pointer; padding: 4px;">×</button>
+                </div>
+            @endif
+            
+            @if(session('error'))
+                <div style="background: var(--danger); color: white; padding: 16px; margin: 20px auto; max-width: 1200px; border-radius: 8px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow);">
+                    <span style="font-size: 20px;">❌</span>
+                    <span style="font-weight: 600;">{{ session('error') }}</span>
+                    <button onclick="this.parentElement.style.display='none'" style="margin-right: auto; background: none; border: none; color: white; font-size: 18px; cursor: pointer; padding: 4px;">×</button>
+                </div>
+            @endif
+            
             {{ $slot ?? '' }}
             @yield('content')
         </main>

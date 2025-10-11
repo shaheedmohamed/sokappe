@@ -215,28 +215,67 @@
             <!-- Bid Action -->
             @auth
                 @if(Auth::id() !== $project->user_id)
-                    <div class="card" style="margin-bottom: 24px;">
-                        <h3 style="margin: 0 0 16px; color: var(--dark);">💼 قدم عرضك</h3>
-                        
-                        <div style="background: var(--gray-50); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                <span style="color: var(--muted);">الميزانية المتوقعة</span>
-                                <span style="font-size: 16px; font-weight: 700; color: var(--primary);">{{ $project->budget_min }} - {{ $project->budget_max }} ج</span>
+                    @php
+                        $userBid = $project->bids->where('user_id', Auth::id())->first();
+                    @endphp
+                    
+                    @if($userBid)
+                        <!-- User already submitted a bid -->
+                        <div class="card" style="margin-bottom: 24px;">
+                            <h3 style="margin: 0 0 16px; color: var(--dark);">✅ عرضك المقدم</h3>
+                            
+                            <div style="background: var(--secondary); color: white; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="font-size: 18px; font-weight: 700;">{{ number_format($userBid->amount) }} ج</span>
+                                    <span style="font-size: 14px;">{{ $userBid->delivery_time }} أيام</span>
+                                </div>
+                                <div style="font-size: 12px; opacity: 0.9;">
+                                    قُدم {{ $userBid->created_at->diffForHumans() }}
+                                </div>
                             </div>
-                            <div style="font-size: 12px; color: var(--muted);">
-                                💡 قدم عرضاً تنافسياً لزيادة فرص قبولك
+                            
+                            @if($userBid->message)
+                                <div style="background: var(--gray-50); padding: 12px; border-radius: 8px; margin-bottom: 16px;">
+                                    <p style="margin: 0; font-size: 14px; color: var(--muted);">
+                                        "{{ $userBid->message }}"
+                                    </p>
+                                </div>
+                            @endif
+                            
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: var(--warning); color: white; border-radius: 8px; font-size: 14px; font-weight: 600;">
+                                <span>⏳</span>
+                                <span>في انتظار رد صاحب المشروع</span>
+                            </div>
+                            
+                            <div style="text-align: center; font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.4;">
+                                💡 لا يمكن تقديم أكثر من عرض واحد على نفس المشروع
                             </div>
                         </div>
-                        
-                        <a href="{{ route('projects.bid.create', $project) }}" class="btn btn-primary" style="width: 100%; text-decoration: none; text-align: center; font-size: 16px; font-weight: 700; padding: 16px; margin-bottom: 12px;">
-                            💼 قدّم عرضك الآن
-                        </a>
-                        
-                        <div style="text-align: center; font-size: 12px; color: var(--muted); line-height: 1.4;">
-                            🛡️ محمي بضمان Sokappe<br>
-                            نضمن حقوقك في جميع المعاملات
+                    @else
+                        <!-- User can submit a bid -->
+                        <div class="card" style="margin-bottom: 24px;">
+                            <h3 style="margin: 0 0 16px; color: var(--dark);">💼 قدم عرضك</h3>
+                            
+                            <div style="background: var(--gray-50); padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                    <span style="color: var(--muted);">الميزانية المتوقعة</span>
+                                    <span style="font-size: 16px; font-weight: 700; color: var(--primary);">{{ $project->budget_min }} - {{ $project->budget_max }} ج</span>
+                                </div>
+                                <div style="font-size: 12px; color: var(--muted);">
+                                    💡 قدم عرضاً تنافسياً لزيادة فرص قبولك
+                                </div>
+                            </div>
+                            
+                            <a href="{{ route('projects.bid.create', $project) }}" class="btn btn-primary" style="width: 100%; text-decoration: none; text-align: center; font-size: 16px; font-weight: 700; padding: 16px; margin-bottom: 12px;">
+                                💼 قدّم عرضك الآن
+                            </a>
+                            
+                            <div style="text-align: center; font-size: 12px; color: var(--muted); line-height: 1.4;">
+                                🛡️ محمي بضمان Sokappe<br>
+                                نضمن حقوقك في جميع المعاملات
+                            </div>
                         </div>
-                    </div>
+                    @endif
                 @endif
             @else
                 <div class="card" style="margin-bottom: 24px; text-align: center;">

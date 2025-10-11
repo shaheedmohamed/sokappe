@@ -11,6 +11,14 @@ class BidController extends Controller
 {
     public function create(Project $project)
     {
+        // فحص إذا كان المستخدم قدم عرضاً بالفعل
+        $existingBid = $project->bids()->where('user_id', Auth::id())->first();
+        
+        if ($existingBid) {
+            return redirect()->route('projects.show', $project)
+                ->with('error', 'لقد قدمت عرضاً على هذا المشروع بالفعل. لا يمكن تقديم أكثر من عرض واحد.');
+        }
+        
         $project->load('user', 'bids.user');
         $otherBids = $project->bids()->where('user_id', '!=', Auth::id())->latest()->take(5)->get();
         return view('bids.create', compact('project', 'otherBids'));
@@ -18,6 +26,14 @@ class BidController extends Controller
 
     public function store(Request $request, Project $project)
     {
+        // فحص إذا كان المستخدم قدم عرضاً بالفعل
+        $existingBid = $project->bids()->where('user_id', Auth::id())->first();
+        
+        if ($existingBid) {
+            return redirect()->route('projects.show', $project)
+                ->with('error', 'لقد قدمت عرضاً على هذا المشروع بالفعل. لا يمكن تقديم أكثر من عرض واحد.');
+        }
+        
         $data = $request->validate([
             'price' => 'required|integer|min:1',
             'days' => 'required|integer|min:1',
