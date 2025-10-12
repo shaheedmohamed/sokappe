@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\User;
-use App\Models\Work;
-use App\Models\FreelancerProfile;
 use App\Models\UserProfile;
 use App\Models\UserSkill;
 use Illuminate\Http\RedirectResponse;
@@ -32,15 +30,10 @@ class ProfileController extends Controller
      */
     public function show(User $user): View
     {
-        $profile = null;
-        $works = collect();
+        // Load user relationships
+        $user->load(['profile', 'skills', 'portfolios', 'ratings.client', 'ratings.project']);
         
-        if ($user->role === 'freelancer') {
-            $profile = FreelancerProfile::where('user_id', $user->id)->first();
-            $works = Work::where('user_id', $user->id)->latest()->get();
-        }
-
-        return view('profile.show', compact('user', 'profile', 'works'));
+        return view('profile.show', compact('user'));
     }
 
     /**
@@ -48,10 +41,9 @@ class ProfileController extends Controller
      */
     public function portfolio(User $user): View
     {
-        $works = Work::where('user_id', $user->id)->latest()->get();
-        $profile = FreelancerProfile::where('user_id', $user->id)->first();
+        $user->load(['portfolios', 'profile']);
         
-        return view('profile.portfolio', compact('user', 'works', 'profile'));
+        return view('profile.portfolio', compact('user'));
     }
 
     /**

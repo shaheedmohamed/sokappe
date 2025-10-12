@@ -8,6 +8,8 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\DealController;
+use App\Http\Controllers\PortfolioController;
+use App\Http\Controllers\RatingController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 

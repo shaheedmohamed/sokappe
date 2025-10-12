@@ -45,19 +45,6 @@ class AdminUsersController extends Controller
         return back()->with('success', 'تم حذف المستخدم بنجاح');
     }
 
-    public function toggleStatus(User $user)
-    {
-        if ($user->role === 'admin') {
-            return back()->with('error', 'لا يمكن تعديل حالة مدير النظام');
-        }
-
-        $user->update([
-            'is_active' => !$user->is_active
-        ]);
-
-        $status = $user->is_active ? 'تم تفعيل' : 'تم إيقاف';
-        return back()->with('success', $status . ' المستخدم بنجاح');
-    }
 
     public function update(Request $request, User $user)
     {
@@ -275,8 +262,10 @@ class AdminUsersController extends Controller
         return back()->with('success', '✅ تم إلغاء حظر المستخدم بنجاح');
     }
 
-    public function toggleStatus(User $user)
+    public function toggleStatus($userId)
     {
+        $user = User::findOrFail($userId);
+        
         if ($user->role === 'admin') {
             return back()->with('error', 'لا يمكن تعديل حالة مدير النظام');
         }
@@ -289,6 +278,17 @@ class AdminUsersController extends Controller
         $user->update([
             'is_active' => !$user->is_active
         ]);
+
+        // Log the activity
+        ActivityLogger::log(
+            'user_status_changed',
+            'تم تغيير حالة المستخدم: ' . $user->name . ' إلى ' . ($user->is_active ? 'مفعل' : 'معطل'),
+            [
+                'target_user_id' => $user->id,
+                'target_user_name' => $user->name,
+                'new_status' => $user->is_active ? 'active' : 'inactive'
+            ]
+        );
 
         $status = $user->is_active ? 'تم تفعيل' : 'تم إيقاف';
         return back()->with('success', $status . ' المستخدم بنجاح');
