@@ -6,6 +6,7 @@ use App\Models\Bid;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BidController extends Controller
 {
@@ -35,10 +36,26 @@ class BidController extends Controller
         }
         
         $data = $request->validate([
-            'price' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:0.01|regex:/^\d+(\.\d{1,2})?$/',
             'days' => 'required|integer|min:1',
             'message' => 'nullable|string|max:2000',
+            'attachments' => 'nullable|array|max:5',
+            'attachments.*' => 'file|max:51200|mimes:pdf,doc,docx,txt,jpg,jpeg,png,gif,zip,rar',
         ]);
+
+        // Handle file uploads
+        $attachmentPaths = [];
+        if ($request->hasFile('attachments')) {
+            foreach ($request->file('attachments') as $file) {
+                $path = $file->store('bid-attachments', 'public');
+                $attachmentPaths[] = [
+                    'path' => $path,
+                    'name' => $file->getClientOriginalName(),
+                    'size' => $file->getSize(),
+                    'type' => $file->getMimeType(),
+                ];
+            }
+        }
 
         Bid::create([
             'project_id' => $project->id,
@@ -49,6 +66,7 @@ class BidController extends Controller
             'delivery_time' => $data['days'],
             'days' => $data['days'], // للتوافق مع النسخة القديمة
             'message' => $data['message'],
+            'attachments' => $attachmentPaths,
             'status' => 'pending',
         ]);
 

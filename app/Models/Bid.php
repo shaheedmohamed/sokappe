@@ -18,7 +18,12 @@ class Bid extends Model
         'delivery_time',
         'days', // للتوافق مع النسخة القديمة
         'message',
+        'attachments',
         'status',
+    ];
+
+    protected $casts = [
+        'attachments' => 'array',
     ];
 
     public function project()

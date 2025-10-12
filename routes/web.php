@@ -28,13 +28,23 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/edit-advanced', [ProfileController::class, 'editAdvanced'])->name('profile.edit-advanced');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile/advanced', [ProfileController::class, 'updateAdvanced'])->name('profile.update-advanced');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
+    // Portfolio routes
+    Route::resource('portfolio', PortfolioController::class);
+    
+    // Rating routes
+    Route::get('/projects/{project}/rate', [RatingController::class, 'create'])->name('ratings.create');
+    Route::post('/projects/{project}/rate', [RatingController::class, 'store'])->name('ratings.store');
 });
 
 // Public profile routes
 Route::get('/u/{user}', [ProfileController::class, 'show'])->name('profile.show');
 Route::get('/u/{user}/portfolio', [ProfileController::class, 'portfolio'])->name('profile.portfolio');
+Route::get('/u/{user}/ratings', [RatingController::class, 'show'])->name('ratings.show');
 
 // Public routes
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
@@ -84,6 +94,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/users/{user}', [\App\Http\Controllers\Admin\AdminUsersController::class, 'show'])->name('users.show');
     Route::patch('/users/{user}', [\App\Http\Controllers\Admin\AdminUsersController::class, 'update'])->name('users.update');
     Route::get('/users/{user}/history', [\App\Http\Controllers\Admin\AdminUsersController::class, 'history'])->name('users.history');
+    Route::patch('/users/{user}/ban', [\App\Http\Controllers\Admin\AdminUsersController::class, 'banUser'])->name('users.ban');
+    Route::patch('/users/{user}/unban', [\App\Http\Controllers\Admin\AdminUsersController::class, 'unbanUser'])->name('users.unban');
     Route::delete('/users/{user}', [\App\Http\Controllers\Admin\AdminUsersController::class, 'destroy'])->name('users.destroy');
     Route::patch('/users/{user}/toggle-status', [\App\Http\Controllers\Admin\AdminUsersController::class, 'toggleStatus'])->name('users.toggle-status');
     
@@ -114,6 +126,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::post('/settings/clear-cache', [\App\Http\Controllers\Admin\AdminSettingsController::class, 'clearCache'])->name('settings.clear-cache');
     Route::get('/settings/export-data', [\App\Http\Controllers\Admin\AdminSettingsController::class, 'exportData'])->name('settings.export-data');
 });
+
+// Test route for activity logging
+Route::get('/test-activity', [\App\Http\Controllers\TestActivityController::class, 'testActivity'])->middleware('auth');
 
 // Onboarding (authenticated users)
 Route::middleware('auth')->prefix('onboarding')->name('onboarding.')->group(function () {

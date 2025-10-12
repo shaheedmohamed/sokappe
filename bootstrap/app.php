@@ -13,6 +13,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'check.banned' => \App\Http\Middleware\CheckBanned::class,
+        ]);
+        
+        // Apply check.banned middleware globally to authenticated routes
+        $middleware->web(append: [
+            \App\Http\Middleware\CheckBanned::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserActivityLog;
+use App\Services\ActivityLogger;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminUsersController extends Controller
 {
@@ -87,6 +90,26 @@ class AdminUsersController extends Controller
         // Get user activity history
         $activities = collect();
 
+        // Add activity logs (login, logout, etc.)
+        $activityLogs = UserActivityLog::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        foreach ($activityLogs as $log) {
+            $activities->push([
+                'type' => $log->action,
+                'title' => $log->action_text,
+                'description' => $this->getActivityDescription($log),
+                'date' => $log->created_at,
+                'icon' => $this->getActivityIcon($log->action),
+                'color' => $this->getActivityColor($log->action),
+                'ip' => $log->ip_address,
+                'location' => $log->country . ($log->city ? ', ' . $log->city : ''),
+                'device' => $log->device_icon . ' ' . $log->browser,
+                'user_agent' => $log->user_agent
+            ]);
+        }
+
         // Add user registration
         $activities->push([
             'type' => 'registration',
@@ -149,5 +172,125 @@ class AdminUsersController extends Controller
         }
 
         return view('admin.users.history', compact('user', 'activities'));
+    }
+
+    private function getActivityDescription($log)
+    {
+        $descriptions = [
+            'login' => 'تسجيل دخول من ' . ($log->country ?? 'Unknown') . ' باستخدام ' . ($log->browser ?? 'Unknown'),
+            'logout' => 'تسجيل خروج من ' . ($log->country ?? 'Unknown'),
+            'register' => 'تسجيل حساب جديد من ' . ($log->country ?? 'Unknown'),
+            'password_reset' => 'إعادة تعيين كلمة المرور',
+            'profile_update' => 'تحديث الملف الشخصي',
+            'project_create' => 'إنشاء مشروع جديد',
+            'service_create' => 'إضافة خدمة جديدة',
+            'bid_create' => 'تقديم عرض على مشروع',
+        ];
+
+        return $descriptions[$log->action] ?? $log->action;
+    }
+
+    private function getActivityIcon($action)
+    {
+        $icons = [
+            'login' => '🔑',
+            'logout' => '🚪',
+            'register' => '👋',
+            'password_reset' => '🔐',
+            'profile_update' => '👤',
+            'project_create' => '📋',
+            'service_create' => '⚡',
+            'bid_create' => '💼',
+        ];
+
+        return $icons[$action] ?? '📊';
+    }
+
+    private function getActivityColor($action)
+    {
+        $colors = [
+            'login' => '#10b981',
+            'logout' => '#f59e0b',
+            'register' => '#3b82f6',
+            'password_reset' => '#ef4444',
+            'profile_update' => '#8b5cf6',
+            'project_create' => '#06b6d4',
+            'service_create' => '#84cc16',
+            'bid_create' => '#f97316',
+        ];
+
+        return $colors[$action] ?? '#6b7280';
+    }
+
+    public function banUser(Request $request, User $user)
+    {
+        if ($user->role === 'admin') {
+            return back()->with('error', '❌ لا يمكن حظر مدير النظام');
+        }
+
+        $validated = $request->validate([
+            'banned_reason' => 'required|string|max:500',
+        ]);
+
+        $user->update([
+            'is_banned' => true,
+            'is_active' => false,
+            'banned_reason' => $validated['banned_reason'],
+            'banned_at' => now(),
+        ]);
+
+        // Log the ban activity
+        ActivityLogger::log(
+            Auth::id(),
+            'user_banned',
+            [
+                'banned_user_id' => $user->id,
+                'banned_user_name' => $user->name,
+                'reason' => $validated['banned_reason']
+            ]
+        );
+
+        return back()->with('success', '🚫 تم حظر المستخدم بنجاح');
+    }
+
+    public function unbanUser(User $user)
+    {
+        $user->update([
+            'is_banned' => false,
+            'is_active' => true,
+            'banned_reason' => null,
+            'banned_at' => null,
+        ]);
+
+        // Log the unban activity
+        ActivityLogger::log(
+            Auth::id(),
+            'user_unbanned',
+            [
+                'unbanned_user_id' => $user->id,
+                'unbanned_user_name' => $user->name
+            ]
+        );
+
+        return back()->with('success', '✅ تم إلغاء حظر المستخدم بنجاح');
+    }
+
+    public function toggleStatus(User $user)
+    {
+        if ($user->role === 'admin') {
+            return back()->with('error', 'لا يمكن تعديل حالة مدير النظام');
+        }
+
+        // If user is banned, don't allow status toggle
+        if ($user->is_banned) {
+            return back()->with('error', '❌ لا يمكن تفعيل مستخدم محظور. يجب إلغاء الحظر أولاً');
+        }
+
+        $user->update([
+            'is_active' => !$user->is_active
+        ]);
+
+        $status = $user->is_active ? 'تم تفعيل' : 'تم إيقاف';
+        return back()->with('success', $status . ' المستخدم بنجاح');
     }
 }

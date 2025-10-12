@@ -155,6 +155,7 @@
                         <h4 style="margin: 0 0 8px; color: var(--dark);">لا توجد عروض بعد</h4>
                         <p style="margin: 0; font-size: 14px;">كن أول من يقدم عرضه لهذا المشروع</p>
                     </div>
+                @endempty
                 @endforelse
             </div>
         </div>

@@ -102,10 +102,16 @@
                             </span>
                         </td>
                         <td style="padding: 15px;">
-                            <span style="padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;
-                                {{ $user->is_active ?? true ? 'background: #dcfce7; color: #166534;' : 'background: #fef2f2; color: #dc2626;' }}">
-                                {{ $user->is_active ?? true ? '✅ نشط' : '❌ معطل' }}
-                            </span>
+                            @if($user->is_banned ?? false)
+                                <span style="padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; background: #7f1d1d; color: white;">
+                                    🚫 محظور
+                                </span>
+                            @else
+                                <span style="padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;
+                                    {{ ($user->is_active ?? true) ? 'background: #dcfce7; color: #166534;' : 'background: #fef2f2; color: #dc2626;' }}">
+                                    {{ ($user->is_active ?? true) ? '🟢 نشط' : '🔴 معطل' }}
+                                </span>
+                            @endif
                         </td>
                         <td style="padding: 15px;">
                             <div style="font-size: 13px; color: #1e293b;">{{ $user->created_at->format('Y/m/d') }}</div>
@@ -145,14 +151,30 @@
                                 </a>
                                 
                                 @if($user->role !== 'admin')
-                                    <!-- إيقاف/تفعيل -->
-                                    <form method="POST" action="{{ route('admin.users.toggle-status', $user) }}">
-                                        @csrf
-                                        @method('PATCH')
-                                        <button type="submit" class="btn {{ ($user->is_active ?? true) ? 'btn-danger' : 'btn-success' }}">
-                                            {{ ($user->is_active ?? true) ? '⏸️ إيقاف' : '▶️ تفعيل' }}
+                                    @if($user->is_banned ?? false)
+                                        <!-- إلغاء الحظر -->
+                                        <form method="POST" action="{{ route('admin.users.unban', $user) }}">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="btn btn-success">
+                                                ✅ إلغاء الحظر
+                                            </button>
+                                        </form>
+                                    @else
+                                        <!-- حظر -->
+                                        <button onclick="showBanModal({{ $user->id }}, '{{ $user->name }}')" class="btn" style="background: #7f1d1d; color: white;">
+                                            🚫 حظر
                                         </button>
-                                    </form>
+                                        
+                                        <!-- إيقاف/تفعيل -->
+                                        <form method="POST" action="{{ route('admin.users.toggle-status', $user) }}">
+                                            @csrf
+                                            @method('PATCH')
+                                            <button type="submit" class="btn {{ ($user->is_active ?? true) ? 'btn-danger' : 'btn-success' }}">
+                                                {{ ($user->is_active ?? true) ? '⏸️ إيقاف' : '▶️ تفعيل' }}
+                                            </button>
+                                        </form>
+                                    @endif
                                     
                                     <!-- حذف -->
                                     <form method="POST" action="{{ route('admin.users.destroy', $user) }}" 
@@ -214,4 +236,63 @@
         <div style="font-size: 12px; color: #64748b;">جديد اليوم</div>
     </div>
 </div>
+
+<!-- Ban User Modal -->
+<div id="banModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000;">
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 12px; width: 90%; max-width: 500px;">
+        <h3 style="margin: 0 0 20px; color: #dc2626;">🚫 حظر المستخدم</h3>
+        
+        <form id="banForm" method="POST">
+            @csrf
+            @method('PATCH')
+            
+            <div style="margin-bottom: 20px;">
+                <p style="margin: 0 0 15px; color: #374151;">
+                    هل أنت متأكد من حظر المستخدم <strong id="banUserName"></strong>؟
+                </p>
+                <p style="margin: 0 0 15px; color: #dc2626; font-size: 14px;">
+                    ⚠️ المستخدم المحظور لن يتمكن من تسجيل الدخول للمنصة نهائياً حتى يتم إلغاء الحظر.
+                </p>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #1e293b;">
+                    سبب الحظر *
+                </label>
+                <textarea name="banned_reason" required rows="4" 
+                          style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 6px; resize: vertical;"
+                          placeholder="اكتب سبب حظر هذا المستخدم..."></textarea>
+            </div>
+            
+            <div style="display: flex; gap: 15px; justify-content: flex-end;">
+                <button type="button" onclick="closeBanModal()" class="btn" style="background: #6b7280; color: white;">
+                    إلغاء
+                </button>
+                <button type="submit" class="btn" style="background: #dc2626; color: white;">
+                    🚫 حظر المستخدم
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+function showBanModal(userId, userName) {
+    document.getElementById('banUserName').textContent = userName;
+    document.getElementById('banForm').action = `/admin/users/${userId}/ban`;
+    document.getElementById('banModal').style.display = 'block';
+}
+
+function closeBanModal() {
+    document.getElementById('banModal').style.display = 'none';
+    document.querySelector('textarea[name="banned_reason"]').value = '';
+}
+
+// Close modal when clicking outside
+document.getElementById('banModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeBanModal();
+    }
+});
+</script>
 @endsection

@@ -24,7 +24,7 @@
                     </p>
                     <div style="display: flex; justify-content: space-between; align-items: center; font-size: 14px;">
                         <span style="color: var(--muted);">الميزانية المتوقعة:</span>
-                        <span style="font-weight: 600; color: var(--primary);">{{ $project->budget_min }} - {{ $project->budget_max }} ج</span>
+                        <span style="font-weight: 600; color: var(--primary);">${{ number_format($project->budget_min, 2) }} - ${{ number_format($project->budget_max, 2) }}</span>
                     </div>
                 </div>
             </div>
@@ -35,13 +35,14 @@
                     📝 تفاصيل عرضك
                 </h2>
 
-                <form method="POST" action="{{ route('projects.bid.store', $project) }}">
+                <form method="POST" action="{{ route('projects.bid.store', $project) }}" enctype="multipart/form-data">
                     @csrf
 
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
                         <div class="form-group">
-                            <label class="form-label" for="price">💰 السعر المقترح (بالجنيه المصري)</label>
-                            <input class="form-input @error('price') error @enderror" type="number" id="price" name="price" value="{{ old('price') }}" required min="1" placeholder="مثال: 1500">
+                            <label class="form-label" for="price">💰 السعر المقترح (بالدولار الأمريكي)</label>
+                            <input class="form-input @error('price') error @enderror" type="number" id="price" name="price" value="{{ old('price') }}" required min="1" step="0.01" placeholder="مثال: 150.00">
+                            <div class="form-hint">أدخل المبلغ بالدولار الأمريكي (USD)</div>
                             @error('price')<span class="form-error">{{ $message }}</span>@enderror
                         </div>
 
@@ -59,6 +60,20 @@
                         <div style="font-size: 12px; color: var(--muted); margin-top: 6px;">
                             💡 اكتب رسالة مقنعة تبرز خبرتك وتميزك عن المنافسين
                         </div>
+                    </div>
+
+                    <!-- File Attachments -->
+                    <div class="form-group">
+                        <label class="form-label" for="attachments">📎 المرفقات (اختياري)</label>
+                        <input type="file" name="attachments[]" id="attachments" multiple 
+                               accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif,.zip,.rar"
+                               style="width: 100%; padding: 12px; border: 2px dashed #d1d5db; border-radius: 8px; background: #f9fafb;">
+                        <div style="font-size: 12px; color: var(--muted); margin-top: 6px;">
+                            📁 يمكنك رفع ملفات توضيحية، أعمال سابقة، أو أي مستندات داعمة لعرضك<br>
+                            الحد الأقصى: 50MB لكل ملف | الأنواع المدعومة: PDF, DOC, صور, ZIP
+                        </div>
+                        @error('attachments')<span class="form-error">{{ $message }}</span>@enderror
+                        @error('attachments.*')<span class="form-error">{{ $message }}</span>@enderror
                     </div>
 
                     <!-- Terms -->

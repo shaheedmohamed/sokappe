@@ -40,13 +40,33 @@
                         <!-- Activity Content -->
                         <div style="background: #f8fafc; padding: 15px; border-radius: 8px; border-left: 4px solid {{ $activity['color'] }};">
                             <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 8px;">
-                                <div>
+                                <div style="flex: 1;">
                                     <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">
                                         {{ $activity['icon'] }} {{ $activity['title'] }}
                                     </div>
-                                    <div style="color: #4b5563; font-size: 14px; line-height: 1.5;">
+                                    <div style="color: #4b5563; font-size: 14px; line-height: 1.5; margin-bottom: 8px;">
                                         {{ $activity['description'] }}
                                     </div>
+                                    
+                                    @if(isset($activity['ip']) || isset($activity['location']) || isset($activity['device']))
+                                        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px;">
+                                            @if(isset($activity['ip']))
+                                                <div style="display: flex; align-items: center; gap: 4px; background: #e0f2fe; padding: 4px 8px; border-radius: 12px; font-size: 11px;">
+                                                    <span style="color: #0369a1;">🌐 {{ $activity['ip'] }}</span>
+                                                </div>
+                                            @endif
+                                            @if(isset($activity['location']) && $activity['location'] !== ', ')
+                                                <div style="display: flex; align-items: center; gap: 4px; background: #f0fdf4; padding: 4px 8px; border-radius: 12px; font-size: 11px;">
+                                                    <span style="color: #166534;">📍 {{ $activity['location'] }}</span>
+                                                </div>
+                                            @endif
+                                            @if(isset($activity['device']))
+                                                <div style="display: flex; align-items: center; gap: 4px; background: #fef3c7; padding: 4px 8px; border-radius: 12px; font-size: 11px;">
+                                                    <span style="color: #92400e;">{{ $activity['device'] }}</span>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             
@@ -86,19 +106,28 @@
                     <span style="font-weight: 600; color: #1e293b;">{{ $activities->count() }}</span>
                 </div>
                 
+                <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px;">
+                    <span style="color: #64748b; font-size: 13px;">🔑 تسجيلات الدخول:</span>
+                    <span style="font-weight: 600; color: #10b981;">{{ $activities->where('type', 'login')->count() }}</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px;">
+                    <span style="color: #64748b; font-size: 13px;">🚪 تسجيلات الخروج:</span>
+                    <span style="font-weight: 600; color: #f59e0b;">{{ $activities->where('type', 'logout')->count() }}</span>
+                </div>
+                
                 @if($user->role === 'freelancer')
                     <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px;">
                         <span style="color: #64748b; font-size: 13px;">⚡ الخدمات:</span>
-                        <span style="font-weight: 600; color: #f59e0b;">{{ $activities->where('type', 'service')->count() }}</span>
+                        <span style="font-weight: 600; color: #84cc16;">{{ $activities->where('type', 'service_create')->count() }}</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px;">
                         <span style="color: #64748b; font-size: 13px;">💼 العروض:</span>
-                        <span style="font-weight: 600; color: #8b5cf6;">{{ $activities->where('type', 'bid')->count() }}</span>
+                        <span style="font-weight: 600; color: #f97316;">{{ $activities->where('type', 'bid_create')->count() }}</span>
                     </div>
                 @else
                     <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px;">
                         <span style="color: #64748b; font-size: 13px;">📋 المشاريع:</span>
-                        <span style="font-weight: 600; color: #3b82f6;">{{ $activities->where('type', 'project')->count() }}</span>
+                        <span style="font-weight: 600; color: #06b6d4;">{{ $activities->where('type', 'project_create')->count() }}</span>
                     </div>
                 @endif
                 
