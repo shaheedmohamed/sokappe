@@ -3,28 +3,31 @@
 @section('title', 'التحليلات والإحصائيات')
 
 @section('content')
-<!-- Analytics Cards -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Analytics Cards with Real Charts -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 20px; margin-bottom: 30px;">
     <div class="admin-card">
-        <h3 class="card-title">📊 إحصائيات المستخدمين الشهرية</h3>
-        <div style="height: 200px; display: flex; align-items: center; justify-content: center; background: #f8fafc; border-radius: 8px;">
-            <div style="text-align: center;">
-                <div style="font-size: 48px; margin-bottom: 10px;">📈</div>
-                <p style="color: #64748b;">رسم بياني للمستخدمين الجدد</p>
-                <small style="color: #94a3b8;">سيتم إضافة Chart.js قريباً</small>
-            </div>
+        <h3 class="card-title">📊 نمو المستخدمين (آخر 7 أيام)</h3>
+        <div style="height: 250px; padding: 10px;">
+            <canvas id="usersChart"></canvas>
         </div>
     </div>
 
     <div class="admin-card">
-        <h3 class="card-title">💰 إحصائيات المشاريع والأرباح</h3>
-        <div style="height: 200px; display: flex; align-items: center; justify-content: center; background: #f8fafc; border-radius: 8px;">
-            <div style="text-align: center;">
-                <div style="font-size: 48px; margin-bottom: 10px;">💹</div>
-                <p style="color: #64748b;">رسم بياني للمشاريع والأرباح</p>
-                <small style="color: #94a3b8;">سيتم إضافة Chart.js قريباً</small>
-            </div>
+        <h3 class="card-title">💰 المشاريع والخدمات</h3>
+        <div style="height: 250px; padding: 10px;">
+            <canvas id="projectsChart"></canvas>
         </div>
+    </div>
+</div>
+
+<!-- Revenue Chart -->
+<div class="admin-card" style="margin-bottom: 30px;">
+    <h3 class="card-title">💹 نظرة عامة على النشاط (آخر 30 يوم)</h3>
+    <div style="height: 300px; padding: 20px;">
+        <canvas id="activityChart"></canvas>
     </div>
 </div>
 
@@ -151,4 +154,142 @@
         </table>
     </div>
 </div>
+
+<script>
+// Users Growth Chart (Last 7 days)
+const usersCtx = document.getElementById('usersChart').getContext('2d');
+const usersChart = new Chart(usersCtx, {
+    type: 'line',
+    data: {
+        labels: [
+            @php
+                $days = [];
+                $userCounts = [];
+                for($i = 6; $i >= 0; $i--) {
+                    $date = now()->subDays($i);
+                    $days[] = $date->format('M d');
+                    $userCounts[] = \App\Models\User::whereDate('created_at', $date->format('Y-m-d'))->count();
+                }
+            @endphp
+            @foreach($days as $day)
+                '{{ $day }}',
+            @endforeach
+        ],
+        datasets: [{
+            label: 'مستخدمين جدد',
+            data: [{{ implode(',', $userCounts) }}],
+            borderColor: '#3b82f6',
+            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+            tension: 0.4,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        }
+    }
+});
+
+// Projects vs Services Chart
+const projectsCtx = document.getElementById('projectsChart').getContext('2d');
+const projectsChart = new Chart(projectsCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['المشاريع', 'الخدمات', 'العروض'],
+        datasets: [{
+            data: [
+                {{ \App\Models\Project::count() }},
+                {{ \App\Models\Service::count() }},
+                {{ \App\Models\Bid::count() }}
+            ],
+            backgroundColor: [
+                '#10b981',
+                '#f59e0b',
+                '#8b5cf6'
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+
+// Activity Overview Chart (Last 30 days)
+const activityCtx = document.getElementById('activityChart').getContext('2d');
+const activityChart = new Chart(activityCtx, {
+    type: 'bar',
+    data: {
+        labels: [
+            @php
+                $weeks = [];
+                $projectData = [];
+                $serviceData = [];
+                for($i = 3; $i >= 0; $i--) {
+                    $startDate = now()->subWeeks($i + 1);
+                    $endDate = now()->subWeeks($i);
+                    $weeks[] = 'أسبوع ' . ($i + 1);
+                    $projectData[] = \App\Models\Project::whereBetween('created_at', [$startDate, $endDate])->count();
+                    $serviceData[] = \App\Models\Service::whereBetween('created_at', [$startDate, $endDate])->count();
+                }
+            @endphp
+            @foreach($weeks as $week)
+                '{{ $week }}',
+            @endforeach
+        ],
+        datasets: [{
+            label: 'مشاريع جديدة',
+            data: [{{ implode(',', $projectData) }}],
+            backgroundColor: '#10b981',
+            borderRadius: 4
+        }, {
+            label: 'خدمات جديدة',
+            data: [{{ implode(',', $serviceData) }}],
+            backgroundColor: '#f59e0b',
+            borderRadius: 4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'top'
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        }
+    }
+});
+
+// Auto refresh charts every 30 seconds
+setInterval(() => {
+    location.reload();
+}, 30000);
+</script>
 @endsection

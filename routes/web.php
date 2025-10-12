@@ -103,7 +103,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     
     // Reports & Settings
     Route::get('/reports', function() { return view('admin.reports.index'); })->name('reports.index');
-    Route::get('/settings', function() { return view('admin.settings'); })->name('settings');
+    Route::get('/settings', [\App\Http\Controllers\Admin\AdminSettingsController::class, 'index'])->name('settings');
+    Route::post('/settings/clear-cache', [\App\Http\Controllers\Admin\AdminSettingsController::class, 'clearCache'])->name('settings.clear-cache');
+    Route::get('/settings/export-data', [\App\Http\Controllers\Admin\AdminSettingsController::class, 'exportData'])->name('settings.export-data');
 });
 
 // Onboarding (authenticated users)
