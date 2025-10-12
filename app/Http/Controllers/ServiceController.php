@@ -40,11 +40,12 @@ class ServiceController extends Controller
             'category' => 'required|string',
             'image' => 'nullable|url',
             'skills' => 'nullable|string',
+            'user_id' => 'nullable|exists:users,id',
         ]);
 
         // Create the service
         $service = Service::create([
-            'user_id' => Auth::id(),
+            'user_id' => $validated['user_id'] ?? Auth::id(),
             'title' => $validated['title'],
             'description' => $validated['description'],
             'price' => $validated['price'],
@@ -73,6 +74,11 @@ class ServiceController extends Controller
             }
         }
 
+        // Redirect based on user role
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.services.index')->with('success', 'تم نشر الخدمة بنجاح!');
+        }
+        
         return redirect()->route('services.index')->with('success', 'تم نشر الخدمة بنجاح!');
     }
 }

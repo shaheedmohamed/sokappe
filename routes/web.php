@@ -9,7 +9,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\DealController;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Create routes (working)
 Route::get('/projects-create', function() {
@@ -87,7 +87,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     
     // Projects Management
     Route::get('/projects', function() { return view('admin.projects.index'); })->name('projects.index');
+    Route::get('/projects/create', function() { return view('admin.projects.create'); })->name('projects.create');
+    Route::post('/projects', [\App\Http\Controllers\ProjectController::class, 'store'])->name('projects.store');
+    
     Route::get('/services', function() { return view('admin.services.index'); })->name('services.index');
+    Route::get('/services/create', function() { return view('admin.services.create'); })->name('services.create');
+    Route::post('/services', [\App\Http\Controllers\ServiceController::class, 'store'])->name('services.store');
+    
     Route::get('/bids', function() { return view('admin.bids.index'); })->name('bids.index');
     
     // Conversations Monitoring

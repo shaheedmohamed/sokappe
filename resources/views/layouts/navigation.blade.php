@@ -26,6 +26,11 @@
           </button>
           <div id="userDropdown" style="display: none; position: absolute; top: 100%; right: 0; background: white; border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow); min-width: 200px; z-index: 1000;">
             <a href="{{ route('dashboard') }}" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border);">📊 لوحة التحكم</a>
+            @if(Auth::user()->role === 'admin')
+              <a href="{{ route('admin.dashboard') }}" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); background: linear-gradient(135deg, #fef3c7, #fde68a); color: #92400e; font-weight: 600;">
+                🛡️ لوحة الإدارة
+              </a>
+            @endif
             <a href="{{ route('profile.show', Auth::user()) }}" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border);">👤 الملف الشخصي</a>
             <a href="{{ route('profile.edit') }}" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border);">⚙️ الإعدادات</a>
             <form method="POST" action="{{ route('logout') }}" style="margin: 0;">

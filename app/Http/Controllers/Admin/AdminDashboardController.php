@@ -33,17 +33,16 @@ class AdminDashboardController extends Controller
 
     public function analytics()
     {
-        $monthly_stats = [
-            'users' => User::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-                ->whereYear('created_at', date('Y'))
-                ->groupBy('month')
-                ->pluck('count', 'month'),
-            'projects' => Project::selectRaw('MONTH(created_at) as month, COUNT(*) as count')
-                ->whereYear('created_at', date('Y'))
-                ->groupBy('month')
-                ->pluck('count', 'month'),
+        // Simple stats without complex SQL functions for SQLite compatibility
+        $stats = [
+            'total_users' => User::count(),
+            'users_this_month' => User::whereMonth('created_at', now()->month)->count(),
+            'total_projects' => Project::count(),
+            'projects_this_month' => Project::whereMonth('created_at', now()->month)->count(),
+            'total_services' => Service::count(),
+            'services_this_month' => Service::whereMonth('created_at', now()->month)->count(),
         ];
 
-        return view('admin.analytics', compact('monthly_stats'));
+        return view('admin.analytics', compact('stats'));
     }
 }

@@ -40,11 +40,12 @@ class ProjectController extends Controller
             'duration' => 'nullable|string',
             'category' => 'required|string',
             'skills' => 'nullable|string',
+            'user_id' => 'nullable|exists:users,id',
         ]);
 
         // Create the project
         $project = Project::create([
-            'user_id' => Auth::id(),
+            'user_id' => $validated['user_id'] ?? Auth::id(),
             'title' => $validated['title'],
             'description' => $validated['description'],
             'budget_min' => $validated['budget_min'],
@@ -74,6 +75,11 @@ class ProjectController extends Controller
             }
         }
 
+        // Redirect based on user role
+        if (Auth::user()->role === 'admin') {
+            return redirect()->route('admin.projects.index')->with('success', 'تم نشر المشروع بنجاح!');
+        }
+        
         return redirect()->route('projects.index')->with('success', 'تم نشر المشروع بنجاح!');
     }
 }
