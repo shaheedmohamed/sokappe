@@ -140,10 +140,11 @@
                                         @else
                                             <button style="background: var(--secondary); color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" disabled>
                                                 قبول العرض
-                                        </button>
-                                        <button style="background: transparent; color: var(--primary); border: 1px solid var(--primary); padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">
-                                            مراسلة
-                                        </button>
+                                            </button>
+                                            <button style="background: transparent; color: var(--primary); border: 1px solid var(--primary); padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">
+                                                مراسلة
+                                            </button>
+                                        @endif
                                     </div>
                                 @endif
                             @endauth
@@ -155,7 +156,6 @@
                         <h4 style="margin: 0 0 8px; color: var(--dark);">لا توجد عروض بعد</h4>
                         <p style="margin: 0; font-size: 14px;">كن أول من يقدم عرضه لهذا المشروع</p>
                     </div>
-                @endempty
                 @endforelse
             </div>
         </div>
