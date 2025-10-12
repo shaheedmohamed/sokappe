@@ -22,12 +22,51 @@
                             </a>
                         </h1>
                         <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                            <span style="background: var(--secondary); color: white; padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;">
-                                🆕 مشروع جديد
+                            @php
+                                $statusConfig = [
+                                    'open' => ['label' => '🟢 مفتوح', 'color' => '#10b981'],
+                                    'in_progress' => ['label' => '🟡 قيد التنفيذ', 'color' => '#f59e0b'],
+                                    'completed' => ['label' => '✅ مكتمل', 'color' => '#6b7280'],
+                                    'cancelled' => ['label' => '❌ ملغي', 'color' => '#ef4444'],
+                                ];
+                                $currentStatus = $statusConfig[$project->status] ?? ['label' => '🆕 مشروع جديد', 'color' => 'var(--secondary)'];
+                            @endphp
+                            <span style="background: {{ $currentStatus['color'] }}; color: white; padding: 6px 12px; border-radius: 16px; font-size: 12px; font-weight: 600;">
+                                {{ $currentStatus['label'] }}
                             </span>
                             <span style="color: var(--muted); font-size: 14px;">
                                 نُشر {{ $project->created_at->diffForHumans() }}
                             </span>
+                            
+                            @auth
+                                @if(Auth::id() === $project->user_id)
+                                    <!-- Status Change Button -->
+                                    <div style="position: relative; display: inline-block;">
+                                        <button onclick="toggleStatusMenu()" style="background: #f3f4f6; color: #374151; border: 1px solid #d1d5db; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                                            ⚙️ تغيير الحالة
+                                            <span style="font-size: 10px;">▼</span>
+                                        </button>
+                                        <div id="statusMenu" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #d1d5db; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 180px; z-index: 1000; margin-top: 4px;">
+                                            @foreach($statusConfig as $status => $config)
+                                                @if($status !== $project->status)
+                                                    <form method="POST" action="{{ route('projects.update-status', $project) }}" style="margin: 0;">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <input type="hidden" name="status" value="{{ $status }}">
+                                                        <button type="submit" 
+                                                                style="width: 100%; text-align: right; padding: 10px 16px; background: none; border: none; color: #374151; cursor: pointer; font-size: 13px; border-bottom: 1px solid #f3f4f6;"
+                                                                onmouseover="this.style.backgroundColor='#f9fafb'"
+                                                                onmouseout="this.style.backgroundColor='transparent'"
+                                                                onclick="return confirm('هل أنت متأكد من تغيير حالة المشروع إلى: {{ $config['label'] }}؟')">
+                                                            {{ $config['label'] }}
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                            @endauth
                         </div>
                     </div>
                     <div style="text-align: left;">
@@ -342,4 +381,21 @@
         تم نشر هذا المشروع في {{ $project->created_at->format('d M Y') }} • آخر تحديث {{ $project->updated_at->diffForHumans() }}
     </div>
 </div>
+
+<script>
+function toggleStatusMenu() {
+    const menu = document.getElementById('statusMenu');
+    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+// Close menu when clicking outside
+document.addEventListener('click', function(event) {
+    const menu = document.getElementById('statusMenu');
+    const button = event.target.closest('button[onclick="toggleStatusMenu()"]');
+    
+    if (!button && menu) {
+        menu.style.display = 'none';
+    }
+});
+</script>
 @endsection

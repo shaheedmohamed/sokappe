@@ -159,4 +159,43 @@ class ProjectController extends Controller
         return redirect()->route('projects.show', $project)
             ->with('success', 'تم تحديث المشروع بنجاح!');
     }
+
+    /**
+     * Update project status
+     */
+    public function updateStatus(Project $project, Request $request)
+    {
+        // Check if user is the project owner
+        if (Auth::id() !== $project->user_id) {
+            abort(403, 'غير مصرح لك بتعديل حالة هذا المشروع');
+        }
+
+        $validated = $request->validate([
+            'status' => 'required|in:open,in_progress,completed,cancelled',
+        ]);
+
+        $oldStatus = $project->status;
+        $newStatus = $validated['status'];
+
+        // Update project status
+        $project->update(['status' => $newStatus]);
+
+        // Handle status changes
+        if ($newStatus === 'completed' && $oldStatus !== 'completed') {
+            // Mark project management as completed if exists
+            $management = \App\Models\ProjectManagement::where('project_id', $project->id)->first();
+            if ($management && $management->status !== 'completed') {
+                $management->markAsCompleted();
+            }
+        }
+
+        $statusLabels = [
+            'open' => 'مفتوح',
+            'in_progress' => 'قيد التنفيذ',
+            'completed' => 'مكتمل',
+            'cancelled' => 'ملغي',
+        ];
+
+        return back()->with('success', 'تم تغيير حالة المشروع إلى: ' . $statusLabels[$newStatus]);
+    }
 }

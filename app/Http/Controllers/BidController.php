@@ -75,8 +75,13 @@ class BidController extends Controller
     /**
      * Accept a bid
      */
-    public function accept(Bid $bid)
+    public function accept(Bid $bid, Request $request)
     {
+        // Handle GET request - show confirmation page
+        if ($request->isMethod('GET')) {
+            return view('bids.confirm-accept', compact('bid'));
+        }
+
         // Check if user is the project owner
         if (Auth::id() !== $bid->project->user_id) {
             abort(403, 'غير مصرح لك بقبول هذا العرض');
@@ -96,7 +101,18 @@ class BidController extends Controller
         // Update project status
         $bid->project->update(['status' => 'in_progress']);
 
-        return back()->with('success', 'تم قبول العرض بنجاح! تم رفض باقي العروض تلقائياً.');
+        // Create project management record
+        \App\Models\ProjectManagement::create([
+            'project_id' => $bid->project_id,
+            'client_id' => $bid->project->user_id,
+            'freelancer_id' => $bid->freelancer_id,
+            'accepted_bid_id' => $bid->id,
+            'status' => 'in_progress',
+            'started_at' => now(),
+        ]);
+
+        return redirect()->route('projects.manage', $bid->project)
+            ->with('success', 'تم قبول العرض بنجاح! مرحباً بك في صفحة إدارة المشروع.');
     }
 
     /**

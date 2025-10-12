@@ -71,8 +71,15 @@ Route::get('/services/create', [ServiceController::class, 'create'])->name('serv
 
 Route::middleware('auth')->group(function () {
     // Bid actions (accept/reject)
-    Route::post('/bids/{bid}/accept', [BidController::class, 'accept'])->name('bids.accept');
+    Route::match(['GET', 'POST'], '/bids/{bid}/accept', [BidController::class, 'accept'])->name('bids.accept');
     Route::post('/bids/{bid}/reject', [BidController::class, 'reject'])->name('bids.reject');
+    
+    // Project Management
+    Route::get('/projects/{project}/manage', [\App\Http\Controllers\ProjectManagementController::class, 'show'])->name('projects.manage');
+    Route::post('/projects/{project}/deliver', [\App\Http\Controllers\ProjectManagementController::class, 'deliver'])->name('projects.deliver');
+    Route::get('/projects/{project}/rate', [\App\Http\Controllers\ProjectManagementController::class, 'showRatingForm'])->name('projects.rate');
+    Route::post('/projects/{project}/rate', [\App\Http\Controllers\ProjectManagementController::class, 'storeRating'])->name('projects.rate.store');
+    Route::post('/projects/{project}/message', [\App\Http\Controllers\ProjectManagementController::class, 'sendMessage'])->name('projects.message');
 });
 
 Route::middleware('auth')->group(function () {
@@ -80,6 +87,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
     Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
+    Route::patch('/projects/{project}/status', [ProjectController::class, 'updateStatus'])->name('projects.update-status');
     Route::get('/projects/{project}/bid', [BidController::class, 'create'])->name('projects.bid.create');
     Route::post('/projects/{project}/bid', [BidController::class, 'store'])->name('projects.bid.store');
 

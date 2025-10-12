@@ -204,7 +204,7 @@
                             
                             <!-- Actions -->
                             @if(Auth::id() === $project->user_id)
-                                <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                                <div style="display: flex; gap: 8px; margin-bottom: 15px; flex-wrap: wrap;">
                                     <a href="{{ route('projects.show', $project) }}" 
                                        style="background: #3b82f6; color: white; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; text-decoration: none;">
                                         👁️ عرض المشروع
@@ -215,6 +215,41 @@
                                             ✏️ تعديل
                                         </a>
                                     @endif
+                                    
+                                    <!-- Status Change Dropdown -->
+                                    <div style="position: relative; display: inline-block;">
+                                        <button onclick="toggleStatusMenu{{ $project->id }}()" 
+                                                style="background: #6b7280; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 4px;">
+                                            ⚙️ تغيير الحالة
+                                            <span style="font-size: 10px;">▼</span>
+                                        </button>
+                                        <div id="statusMenu{{ $project->id }}" style="display: none; position: absolute; top: 100%; left: 0; background: white; border: 1px solid #d1d5db; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); min-width: 160px; z-index: 1000; margin-top: 4px;">
+                                            @php
+                                                $statusOptions = [
+                                                    'open' => ['label' => '🟢 مفتوح', 'color' => '#10b981'],
+                                                    'in_progress' => ['label' => '🟡 قيد التنفيذ', 'color' => '#f59e0b'],
+                                                    'completed' => ['label' => '✅ مكتمل', 'color' => '#6b7280'],
+                                                    'cancelled' => ['label' => '❌ ملغي', 'color' => '#ef4444'],
+                                                ];
+                                            @endphp
+                                            @foreach($statusOptions as $status => $config)
+                                                @if($status !== $project->status)
+                                                    <form method="POST" action="{{ route('projects.update-status', $project) }}" style="margin: 0;">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <input type="hidden" name="status" value="{{ $status }}">
+                                                        <button type="submit" 
+                                                                style="width: 100%; text-align: right; padding: 8px 12px; background: none; border: none; color: #374151; cursor: pointer; font-size: 12px; border-bottom: 1px solid #f3f4f6;"
+                                                                onmouseover="this.style.backgroundColor='#f9fafb'"
+                                                                onmouseout="this.style.backgroundColor='transparent'"
+                                                                onclick="return confirm('هل أنت متأكد من تغيير حالة المشروع إلى: {{ $config['label'] }}؟')">
+                                                            {{ $config['label'] }}
+                                                        </button>
+                                                    </form>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
                                 </div>
                             @endif
                         </div>
@@ -555,25 +590,49 @@
 </div>
 
 <script>
-function showTab(tabName) {
-    // Hide all tab contents
-    document.querySelectorAll('.tab-content').forEach(tab => {
-        tab.style.display = 'none';
+    function showTab(tabName) {
+        // Hide all tabs
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.style.display = 'none';
+        });
+        
+        // Remove active class from all buttons
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.style.color = '#64748b';
+            btn.style.borderBottomColor = 'transparent';
+        });
+        
+        // Show selected tab
+        document.getElementById(tabName + '-tab').style.display = 'block';
+        
+        // Add active class to clicked button
+        event.target.style.color = '#3b82f6';
+        event.target.style.borderBottomColor = '#3b82f6';
+    }
+
+    // Status menu functions for each project
+    @foreach($user->projects as $project)
+        function toggleStatusMenu{{ $project->id }}() {
+            const menu = document.getElementById('statusMenu{{ $project->id }}');
+            // Close all other menus first
+            document.querySelectorAll('[id^="statusMenu"]').forEach(m => {
+                if (m.id !== 'statusMenu{{ $project->id }}') {
+                    m.style.display = 'none';
+                }
+            });
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        }
+    @endforeach
+
+    // Close menus when clicking outside
+    document.addEventListener('click', function(event) {
+        const clickedButton = event.target.closest('button[onclick^="toggleStatusMenu"]');
+        if (!clickedButton) {
+            document.querySelectorAll('[id^="statusMenu"]').forEach(menu => {
+                menu.style.display = 'none';
+            });
+        }
     });
-    
-    // Remove active class from all buttons
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.style.borderBottomColor = 'transparent';
-        btn.style.color = '#64748b';
-    });
-    
-    // Show selected tab
-    document.getElementById(tabName + '-tab').style.display = 'block';
-    
-    // Add active class to selected button
-    event.target.style.borderBottomColor = '#3b82f6';
-    event.target.style.color = '#3b82f6';
-    
     // Show/Hide "Add Work" button based on current tab
     const addWorkBtn = document.getElementById('addWorkBtn');
     if (addWorkBtn) {

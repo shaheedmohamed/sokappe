@@ -2,7 +2,6 @@
   <div class="nav-inner">
     <a class="brand" href="/">Sokappe</a>
     <div class="nav-links">
-      <a href="/">الرئيسية</a>
       <a href="{{ route('projects.index') }}">تصفح المشاريع</a>
       <a href="{{ route('services.index') }}">تصفح الخدمات</a>
       <a href="{{ route('deals.index') }}">💎 الصفقات</a>

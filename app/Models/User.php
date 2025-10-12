@@ -127,11 +127,28 @@ class User extends Authenticatable
 
     public function getAverageRatingAttribute()
     {
-        return $this->ratings()->avg('overall_rating') ?? 0;
+        // Use detailed ratings if available, otherwise fall back to old ratings
+        $detailedAvg = $this->detailedRatings()->avg('overall_rating');
+        if ($detailedAvg) {
+            return round($detailedAvg, 1);
+        }
+        
+        return $this->ratings()->avg('rating') ?? 0;
+    }
+
+    public function detailedRatings()
+    {
+        return $this->hasMany(DetailedRating::class, 'freelancer_id');
     }
 
     public function getRatingsCountAttribute()
     {
+        // Count detailed ratings first, then old ratings
+        $detailedCount = $this->detailedRatings()->count();
+        if ($detailedCount > 0) {
+            return $detailedCount;
+        }
+        
         return $this->ratings()->count();
     }
 
