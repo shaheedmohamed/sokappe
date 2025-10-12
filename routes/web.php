@@ -70,8 +70,16 @@ Route::get('/projects/create', [ProjectController::class, 'create'])->name('proj
 Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
 
 Route::middleware('auth')->group(function () {
+    // Bid actions (accept/reject)
+    Route::post('/bids/{bid}/accept', [BidController::class, 'accept'])->name('bids.accept');
+    Route::post('/bids/{bid}/reject', [BidController::class, 'reject'])->name('bids.reject');
+});
+
+Route::middleware('auth')->group(function () {
     // Projects
     Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+    Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+    Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
     Route::get('/projects/{project}/bid', [BidController::class, 'create'])->name('projects.bid.create');
     Route::post('/projects/{project}/bid', [BidController::class, 'store'])->name('projects.bid.store');
 
@@ -123,6 +131,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     
     Route::get('/bids', [\App\Http\Controllers\Admin\AdminBidsController::class, 'index'])->name('bids.index');
     Route::get('/bids/{bid}', [\App\Http\Controllers\Admin\AdminBidsController::class, 'show'])->name('bids.show');
+    
+    Route::get('/messages', [\App\Http\Controllers\Admin\AdminMessagesController::class, 'index'])->name('messages.index');
+    Route::get('/messages/{conversation}', [\App\Http\Controllers\Admin\AdminMessagesController::class, 'show'])->name('messages.show');
+    Route::get('/messages/stats', [\App\Http\Controllers\Admin\AdminMessagesController::class, 'stats'])->name('messages.stats');
     Route::patch('/bids/{bid}/status', [\App\Http\Controllers\Admin\AdminBidsController::class, 'updateStatus'])->name('bids.update-status');
     Route::delete('/bids/{bid}', [\App\Http\Controllers\Admin\AdminBidsController::class, 'destroy'])->name('bids.destroy');
     

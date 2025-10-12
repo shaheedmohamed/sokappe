@@ -32,7 +32,7 @@ class MessageController extends Controller
     public function startFromBid(Bid $bid)
     {
         // Check if user is authorized (either project owner or bid owner)
-        if (Auth::id() !== $bid->project->user_id && Auth::id() !== $bid->user_id) {
+        if (Auth::id() !== $bid->project->user_id && Auth::id() !== $bid->freelancer_id) {
             abort(403, 'غير مصرح لك بالوصول لهذه المحادثة');
         }
 
@@ -40,13 +40,14 @@ class MessageController extends Controller
         $conversation = Conversation::where('bid_id', $bid->id)->first();
 
         if (!$conversation) {
-            // Create new conversation
-            $conversation = Conversation::create([
-                'project_id' => $bid->project_id,
+            // Create conversation if it doesn't exist
+            $conversation = Conversation::firstOrCreate([
                 'bid_id' => $bid->id,
+            ], [
+                'project_id' => $bid->project_id,
                 'client_id' => $bid->project->user_id,
-                'freelancer_id' => $bid->user_id,
-                'subject' => 'مناقشة العرض: ' . $bid->project->title,
+                'freelancer_id' => $bid->freelancer_id,
+                'subject' => 'محادثة حول العرض على مشروع: ' . $bid->project->title,
                 'last_message_at' => now(),
             ]);
 

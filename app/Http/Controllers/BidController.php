@@ -57,10 +57,9 @@ class BidController extends Controller
             }
         }
 
-        Bid::create([
+        $bid = Bid::create([
             'project_id' => $project->id,
-            'user_id' => Auth::id(),
-            'freelancer_id' => Auth::id(), // للتوافق مع النسخة القديمة
+            'freelancer_id' => Auth::id(),
             'amount' => $data['price'],
             'price' => $data['price'], // للتوافق مع النسخة القديمة
             'delivery_time' => $data['days'],
@@ -71,5 +70,48 @@ class BidController extends Controller
         ]);
 
         return redirect()->route('projects.show', $project)->with('success', 'تم تقديم عرضك بنجاح!');
+    }
+
+    /**
+     * Accept a bid
+     */
+    public function accept(Bid $bid)
+    {
+        // Check if user is the project owner
+        if (Auth::id() !== $bid->project->user_id) {
+            abort(403, 'غير مصرح لك بقبول هذا العرض');
+        }
+
+        // Check if project is still open
+        if ($bid->project->status !== 'open') {
+            return back()->with('error', 'لا يمكن قبول العروض لهذا المشروع');
+        }
+
+        // Accept the bid
+        $bid->update(['status' => 'accepted']);
+        
+        // Reject all other bids for this project
+        $bid->project->bids()->where('id', '!=', $bid->id)->update(['status' => 'rejected']);
+        
+        // Update project status
+        $bid->project->update(['status' => 'in_progress']);
+
+        return back()->with('success', 'تم قبول العرض بنجاح! تم رفض باقي العروض تلقائياً.');
+    }
+
+    /**
+     * Reject a bid
+     */
+    public function reject(Bid $bid)
+    {
+        // Check if user is the project owner
+        if (Auth::id() !== $bid->project->user_id) {
+            abort(403, 'غير مصرح لك برفض هذا العرض');
+        }
+
+        // Reject the bid
+        $bid->update(['status' => 'rejected']);
+
+        return back()->with('success', 'تم رفض العرض');
     }
 }

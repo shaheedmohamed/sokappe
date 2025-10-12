@@ -91,4 +91,72 @@ class ProjectController extends Controller
         
         return redirect()->route('projects.index')->with('success', 'تم نشر المشروع بنجاح!');
     }
+
+    /**
+     * Show the form for editing the specified project.
+     */
+    public function edit(Project $project)
+    {
+        // Check if user is the project owner
+        if (Auth::id() !== $project->user_id) {
+            abort(403, 'غير مصرح لك بتعديل هذا المشروع');
+        }
+
+        // Check if project can be edited (only open projects)
+        if ($project->status !== 'open') {
+            return redirect()->route('projects.show', $project)
+                ->with('error', 'لا يمكن تعديل هذا المشروع لأنه لم عد مفتوحاً');
+        }
+
+        $categories = \App\Models\Category::all();
+        $skills = \App\Models\Skill::all();
+        
+        return view('projects.edit', compact('project', 'categories', 'skills'));
+    }
+
+    /**
+     * Update the specified project in storage.
+     */
+    public function update(Request $request, Project $project)
+    {
+        // Check if user is the project owner
+        if (Auth::id() !== $project->user_id) {
+            abort(403, 'غير مصرح لك بتعديل هذا المشروع');
+        }
+
+        // Check if project can be edited
+        if ($project->status !== 'open') {
+            return redirect()->route('projects.show', $project)
+                ->with('error', 'لا يمكن تعديل هذا المشروع لأنه لم عد مفتوحاً');
+        }
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'budget_min' => 'required|numeric|min:1',
+            'budget_max' => 'required|numeric|min:1|gte:budget_min',
+            'duration' => 'required|integer|min:1',
+            'category_id' => 'nullable|exists:categories,id',
+            'skills' => 'nullable|array',
+            'skills.*' => 'exists:skills,id',
+        ]);
+
+        // Update project
+        $project->update([
+            'title' => $validated['title'],
+            'description' => $validated['description'],
+            'budget_min' => $validated['budget_min'],
+            'budget_max' => $validated['budget_max'],
+            'duration' => $validated['duration'],
+            'category_id' => $validated['category_id'],
+        ]);
+
+        // Update skills if provided
+        if (isset($validated['skills'])) {
+            $project->skills()->sync($validated['skills']);
+        }
+
+        return redirect()->route('projects.show', $project)
+            ->with('success', 'تم تحديث المشروع بنجاح!');
+    }
 }

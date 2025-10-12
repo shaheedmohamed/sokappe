@@ -63,6 +63,9 @@
                 <button class="tab-btn" onclick="showTab('portfolio')" style="padding: 16px 24px; border: none; background: transparent; color: #64748b; cursor: pointer; font-weight: 600; border-bottom: 3px solid transparent;">
                     🎨 معرض الأعمال ({{ $user->portfolios->count() }})
                 </button>
+                <button class="tab-btn" onclick="showTab('projects')" style="padding: 16px 24px; border: none; background: transparent; color: #64748b; cursor: pointer; font-weight: 600; border-bottom: 3px solid transparent;">
+                    📋 المشاريع ({{ $user->projects->count() }})
+                </button>
                 <button class="tab-btn" onclick="showTab('ratings')" style="padding: 16px 24px; border: none; background: transparent; color: #64748b; cursor: pointer; font-weight: 600; border-bottom: 3px solid transparent;">
                     ⭐ التقييمات ({{ $user->ratings_count }})
                 </button>
@@ -122,11 +125,225 @@
                         </h2>
                         <div style="display: flex; flex-wrap: wrap; gap: 12px;">
                             @foreach($user->skills as $skill)
-                                <div style="background: {{ $skill->proficiency_color }}20; color: {{ $skill->proficiency_color }}; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 500; border: 1px solid {{ $skill->proficiency_color }}40;">
-                                    {{ $skill->skill_name }} - {{ $skill->proficiency_text }}
+                                @php
+                                    $colors = [
+                                        'beginner' => '#94a3b8',
+                                        'intermediate' => '#3b82f6', 
+                                        'advanced' => '#10b981',
+                                        'expert' => '#f59e0b'
+                                    ];
+                                    $labels = [
+                                        'beginner' => 'مبتدئ',
+                                        'intermediate' => 'متوسط',
+                                        'advanced' => 'متقدم', 
+                                        'expert' => 'خبير'
+                                    ];
+                                    $color = $colors[$skill->proficiency] ?? '#64748b';
+                                    $label = $labels[$skill->proficiency] ?? 'غير محدد';
+                                @endphp
+                                <div style="background: {{ $color }}20; color: {{ $color }}; padding: 8px 16px; border-radius: 20px; font-size: 14px; font-weight: 500; border: 1px solid {{ $color }}40;">
+                                    {{ $skill->skill_name }} - {{ $label }}
                                 </div>
                             @endforeach
                         </div>
+                    </div>
+                @endif
+            </div>
+
+            <!-- Projects Tab -->
+            <div id="projects-tab" class="tab-content" style="display: none;">
+                @if($user->projects->count() > 0)
+                    @foreach($user->projects as $project)
+                        <!-- Project Header -->
+                        <div style="background: white; border-radius: 12px; padding: 25px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 4px solid {{ $project->status === 'open' ? '#10b981' : ($project->status === 'in_progress' ? '#f59e0b' : '#6b7280') }};">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                                <div style="flex: 1;">
+                                    <h3 style="margin: 0 0 8px; color: #1e293b; font-size: 18px;">
+                                        <a href="{{ route('projects.show', $project) }}" style="color: #3b82f6; text-decoration: none;">
+                                            {{ $project->title }}
+                                        </a>
+                                    </h3>
+                                    <p style="margin: 0 0 12px; color: #64748b; line-height: 1.6;">
+                                        {{ Str::limit($project->description, 150) }}
+                                    </p>
+                                    
+                                    <!-- Project Meta -->
+                                    <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px;">
+                                        <div style="display: flex; align-items: center; gap: 5px; color: #64748b; font-size: 13px;">
+                                            <span>💰</span>
+                                            <span>${{ number_format($project->budget_min, 2) }} - ${{ number_format($project->budget_max, 2) }}</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 5px; color: #64748b; font-size: 13px;">
+                                            <span>📅</span>
+                                            <span>{{ $project->created_at->diffForHumans() }}</span>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 5px; color: #64748b; font-size: 13px;">
+                                            <span>📊</span>
+                                            <span>{{ $project->bids->count() }} عرض</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Status Badge -->
+                                <div style="margin-right: 15px;">
+                                    @if($project->status === 'open')
+                                        <span style="background: #dcfce7; color: #166534; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                                            🟢 مفتوح
+                                        </span>
+                                    @elseif($project->status === 'in_progress')
+                                        <span style="background: #fef3c7; color: #92400e; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                                            🟡 قيد التنفيذ
+                                        </span>
+                                    @else
+                                        <span style="background: #f3f4f6; color: #4b5563; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                                            ⚫ مكتمل
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                            
+                            <!-- Actions -->
+                            @if(Auth::id() === $project->user_id)
+                                <div style="display: flex; gap: 8px; margin-bottom: 15px;">
+                                    <a href="{{ route('projects.show', $project) }}" 
+                                       style="background: #3b82f6; color: white; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; text-decoration: none;">
+                                        👁️ عرض المشروع
+                                    </a>
+                                    @if($project->status === 'open')
+                                        <a href="{{ route('projects.edit', $project) }}" 
+                                           style="background: #f59e0b; color: white; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; text-decoration: none;">
+                                            ✏️ تعديل
+                                        </a>
+                                    @endif
+                                </div>
+                            @endif
+                        </div>
+
+                        <!-- Project Bids (Each bid in separate row) -->
+                        @if($project->bids->count() > 0)
+                            @foreach($project->bids as $bid)
+                                <div style="background: white; border-radius: 12px; padding: 20px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border: 1px solid #e5e7eb;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <!-- Freelancer Info -->
+                                        <div style="display: flex; align-items: center; gap: 12px; flex: 1;">
+                                            <img src="{{ $bid->freelancer->avatar_url }}" 
+                                                 style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
+                                            <div>
+                                                <div style="font-weight: 600; color: #1e293b; font-size: 16px; margin-bottom: 2px;">
+                                                    <a href="{{ route('profile.show', $bid->freelancer) }}" style="color: #3b82f6; text-decoration: none;">
+                                                        {{ $bid->freelancer->name }}
+                                                    </a>
+                                                </div>
+                                                @if($bid->freelancer->profile && $bid->freelancer->profile->title)
+                                                    <div style="color: #64748b; font-size: 13px;">{{ $bid->freelancer->profile->title }}</div>
+                                                @endif
+                                                @if($bid->freelancer->ratings_count > 0)
+                                                    <div style="display: flex; align-items: center; gap: 4px; margin-top: 4px;">
+                                                        @for($i = 1; $i <= 5; $i++)
+                                                            <span style="color: {{ $i <= $bid->freelancer->average_rating ? '#fbbf24' : '#e5e7eb' }}; font-size: 12px;">★</span>
+                                                        @endfor
+                                                        <span style="color: #64748b; font-size: 11px; margin-right: 4px;">
+                                                            ({{ $bid->freelancer->ratings_count }})
+                                                        </span>
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <!-- Bid Details -->
+                                        <div style="text-align: center; margin: 0 20px;">
+                                            <div style="color: #10b981; font-weight: 700; font-size: 20px; margin-bottom: 4px;">
+                                                ${{ number_format($bid->amount, 2) }}
+                                            </div>
+                                            <div style="color: #64748b; font-size: 12px;">
+                                                {{ $bid->delivery_time }} أيام
+                                            </div>
+                                            <div style="color: #94a3b8; font-size: 11px; margin-top: 4px;">
+                                                {{ $bid->created_at->diffForHumans() }}
+                                            </div>
+                                        </div>
+
+                                        <!-- Status & Actions -->
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <!-- Status Badge -->
+                                            @if($bid->status === 'pending')
+                                                <span style="background: #fef3c7; color: #92400e; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                                                    ⏳ قيد الانتظار
+                                                </span>
+                                            @elseif($bid->status === 'accepted')
+                                                <span style="background: #dcfce7; color: #166534; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                                                    ✅ مقبول
+                                                </span>
+                                            @else
+                                                <span style="background: #fee2e2; color: #dc2626; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600;">
+                                                    ❌ مرفوض
+                                                </span>
+                                            @endif
+
+                                            <!-- Action Buttons -->
+                                            @if(Auth::id() === $project->user_id)
+                                                <div style="display: flex; gap: 6px;">
+                                                    @if($bid->status === 'pending' && $project->status === 'open')
+                                                        <form action="{{ route('bids.accept', $bid) }}" method="POST" style="display: inline;">
+                                                            @csrf
+                                                            <button type="submit" 
+                                                                    style="background: #10b981; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;"
+                                                                    onclick="return confirm('هل أنت متأكد من قبول هذا العرض؟')">
+                                                                ✅ قبول
+                                                            </button>
+                                                        </form>
+                                                        <form action="{{ route('bids.reject', $bid) }}" method="POST" style="display: inline;">
+                                                            @csrf
+                                                            <button type="submit" 
+                                                                    style="background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;"
+                                                                    onclick="return confirm('هل أنت متأكد من رفض هذا العرض؟')">
+                                                                ❌ رفض
+                                                            </button>
+                                                        </form>
+                                                    @endif
+                                                    <a href="{{ route('messages.start-from-bid', $bid) }}" 
+                                                       style="background: #3b82f6; color: white; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; text-decoration: none;">
+                                                        💬 مراسلة
+                                                    </a>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <!-- Bid Message -->
+                                    @if($bid->message)
+                                        <div style="margin-top: 15px; padding: 12px; background: #f8fafc; border-radius: 8px; border-right: 3px solid #3b82f6;">
+                                            <div style="color: #64748b; font-size: 12px; margin-bottom: 4px;">رسالة العرض:</div>
+                                            <div style="color: #374151; font-size: 14px; line-height: 1.5;">
+                                                {{ $bid->message }}
+                                            </div>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endforeach
+                        @else
+                            <div style="text-align: center; padding: 40px; background: #f8fafc; border-radius: 8px; color: #64748b; margin-bottom: 20px;">
+                                <span style="font-size: 32px; margin-bottom: 12px; display: block;">📭</span>
+                                <span style="font-size: 16px;">لم يتم تقديم أي عروض على هذا المشروع</span>
+                            </div>
+                        @endif
+                    @endforeach
+                @else
+                    <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <div style="font-size: 64px; margin-bottom: 20px; opacity: 0.5;">📋</div>
+                        <h3 style="margin: 0 0 12px; color: #1e293b; font-size: 24px;">لا توجد مشاريع</h3>
+                        <p style="margin: 0 0 24px; color: #64748b; font-size: 16px;">
+                            لم يتم إنشاء أي مشاريع بعد
+                        </p>
+                        
+                        @auth
+                            @if(Auth::id() === $user->id)
+                                <a href="{{ route('projects.create') }}" 
+                                   style="display: inline-block; padding: 12px 24px; background: #3b82f6; color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">
+                                    ➕ إنشاء مشروع جديد
+                                </a>
+                            @endif
+                        @endauth
                     </div>
                 @endif
             </div>

@@ -31,7 +31,14 @@ class ProfileController extends Controller
     public function show(User $user): View
     {
         // Load user relationships
-        $user->load(['profile', 'skills', 'portfolios', 'ratings.client', 'ratings.project']);
+        $user->load([
+            'profile', 
+            'skills', 
+            'portfolios', 
+            'ratings.client', 
+            'ratings.project',
+            'projects.bids.freelancer'
+        ]);
         
         return view('profile.show', compact('user'));
     }

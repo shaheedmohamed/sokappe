@@ -352,9 +352,16 @@
                 <div class="nav-section">
                     <div class="nav-section-title">المراقبة</div>
                     <div class="nav-item">
-                        <a href="{{ route('admin.conversations.index') }}" class="nav-link {{ request()->routeIs('admin.conversations.*') ? 'active' : '' }}">
+                        <a href="{{ route('admin.messages.index') }}" class="nav-link {{ request()->routeIs('admin.messages.*') ? 'active' : '' }}">
                             <span class="nav-icon">💬</span>
-                            المحادثات
+                            الرسائل
+                            <span class="nav-badge">{{ \App\Models\Conversation::count() }}</span>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="{{ route('admin.conversations.index') }}" class="nav-link {{ request()->routeIs('admin.conversations.*') ? 'active' : '' }}">
+                            <span class="nav-icon">🗨️</span>
+                            المحادثات القديمة
                         </a>
                     </div>
                     <div class="nav-item">
