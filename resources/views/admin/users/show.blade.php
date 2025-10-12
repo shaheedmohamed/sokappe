@@ -130,7 +130,7 @@ if (window.location.hash === '#edit') {
                                 <div style="color: #64748b; font-size: 13px;">{{ Str::limit($service->description, 100) }}</div>
                             </div>
                             <div style="text-align: left;">
-                                <div style="font-weight: 600; color: #10b981;">{{ number_format($service->price) }} ج</div>
+                                <div style="font-weight: 600; color: #10b981;">${{ number_format($service->price, 2) }}</div>
                                 <div style="color: #64748b; font-size: 12px;">{{ $service->delivery_days }} يوم</div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@ if (window.location.hash === '#edit') {
                                 <div style="color: #64748b; font-size: 13px;">{{ Str::limit($bid->description, 100) }}</div>
                             </div>
                             <div style="text-align: left;">
-                                <div style="font-weight: 600; color: #10b981;">{{ number_format($bid->amount) }} ج</div>
+                                <div style="font-weight: 600; color: #10b981;">${{ number_format($bid->amount, 2) }}</div>
                                 <span style="padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600;
                                     {{ $bid->status === 'pending' ? 'background: #fef3c7; color: #92400e;' : 
                                        ($bid->status === 'accepted' ? 'background: #dcfce7; color: #166534;' : 'background: #fef2f2; color: #dc2626;') }}">
@@ -174,7 +174,7 @@ if (window.location.hash === '#edit') {
                                 <div style="color: #64748b; font-size: 13px;">{{ Str::limit($project->description, 100) }}</div>
                             </div>
                             <div style="text-align: left;">
-                                <div style="font-weight: 600; color: #10b981;">{{ number_format($project->budget_min) }} - {{ number_format($project->budget_max) }} ج</div>
+                                <div style="font-weight: 600; color: #10b981;">${{ number_format($project->budget_min, 2) }} - ${{ number_format($project->budget_max, 2) }}</div>
                                 <div style="color: #64748b; font-size: 12px;">{{ $project->bids->count() }} عرض</div>
                             </div>
                         </div>

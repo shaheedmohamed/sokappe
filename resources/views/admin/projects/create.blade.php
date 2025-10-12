@@ -34,19 +34,19 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
                 <div>
                     <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #1e293b;">
-                        💰 الحد الأدنى للميزانية *
+                        💰 الميزانية الدنيا (بالدولار)
                     </label>
-                    <input type="number" name="budget_min" required min="0"
+                    <input type="number" name="budget_min" required step="0.01"
                            style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px;"
-                           placeholder="1000">
+                           placeholder="100">
                 </div>
                 <div>
                     <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #1e293b;">
-                        💰 الحد الأقصى للميزانية *
+                        💰 الميزانية العليا (بالدولار)
                     </label>
-                    <input type="number" name="budget_max" required min="0"
+                    <input type="number" name="budget_max" required step="0.01"
                            style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px;"
-                           placeholder="5000">
+                           placeholder="500">
                 </div>
             </div>
 

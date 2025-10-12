@@ -30,7 +30,7 @@
         </div>
         <div style="text-align: left;">
             <div style="font-size: 20px; font-weight: 700; color: #10b981; margin-bottom: 5px;">
-                {{ number_format($project->budget_min) }} - {{ number_format($project->budget_max) }} ج
+                ${{ number_format($project->budget_min, 2) }} - ${{ number_format($project->budget_max, 2) }}
             </div>
             @if($project->duration || $project->duration_days)
                 <div style="color: #64748b; font-size: 14px;">
@@ -107,7 +107,7 @@
                         
                         <div style="text-align: left;">
                             <div style="font-size: 20px; font-weight: 700; color: #10b981; margin-bottom: 5px;">
-                                {{ number_format($bid->amount) }} ج
+                                ${{ number_format($bid->amount, 2) }}
                             </div>
                             <div style="color: #64748b; font-size: 13px; margin-bottom: 5px;">
                                 ⏱️ {{ $bid->delivery_days }} يوم

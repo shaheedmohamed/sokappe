@@ -35,8 +35,8 @@ class ProjectController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'budget_min' => 'required|numeric|min:0',
-            'budget_max' => 'required|numeric|min:0|gte:budget_min',
+            'budget_min' => 'required|numeric|min:0|regex:/^\d+(\.\d{1,2})?$/',
+            'budget_max' => 'required|numeric|min:0|gte:budget_min|regex:/^\d+(\.\d{1,2})?$/',
             'duration' => 'nullable|string',
             'duration_days' => 'nullable|integer|min:1',
             'category' => 'required|string',

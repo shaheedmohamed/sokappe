@@ -58,8 +58,8 @@
                             </div>
                         </td>
                         <td style="padding: 15px;">
-                            <div style="font-weight: 600; color: #10b981;">
-                                {{ number_format($project->budget_min) }} - {{ number_format($project->budget_max) }} ج
+                            <div style="font-weight: 600; color: #10b981; font-size: 16px;">
+                                ${{ number_format($project->budget_min, 2) }} - ${{ number_format($project->budget_max, 2) }}
                             </div>
                         </td>
                         <td style="padding: 15px;">

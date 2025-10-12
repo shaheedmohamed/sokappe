@@ -143,6 +143,11 @@ class AdminUsersController extends Controller
         // Sort activities by date (newest first)
         $activities = $activities->sortByDesc('date');
 
+        // Ensure activities is always a collection
+        if ($activities->isEmpty()) {
+            $activities = collect([]);
+        }
+
         return view('admin.users.history', compact('user', 'activities'));
     }
 }

@@ -105,7 +105,11 @@
                 <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px;">
                     <span style="color: #64748b; font-size: 13px;">📅 آخر نشاط:</span>
                     <span style="font-weight: 600; color: #10b981;">
-                        {{ $activities->first()['date']->diffForHumans() ?? 'لا يوجد' }}
+                        @if($activities->count() > 0)
+                            {{ $activities->first()['date']->diffForHumans() }}
+                        @else
+                            لا يوجد
+                        @endif
                     </span>
                 </div>
             </div>
@@ -165,18 +169,23 @@
 <script>
 function exportActivity() {
     const data = {
-        user: '{{ $user->name }}',
-        email: '{{ $user->email }}',
+        user: @json($user->name),
+        email: @json($user->email),
         total_activities: {{ $activities->count() }},
-        activities: @json($activities->map(function($activity) {
-            return [
-                'type' => $activity['type'],
-                'title' => $activity['title'],
-                'description' => $activity['description'],
-                'date' => $activity['date']->format('Y-m-d H:i:s')
-            ];
-        })->values())
+        export_date: @json(now()->format('Y-m-d H:i:s')),
+        activities: []
     };
+    
+    @if($activities->count() > 0)
+        @foreach($activities as $activity)
+            data.activities.push({
+                type: @json($activity['type']),
+                title: @json($activity['title']),
+                description: @json($activity['description']),
+                date: @json($activity['date']->format('Y-m-d H:i:s'))
+            });
+        @endforeach
+    @endif
     
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);

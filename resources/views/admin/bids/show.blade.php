@@ -27,7 +27,7 @@
         </div>
         <div style="text-align: left;">
             <div style="font-size: 24px; font-weight: 700; color: #10b981; margin-bottom: 5px;">
-                {{ number_format($bid->amount) }} ج
+                ${{ number_format($bid->amount, 2) }}
             </div>
             <div style="color: #64748b; font-size: 14px;">
                 ⏱️ {{ $bid->delivery_days }} يوم للتسليم
@@ -69,7 +69,7 @@
                     </div>
                     <div style="text-align: left;">
                         <div style="font-weight: 600; color: #10b981;">
-                            {{ number_format($bid->project->budget_min) }} - {{ number_format($bid->project->budget_max) }} ج
+                            ${{ number_format($bid->project->budget_min, 2) }} - ${{ number_format($bid->project->budget_max, 2) }}
                         </div>
                         <div style="color: #64748b; font-size: 12px;">
                             {{ $bid->project->bids->count() }} عرض مقدم
@@ -167,11 +167,11 @@
                 </div>
                 <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px; margin-bottom: 8px;">
                     <span style="color: #64748b; font-size: 13px;">💰 أقل عرض:</span>
-                    <span style="font-weight: 600; color: #10b981;">{{ number_format($projectBids->min('amount')) }} ج</span>
+                    <span style="font-weight: 600; color: #10b981;">${{ number_format($projectBids->min('amount'), 2) }}</span>
                 </div>
                 <div style="display: flex; justify-content: space-between; padding: 10px; background: #f8fafc; border-radius: 6px;">
                     <span style="color: #64748b; font-size: 13px;">💰 أعلى عرض:</span>
-                    <span style="font-weight: 600; color: #ef4444;">{{ number_format($projectBids->max('amount')) }} ج</span>
+                    <span style="font-weight: 600; color: #ef4444;">${{ number_format($projectBids->max('amount'), 2) }}</span>
                 </div>
             </div>
         </div>

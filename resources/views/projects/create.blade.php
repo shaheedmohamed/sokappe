@@ -43,13 +43,15 @@
 
       <div class="form-row">
         <div class="form-group">
-          <label class="form-label" for="budget_min">💰 الميزانية (حد أدنى)</label>
-          <input class="form-input @error('budget_min') error @enderror" type="number" id="budget_min" name="budget_min" value="{{ old('budget_min') }}" placeholder="1000">
+          <label class="form-label" for="budget_min">💰 الميزانية (حد أدنى) - بالدولار الأمريكي</label>
+          <input class="form-input @error('budget_min') error @enderror" type="number" id="budget_min" name="budget_min" value="{{ old('budget_min') }}" placeholder="100" step="0.01">
+          <div class="form-hint">أدخل المبلغ بالدولار الأمريكي (USD)</div>
           @error('budget_min')<span class="form-error">{{ $message }}</span>@enderror
         </div>
         <div class="form-group">
-          <label class="form-label" for="budget_max">💰 الميزانية (حد أقصى)</label>
-          <input class="form-input @error('budget_max') error @enderror" type="number" id="budget_max" name="budget_max" value="{{ old('budget_max') }}" placeholder="5000">
+          <label class="form-label" for="budget_max">💰 الميزانية (حد أقصى) - بالدولار الأمريكي</label>
+          <input class="form-input @error('budget_max') error @enderror" type="number" id="budget_max" name="budget_max" value="{{ old('budget_max') }}" placeholder="500" step="0.01">
+          <div class="form-hint">أدخل المبلغ بالدولار الأمريكي (USD)</div>
           @error('budget_max')<span class="form-error">{{ $message }}</span>@enderror
         </div>
         <div class="form-group">
