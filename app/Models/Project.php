@@ -11,11 +11,13 @@ class Project extends Model
 
     protected $fillable = [
         'user_id',
+        'employer_id',
         'title',
         'description',
         'budget_min',
         'budget_max',
         'duration',
+        'duration_days',
         'category',
         'skills',
         'status',

@@ -53,9 +53,14 @@
           @error('budget_max')<span class="form-error">{{ $message }}</span>@enderror
         </div>
         <div class="form-group">
-          <label class="form-label" for="duration">⏰ مدة التنفيذ</label>
-          <input class="form-input @error('duration') error @enderror" type="text" id="duration" name="duration" value="{{ old('duration') }}" placeholder="14 يوم">
+          <label class="form-label" for="duration">⏰ مدة التنفيذ (نص)</label>
+          <input class="form-input @error('duration') error @enderror" type="text" id="duration" name="duration" value="{{ old('duration') }}" placeholder="أسبوعين، شهر، حسب الاتفاق">
           @error('duration')<span class="form-error">{{ $message }}</span>@enderror
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="duration_days">📅 مدة التنفيذ (بالأيام)</label>
+          <input class="form-input @error('duration_days') error @enderror" type="number" id="duration_days" name="duration_days" value="{{ old('duration_days') }}" placeholder="14" min="1">
+          @error('duration_days')<span class="form-error">{{ $message }}</span>@enderror
         </div>
       </div>
 

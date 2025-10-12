@@ -82,19 +82,26 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Users Management
     Route::get('/users', [\App\Http\Controllers\Admin\AdminUsersController::class, 'index'])->name('users.index');
     Route::get('/users/{user}', [\App\Http\Controllers\Admin\AdminUsersController::class, 'show'])->name('users.show');
+    Route::patch('/users/{user}', [\App\Http\Controllers\Admin\AdminUsersController::class, 'update'])->name('users.update');
+    Route::get('/users/{user}/history', [\App\Http\Controllers\Admin\AdminUsersController::class, 'history'])->name('users.history');
     Route::delete('/users/{user}', [\App\Http\Controllers\Admin\AdminUsersController::class, 'destroy'])->name('users.destroy');
     Route::patch('/users/{user}/toggle-status', [\App\Http\Controllers\Admin\AdminUsersController::class, 'toggleStatus'])->name('users.toggle-status');
     
     // Projects Management
-    Route::get('/projects', function() { return view('admin.projects.index'); })->name('projects.index');
-    Route::get('/projects/create', function() { return view('admin.projects.create'); })->name('projects.create');
+    Route::get('/projects', [\App\Http\Controllers\Admin\AdminProjectsController::class, 'index'])->name('projects.index');
+    Route::get('/projects/create', [\App\Http\Controllers\Admin\AdminProjectsController::class, 'create'])->name('projects.create');
+    Route::get('/projects/{project}', [\App\Http\Controllers\Admin\AdminProjectsController::class, 'show'])->name('projects.show');
     Route::post('/projects', [\App\Http\Controllers\ProjectController::class, 'store'])->name('projects.store');
+    Route::delete('/projects/{project}', [\App\Http\Controllers\Admin\AdminProjectsController::class, 'destroy'])->name('projects.destroy');
     
     Route::get('/services', function() { return view('admin.services.index'); })->name('services.index');
     Route::get('/services/create', function() { return view('admin.services.create'); })->name('services.create');
     Route::post('/services', [\App\Http\Controllers\ServiceController::class, 'store'])->name('services.store');
     
-    Route::get('/bids', function() { return view('admin.bids.index'); })->name('bids.index');
+    Route::get('/bids', [\App\Http\Controllers\Admin\AdminBidsController::class, 'index'])->name('bids.index');
+    Route::get('/bids/{bid}', [\App\Http\Controllers\Admin\AdminBidsController::class, 'show'])->name('bids.show');
+    Route::patch('/bids/{bid}/status', [\App\Http\Controllers\Admin\AdminBidsController::class, 'updateStatus'])->name('bids.update-status');
+    Route::delete('/bids/{bid}', [\App\Http\Controllers\Admin\AdminBidsController::class, 'destroy'])->name('bids.destroy');
     
     // Conversations Monitoring
     Route::get('/conversations', [\App\Http\Controllers\Admin\AdminConversationsController::class, 'index'])->name('conversations.index');

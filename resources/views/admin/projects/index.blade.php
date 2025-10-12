@@ -81,12 +81,16 @@
                         </td>
                         <td style="padding: 15px;">
                             <div style="display: flex; gap: 6px;">
-                                <a href="{{ route('projects.show', $project) }}" class="btn btn-primary" style="padding: 6px 10px; font-size: 11px;">
+                                <a href="{{ route('admin.projects.show', $project) }}" class="btn btn-primary" style="padding: 6px 10px; font-size: 11px;">
                                     👁️ عرض
                                 </a>
-                                <button class="btn btn-danger" style="padding: 6px 10px; font-size: 11px;">
-                                    🗑️ حذف
-                                </button>
+                                <form method="POST" action="{{ route('admin.projects.destroy', $project) }}" style="display: inline;" onsubmit="return confirm('هل أنت متأكد من حذف هذا المشروع؟')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" style="padding: 6px 10px; font-size: 11px;">
+                                        🗑️ حذف
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>

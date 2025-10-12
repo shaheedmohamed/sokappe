@@ -67,13 +67,23 @@
                 </select>
             </div>
 
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #1e293b;">
-                    ⏱️ مدة المشروع المتوقعة
-                </label>
-                <input type="text" name="duration"
-                       style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px;"
-                       placeholder="مثال: أسبوعين، شهر، حسب الاتفاق">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                <div>
+                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #1e293b;">
+                        ⏱️ مدة المشروع (نص)
+                    </label>
+                    <input type="text" name="duration"
+                           style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px;"
+                           placeholder="مثال: أسبوعين، شهر، حسب الاتفاق">
+                </div>
+                <div>
+                    <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #1e293b;">
+                        📅 مدة المشروع (بالأيام)
+                    </label>
+                    <input type="number" name="duration_days" min="1"
+                           style="width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px;"
+                           placeholder="14">
+                </div>
             </div>
 
             <div style="margin-bottom: 20px;">

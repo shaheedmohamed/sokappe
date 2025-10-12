@@ -38,19 +38,28 @@ class ProjectController extends Controller
             'budget_min' => 'required|numeric|min:0',
             'budget_max' => 'required|numeric|min:0|gte:budget_min',
             'duration' => 'nullable|string',
+            'duration_days' => 'nullable|integer|min:1',
             'category' => 'required|string',
             'skills' => 'nullable|string',
             'user_id' => 'nullable|exists:users,id',
         ]);
 
+        // Set default values for optional fields
+        $validated['duration'] = $validated['duration'] ?? null;
+        $validated['duration_days'] = $validated['duration_days'] ?? null;
+        $validated['skills'] = $validated['skills'] ?? null;
+
         // Create the project
+        $userId = $validated['user_id'] ?? Auth::id();
         $project = Project::create([
-            'user_id' => $validated['user_id'] ?? Auth::id(),
+            'user_id' => $userId,
+            'employer_id' => $userId, // Set employer_id same as user_id
             'title' => $validated['title'],
             'description' => $validated['description'],
             'budget_min' => $validated['budget_min'],
             'budget_max' => $validated['budget_max'],
             'duration' => $validated['duration'],
+            'duration_days' => $validated['duration_days'],
             'category' => $validated['category'],
             'status' => 'open',
         ]);

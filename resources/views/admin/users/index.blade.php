@@ -3,23 +3,66 @@
 @section('title', 'إدارة المستخدمين')
 
 @section('content')
+<style>
+.action-buttons {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.action-buttons .btn {
+    padding: 8px 12px !important;
+    font-size: 11px !important;
+    border-radius: 4px !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    margin-bottom: 3px !important;
+    border: none !important;
+    cursor: pointer !important;
+    white-space: nowrap !important;
+}
+
+.action-buttons .btn-primary {
+    background: #3b82f6 !important;
+    color: white !important;
+}
+
+.action-buttons .btn-success {
+    background: #10b981 !important;
+    color: white !important;
+}
+
+.action-buttons .btn-danger {
+    background: #ef4444 !important;
+    color: white !important;
+}
+
+.action-buttons form {
+    display: inline-block !important;
+    margin-bottom: 3px !important;
+}
+</style>
 <div class="admin-card">
     <div class="card-header">
         <h3 class="card-title">جميع المستخدمين</h3>
-        <div style="display: flex; gap: 10px;">
-            <form method="GET" style="display: flex; gap: 10px;">
-                <input type="text" name="search" placeholder="البحث بالاسم أو الإيميل..." 
-                       value="{{ request('search') }}" 
-                       style="padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px; width: 250px;">
-                <select name="role" style="padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px;">
-                    <option value="">جميع الأدوار</option>
-                    <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>مدير</option>
-                    <option value="freelancer" {{ request('role') === 'freelancer' ? 'selected' : '' }}>محترف</option>
-                    <option value="employer" {{ request('role') === 'employer' ? 'selected' : '' }}>عميل</option>
-                </select>
-                <button type="submit" class="btn btn-primary">بحث</button>
-            </form>
-        </div>
+        <form method="GET" style="display: flex; gap: 10px;">
+            <input type="text" name="search" value="{{ request('search') }}" 
+                   placeholder="البحث بالاسم أو الإيميل..." 
+                   style="padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px; width: 250px;">
+            <select name="role" style="padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 6px;">
+                <option value="">جميع الأدوار</option>
+                <option value="freelancer" {{ request('role') === 'freelancer' ? 'selected' : '' }}>محترف</option>
+                <option value="employer" {{ request('role') === 'employer' ? 'selected' : '' }}>عميل</option>
+                <option value="admin" {{ request('role') === 'admin' ? 'selected' : '' }}>مدير</option>
+            </select>
+            <button type="submit" class="btn btn-primary">🔍 بحث</button>
+            @if(request('search') || request('role'))
+                <a href="{{ route('admin.users.index') }}" class="btn" style="background: #6b7280; color: white;">
+                    ❌ مسح
+                </a>
+            @endif
+        </form>
     </div>
 
     <div style="overflow-x: auto;">
@@ -84,27 +127,39 @@
                                 @endif
                             </div>
                         </td>
-                        <td style="padding: 15px;">
-                            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-                                <a href="{{ route('admin.users.show', $user) }}" 
-                                   class="btn btn-primary" style="padding: 6px 10px; font-size: 11px;">
+                        <td style="padding: 15px; min-width: 250px;">
+                            <div class="action-buttons">
+                                <!-- عرض -->
+                                <a href="{{ route('admin.users.show', $user) }}" class="btn btn-primary">
                                     👁️ عرض
                                 </a>
+                                
+                                <!-- تعديل -->
+                                <a href="{{ route('admin.users.show', $user) }}#edit" class="btn btn-success">
+                                    ✏️ تعديل
+                                </a>
+                                
+                                <!-- سجل النشاط -->
+                                <a href="{{ route('admin.users.history', $user) }}" class="btn" style="background: #8b5cf6; color: white;">
+                                    📊 النشاط
+                                </a>
+                                
                                 @if($user->role !== 'admin')
-                                    <form method="POST" action="{{ route('admin.users.toggle-status', $user) }}" style="display: inline;">
+                                    <!-- إيقاف/تفعيل -->
+                                    <form method="POST" action="{{ route('admin.users.toggle-status', $user) }}">
                                         @csrf
                                         @method('PATCH')
-                                        <button type="submit" class="btn {{ $user->is_active ?? true ? 'btn-danger' : 'btn-success' }}" 
-                                                style="padding: 6px 10px; font-size: 11px;">
-                                            {{ $user->is_active ?? true ? '⏸️ إيقاف' : '▶️ تفعيل' }}
+                                        <button type="submit" class="btn {{ ($user->is_active ?? true) ? 'btn-danger' : 'btn-success' }}">
+                                            {{ ($user->is_active ?? true) ? '⏸️ إيقاف' : '▶️ تفعيل' }}
                                         </button>
                                     </form>
+                                    
+                                    <!-- حذف -->
                                     <form method="POST" action="{{ route('admin.users.destroy', $user) }}" 
-                                          style="display: inline;" 
                                           onsubmit="return confirm('هل أنت متأكد من حذف هذا المستخدم؟')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" style="padding: 6px 10px; font-size: 11px;">
+                                        <button type="submit" class="btn btn-danger">
                                             🗑️ حذف
                                         </button>
                                     </form>
