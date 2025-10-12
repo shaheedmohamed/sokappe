@@ -611,18 +611,22 @@
     }
 
     // Status menu functions for each project
-    @foreach($user->projects as $project)
-        function toggleStatusMenu{{ $project->id }}() {
-            const menu = document.getElementById('statusMenu{{ $project->id }}');
-            // Close all other menus first
-            document.querySelectorAll('[id^="statusMenu"]').forEach(m => {
-                if (m.id !== 'statusMenu{{ $project->id }}') {
-                    m.style.display = 'none';
+    @if($user->projects->count() > 0)
+        @foreach($user->projects as $project)
+            window['toggleStatusMenu{{ $project->id }}'] = function() {
+                const menu = document.getElementById('statusMenu{{ $project->id }}');
+                if (menu) {
+                    // Close all other menus first
+                    document.querySelectorAll('[id^="statusMenu"]').forEach(m => {
+                        if (m.id !== 'statusMenu{{ $project->id }}') {
+                            m.style.display = 'none';
+                        }
+                    });
+                    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
                 }
-            });
-            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-        }
-    @endforeach
+            };
+        @endforeach
+    @endif
 
     // Close menus when clicking outside
     document.addEventListener('click', function(event) {
@@ -633,15 +637,5 @@
             });
         }
     });
-    // Show/Hide "Add Work" button based on current tab
-    const addWorkBtn = document.getElementById('addWorkBtn');
-    if (addWorkBtn) {
-        if (tabName === 'portfolio') {
-            addWorkBtn.style.display = 'flex';
-        } else {
-            addWorkBtn.style.display = 'none';
-        }
-    }
-}
 </script>
 @endsection
