@@ -10,6 +10,7 @@ use App\Http\Controllers\BidController;
 use App\Http\Controllers\DealController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\MessageController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -41,6 +42,14 @@ Route::middleware('auth')->group(function () {
     // Rating routes
     Route::get('/projects/{project}/rate', [RatingController::class, 'create'])->name('ratings.create');
     Route::post('/projects/{project}/rate', [RatingController::class, 'store'])->name('ratings.store');
+    
+    // Message routes
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');
+    Route::get('/messages/{conversation}', [MessageController::class, 'show'])->name('messages.show');
+    Route::post('/messages/{conversation}', [MessageController::class, 'store'])->name('messages.store');
+    Route::get('/messages/{conversation}/new-messages', [MessageController::class, 'getNewMessages'])->name('messages.new');
+    Route::get('/messages/unread-count', [MessageController::class, 'getUnreadCount'])->name('messages.unread-count');
+    Route::get('/bids/{bid}/message', [MessageController::class, 'startFromBid'])->name('messages.start-from-bid');
 });
 
 // Public profile routes

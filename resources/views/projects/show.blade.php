@@ -141,10 +141,11 @@
                                             <button style="background: var(--secondary); color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;" disabled>
                                                 قبول العرض
                                             </button>
-                                            <button style="background: transparent; color: var(--primary); border: 1px solid var(--primary); padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;">
-                                                مراسلة
-                                            </button>
                                         @endif
+                                        <a href="{{ route('messages.start-from-bid', $bid) }}" 
+                                           style="background: transparent; color: var(--primary); border: 1px solid var(--primary); padding: 8px 16px; border-radius: 6px; font-size: 12px; font-weight: 600; text-decoration: none; display: inline-block;">
+                                            💬 مراسلة
+                                        </a>
                                     </div>
                                 @endif
                             @endauth
