@@ -8,7 +8,7 @@
       @auth
         <a href="{{ route('messages.index') }}" style="position: relative;">
           💬 الرسائل
-          <span class="messages-unread-badge" style="display: none; position: absolute; top: -8px; right: -8px; background: #ef4444; color: white; width: 18px; height: 18px; border-radius: 50%; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center;"></span>
+          <!-- <span class="messages-unread-badge" style="display: none; position: absolute; top: -8px; right: -8px; background: #ef4444; color: white; width: 18px; height: 18px; border-radius: 50%; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center;"></span> -->
         </a>
         <!-- <a href="{{ route('projects.create.new') }}" class="btn primary" style="padding: 8px 16px; margin: 0 5px;">+ إنشاء مشروع</a>
         <a href="{{ route('services.create.new') }}" class="btn outline" style="padding: 8px 16px; margin: 0 5px;">+ إنشاء خدمة</a> -->

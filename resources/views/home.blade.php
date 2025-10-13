@@ -275,16 +275,52 @@
 </style>
 
 <!-- Hero Section -->
-<section class="hero">
+<section class="hero" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.9), rgba(139, 92, 246, 0.9)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover; min-height: 100vh; display: flex; align-items: center; position: relative;">
   <div class="container-full">
-    <div class="hero-content" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-      <h1>منصة Sokappe للعمل الحر</h1>
-      <p>اعرض مشروعك أو اطلب خدمتك الآن – Sokappe يوصلك بأفضل المحترفين والمواهب العربية في جميع المجالات</p>
-      <div class="hero-buttons">
-        <a href="{{ route('projects.create.new') }}" class="btn primary">ابدأ مشروعك الآن</a>
-        <a href="{{ route('register') }}" class="btn outline" style="background:rgba(255,255,255,0.1); border-color:white; color:white;">انضم كمحترف</a>
+    <div class="hero-content" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; text-align: center; color: white;">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 30px;">
+        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=126&q=80" style="width: 80px; height: 80px; border-radius: 50%; border: 4px solid white; box-shadow: 0 8px 32px rgba(0,0,0,0.3);" alt="Success">
+        <h1 style="font-size: 4rem; font-weight: 900; margin: 0; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">🚀 Sokappe</h1>
+        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&auto=format&fit=crop&w=126&q=80" style="width: 80px; height: 80px; border-radius: 50%; border: 4px solid white; box-shadow: 0 8px 32px rgba(0,0,0,0.3);" alt="Team">
+      </div>
+      <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 20px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">منصة العمل الحر الأولى في الوطن العربي</h2>
+      <p style="font-size: 1.4rem; line-height: 1.8; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">🎯 اربط مشروعك بأفضل المحترفين العرب • 💼 احصل على خدمات عالية الجودة • ⚡ تسليم سريع وضمان كامل</p>
+      <div class="hero-buttons" style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+        <a href="{{ route('projects.create') }}" class="btn primary" style="padding: 18px 40px; font-size: 1.2rem; font-weight: 700; border-radius: 50px; background: linear-gradient(45deg, #10b981, #059669); border: none; color: white; text-decoration: none; box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4); transition: all 0.3s ease;">🚀 ابدأ مشروعك الآن</a>
+        <a href="{{ route('register') }}" class="btn outline" style="padding: 18px 40px; font-size: 1.2rem; font-weight: 700; border-radius: 50px; background: rgba(255,255,255,0.15); border: 2px solid white; color: white; text-decoration: none; backdrop-filter: blur(10px); transition: all 0.3s ease;">⭐ انضم كمحترف</a>
+      </div>
+      
+      <!-- Trust Indicators -->
+      <div style="margin-top: 60px; display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; opacity: 0.9;">
+        <div style="text-align: center;">
+          <div style="font-size: 2.5rem; font-weight: 900; color: #fbbf24;">10K+</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">مشروع مكتمل</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 2.5rem; font-weight: 900; color: #fbbf24;">5K+</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">محترف موثوق</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 2.5rem; font-weight: 900; color: #fbbf24;">98%</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">رضا العملاء</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 2.5rem; font-weight: 900; color: #fbbf24;">24/7</div>
+          <div style="font-size: 0.9rem; opacity: 0.8;">دعم فني</div>
+        </div>
       </div>
     </div>
+  </div>
+  
+  <!-- Floating Elements -->
+  <div style="position: absolute; top: 20%; left: 10%; animation: float 6s ease-in-out infinite;">
+    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" style="width: 60px; height: 60px; border-radius: 50%; opacity: 0.7; box-shadow: 0 4px 15px rgba(0,0,0,0.2);" alt="Code">
+  </div>
+  <div style="position: absolute; top: 30%; right: 15%; animation: float 8s ease-in-out infinite reverse;">
+    <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" style="width: 50px; height: 50px; border-radius: 50%; opacity: 0.6; box-shadow: 0 4px 15px rgba(0,0,0,0.2);" alt="Design">
+  </div>
+  <div style="position: absolute; bottom: 20%; left: 20%; animation: float 10s ease-in-out infinite;">
+    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" style="width: 70px; height: 70px; border-radius: 50%; opacity: 0.5; box-shadow: 0 4px 15px rgba(0,0,0,0.2);" alt="Success">
   </div>
 </section>
 
