@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\Models\Wallet;
 use App\Models\Transaction;
-use App\Services\OPayService;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class WalletController extends Controller
 {
@@ -93,19 +92,14 @@ class WalletController extends Controller
                 if ($paymentResult['success']) {
                     $transaction->update([
                         'status' => Transaction::STATUS_PROCESSING,
-                        'external_id' => $paymentResult['reference'] ?? null,
+                        'external_id' => $paymentResult['transaction_id'],
                         'gateway_response' => $paymentResult,
                     ]);
                     
                     DB::commit();
                     
-                    // إعادة توجيه للدفع عبر OPay
-                    if (isset($paymentResult['payment_url'])) {
-                        return redirect()->away($paymentResult['payment_url']);
-                    } else {
-                        return redirect()->route('wallet.index')
-                            ->with('success', 'تم إرسال طلب الشحن بنجاح. سيتم تحديث رصيدك خلال دقائق.');
-                    }
+                    return redirect()->route('wallet.index')
+                        ->with('success', 'تم إرسال طلب الشحن بنجاح. سيتم تحديث رصيدك خلال دقائق.');
                 } else {
                     throw new \Exception($paymentResult['message'] ?? 'فشل في معالجة الدفع');
                 }
@@ -271,33 +265,16 @@ class WalletController extends Controller
     /**
      * معالجة الدفع عبر OPay (مؤقت)
      */
-    private function processOPayDeposit(Transaction $transaction)
+    private function processOPayDeposit($transaction)
     {
-        try {
-            $opayService = new OPayService();
-            $result = $opayService->createPaymentLink($transaction);
-            
-            if ($result['success']) {
-                // إعادة توجيه المستخدم لصفحة الدفع
-                return [
-                    'success' => true,
-                    'payment_url' => $result['payment_url'],
-                    'reference' => $result['reference'],
-                    'order_no' => $result['order_no'],
-                    'redirect' => true,
-                    'message' => 'Payment link created successfully'
-                ];
-            } else {
-                return [
-                    'success' => false,
-                    'message' => $result['message'] ?? 'Failed to create payment link'
-                ];
-            }
-        } catch (\Exception $e) {
-            return [
-                'success' => false,
-                'message' => 'Payment service error: ' . $e->getMessage()
-            ];
-        }
+        // هنا سيتم الربط مع OPay API الحقيقي
+        // حالياً نرجع نتيجة وهمية للاختبار
+        
+        return [
+            'success' => true,
+            'transaction_id' => 'OPAY_' . time() . '_' . rand(1000, 9999),
+            'status' => 'processing',
+            'message' => 'Payment initiated successfully',
+        ];
     }
 }

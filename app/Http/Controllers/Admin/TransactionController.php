@@ -290,10 +290,10 @@ class TransactionController extends Controller
             ->groupBy('type')
             ->get();
 
-        // إحصائيات شهرية
+        // إحصائيات شهرية (متوافق مع SQLite)
         $monthlyStats = Transaction::select(
-                DB::raw('YEAR(created_at) as year'),
-                DB::raw('MONTH(created_at) as month'),
+                DB::raw("strftime('%Y', created_at) as year"),
+                DB::raw("strftime('%m', created_at) as month"),
                 DB::raw('count(*) as count'),
                 DB::raw('sum(amount) as total')
             )
