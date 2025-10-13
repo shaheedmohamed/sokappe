@@ -29,35 +29,36 @@ class OPayService
         try {
             $payload = [
                 'reference' => $transaction->transaction_id,
-                'amount' => [
-                    'total' => (int)($transaction->amount * 100), // Convert to kobo/cents
-                    'currency' => $transaction->currency === 'EGP' ? 'EGP' : 'NGN'
-                ],
+                'amount' => (int)($transaction->amount * 100), // Convert to cents
+                'currency' => $transaction->currency ?? 'USD',
                 'callbackUrl' => route('opay.callback'),
                 'returnUrl' => route('wallet.index'),
                 'cancelUrl' => route('wallet.deposit'),
                 'userInfo' => [
-                    'userId' => $transaction->user_id,
+                    'userId' => (string)$transaction->user_id,
                     'userEmail' => $transaction->user->email,
                     'userName' => $transaction->user->name,
                     'userMobile' => $transaction->user->phone ?? '',
                 ],
-                'product' => [
-                    'name' => 'شحن رصيد المحفظة',
-                    'description' => $transaction->description ?? 'شحن رصيد عبر OPay',
-                ],
+                'productName' => 'Wallet Top-up',
+                'productDesc' => $transaction->description ?? 'Wallet recharge via OPay',
                 'expireAt' => now()->addMinutes(30)->timestamp,
+                'country' => 'EG',
             ];
 
             $headers = [
-                'Authorization' => 'Bearer ' . $this->publicKey,
+                'Authorization' => 'Bearer ' . $this->secretKey, // Use secret key for cashier
                 'MerchantId' => $this->merchantId,
                 'Content-Type' => 'application/json',
+                'Accept' => 'application/json',
             ];
 
+            // Use standard endpoint for all currencies in sandbox
+            $endpoint = '/api/v3/cashier/initialize';
+                
             $response = Http::withHeaders($headers)
                 ->timeout(30)
-                ->post($this->baseUrl . '/api/v3/cashier/initialize', $payload);
+                ->post($this->baseUrl . $endpoint, $payload);
 
             if ($response->successful()) {
                 $data = $response->json();
@@ -349,9 +350,12 @@ class OPayService
                 'MerchantId' => $this->merchantId,
             ];
 
+            // Use standard endpoint for banks
+            $endpoint = '/api/v3/banks';
+                
             $response = Http::withHeaders($headers)
                 ->timeout(30)
-                ->get($this->baseUrl . '/api/v3/banks', [
+                ->get($this->baseUrl . $endpoint, [
                     'countryCode' => $country
                 ]);
 

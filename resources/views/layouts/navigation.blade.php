@@ -29,11 +29,11 @@
               🛠️ خدماتي
             </a>
           @endif
-          @if(Auth::user()->role === 'employer')
+          <!-- @if(Auth::user()->role === 'employer')
             <a href="#" style="display: flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 25px; background: rgba(59, 130, 246, 0.1); color: #3b82f6; font-weight: 500; transition: all 0.3s ease;">
               📊 مشاريعي
             </a>
-          @endif
+          @endif -->
         </div>
         <!-- User Profile Dropdown -->
         <div style="position: relative; display: inline-block;">
