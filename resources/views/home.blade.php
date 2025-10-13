@@ -362,7 +362,7 @@
 </style>
 
 <!-- Hero Section -->
-<section class="hero">
+<section class="hero" style="position: relative; z-index: 5;">
   <div class="container-full">
     <div class="hero-content" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; text-align: center; color: white;">
       <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 30px;">
@@ -412,7 +412,7 @@
 </section>
 
 <!-- Trust & Security Section -->
-<section class="trust-section">
+<section class="trust-section" style="position: relative; z-index: 10;">
   <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
     <div class="section-title">
       <h2>🛡️ الثقة والأمان أولويتنا</h2>
@@ -609,93 +609,6 @@
   </div>
 </section>
 
-<!-- Footer -->
-<footer class="footer" style="background: linear-gradient(135deg, #1f2937 0%, #111827 100%); color: white; padding: 60px 0 30px; position: relative;">
-  <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
-      
-      <!-- Company Info -->
-      <div style="animation: fadeInUp 0.6s ease-out;">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-          <h4 style="margin: 0; font-size: 1.8rem; color: #3b82f6;">🚀 Sokappe</h4>
-        </div>
-        <p style="color: #d1d5db; line-height: 1.6; margin-bottom: 20px;">
-          منصة العمل الحر الرائدة في الوطن العربي. نربط بين أصحاب المشاريع والخبراء المحترفين بأحدث التقنيات.
-        </p>
-        <div style="display: flex; gap: 15px;">
-          <a href="#" style="width: 40px; height: 40px; background: rgba(59, 130, 246, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #3b82f6; text-decoration: none; transition: all 0.3s ease;">📘</a>
-          <a href="#" style="width: 40px; height: 40px; background: rgba(59, 130, 246, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #3b82f6; text-decoration: none; transition: all 0.3s ease;">🐦</a>
-          <a href="#" style="width: 40px; height: 40px; background: rgba(59, 130, 246, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #3b82f6; text-decoration: none; transition: all 0.3s ease;">📷</a>
-          <a href="#" style="width: 40px; height: 40px; background: rgba(59, 130, 246, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #3b82f6; text-decoration: none; transition: all 0.3s ease;">💼</a>
-        </div>
-      </div>
-      
-      <!-- For Freelancers -->
-      <div style="animation: fadeInUp 0.6s ease-out 0.1s both;">
-        <h4 style="color: white; margin-bottom: 20px; font-size: 1.2rem;">💼 للمحترفين</h4>
-        <ul style="list-style: none; padding: 0; margin: 0;">
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">🚀 كيف تبدأ</a></li>
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">💡 نصائح للنجاح</a></li>
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">🛠️ أدوات المحترف</a></li>
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">❓ مركز المساعدة</a></li>
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">📊 إحصائياتي</a></li>
-        </ul>
-      </div>
-      
-      <!-- For Clients -->
-      <div style="animation: fadeInUp 0.6s ease-out 0.2s both;">
-        <h4 style="color: white; margin-bottom: 20px; font-size: 1.2rem;">🎯 لأصحاب المشاريع</h4>
-        <ul style="list-style: none; padding: 0; margin: 0;">
-          <li style="margin-bottom: 12px;"><a href="{{ route('projects.create') }}" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">📝 انشر مشروعك</a></li>
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">🔍 كيف تختار المحترف</a></li>
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">✅ ضمانات الجودة</a></li>
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">💰 الأسعار والعمولات</a></li>
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">📈 مشاريعي</a></li>
-        </ul>
-      </div>
-      
-      <!-- Company -->
-      <div style="animation: fadeInUp 0.6s ease-out 0.3s both;">
-        <h4 style="color: white; margin-bottom: 20px; font-size: 1.2rem;">🏢 الشركة</h4>
-        <ul style="list-style: none; padding: 0; margin: 0;">
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">🌟 من نحن</a></li>
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">📞 اتصل بنا</a></li>
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">📋 الشروط والأحكام</a></li>
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">🔒 سياسة الخصوصية</a></li>
-          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">📰 المدونة</a></li>
-        </ul>
-      </div>
-    </div>
-    
-    <!-- Footer Bottom -->
-    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
-      <div style="color: #9ca3af; font-size: 0.9rem;">
-        &copy; 2024 Sokappe. جميع الحقوق محفوظة. 
-        <span style="color: #3b82f6;">صُنع بـ ❤️ في الوطن العربي</span>
-      </div>
-      
-      <div style="display: flex; align-items: center; gap: 20px; color: #9ca3af; font-size: 0.85rem;">
-        <div style="display: flex; align-items: center; gap: 5px;">
-          <span>🔒</span>
-          <span>SSL آمن</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 5px;">
-          <span>💳</span>
-          <span>دفع محمي</span>
-        </div>
-        <div style="display: flex; align-items: center; gap: 5px;">
-          <span>🏆</span>
-          <span>جودة مضمونة</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<!-- Scroll to Top Button -->
-<button id="scrollToTop" onclick="scrollToTop()" style="position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, #3b82f6, #8b5cf6); border: none; color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); transition: all 0.3s ease; z-index: 1000; display: none;">
-  ⬆️
-</button>
 
 <script>
 // Scroll to top functionality
@@ -763,5 +676,375 @@ document.querySelectorAll('.feature-card, .trust-item, .step-card, .testimonial-
   el.style.transition = 'all 0.6s ease-out';
   observer.observe(el);
 });
+
+// Add smooth scrolling for all anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Add loading animation for buttons
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    if (!this.classList.contains('loading')) {
+      this.classList.add('loading');
+      const originalText = this.textContent;
+      this.innerHTML = '⏳ جاري التحميل...';
+      
+      setTimeout(() => {
+        this.innerHTML = originalText;
+        this.classList.remove('loading');
+      }, 1500);
+    }
+  });
+});
+
+// Add parallax effect to hero background
+window.addEventListener('scroll', function() {
+  const scrolled = window.pageYOffset;
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+  }
+});
+
+// Add typing effect to hero title
+function typeWriter(element, text, speed = 100) {
+  let i = 0;
+  element.innerHTML = '';
+  
+  function type() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  
+  type();
+}
+
+// Initialize typing effect when page loads
+window.addEventListener('load', function() {
+  const heroTitle = document.querySelector('.hero h2');
+  if (heroTitle) {
+    const originalText = heroTitle.textContent;
+    setTimeout(() => {
+      typeWriter(heroTitle, originalText, 50);
+    }, 1000);
+  }
+});
+
+// Add floating animation to trust numbers
+document.querySelectorAll('.trust-number').forEach((num, index) => {
+  setInterval(() => {
+    num.style.transform = `translateY(${Math.sin(Date.now() / 1000 + index) * 5}px)`;
+  }, 50);
+});
+
+// Add counter animation for statistics
+function animateCounter(element, target, duration = 2000) {
+  const start = parseInt(element.textContent) || 0;
+  const increment = (target - start) / (duration / 16);
+  let current = start;
+  
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      element.textContent = target + (element.textContent.includes('K') ? 'K+' : element.textContent.includes('%') ? '%' : '');
+      clearInterval(timer);
+    } else {
+      element.textContent = Math.floor(current) + (element.textContent.includes('K') ? 'K+' : element.textContent.includes('%') ? '%' : '');
+    }
+  }, 16);
+}
+
+// Animate counters when they come into view
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !entry.target.classList.contains('animated')) {
+      entry.target.classList.add('animated');
+      const text = entry.target.textContent;
+      const number = parseInt(text.replace(/[^0-9]/g, ''));
+      animateCounter(entry.target, number);
+    }
+  });
+});
+
+document.querySelectorAll('.trust-number').forEach(el => {
+  counterObserver.observe(el);
+});
+
+// Add sparkle effect on hover for feature cards
+document.querySelectorAll('.feature-card').forEach(card => {
+  card.addEventListener('mouseenter', function() {
+    createSparkles(this);
+  });
+});
+
+function createSparkles(element) {
+  for (let i = 0; i < 5; i++) {
+    const sparkle = document.createElement('div');
+    sparkle.innerHTML = '✨';
+    sparkle.style.position = 'absolute';
+    sparkle.style.pointerEvents = 'none';
+    sparkle.style.fontSize = '12px';
+    sparkle.style.left = Math.random() * 100 + '%';
+    sparkle.style.top = Math.random() * 100 + '%';
+    sparkle.style.animation = 'sparkle 1s ease-out forwards';
+    
+    element.style.position = 'relative';
+    element.appendChild(sparkle);
+    
+    setTimeout(() => {
+      sparkle.remove();
+    }, 1000);
+  }
+}
+
+// Add sparkle animation CSS
+const sparkleCSS = `
+@keyframes sparkle {
+  0% { opacity: 0; transform: scale(0) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1) rotate(180deg); }
+  100% { opacity: 0; transform: scale(0) rotate(360deg); }
+}
+`;
+
+const style = document.createElement('style');
+style.textContent = sparkleCSS;
+document.head.appendChild(style);
+
+// Add success message animation
+function showSuccessMessage(message) {
+  const successDiv = document.createElement('div');
+  successDiv.innerHTML = `
+    <div style="
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(45deg, #10b981, #059669);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+      z-index: 10000;
+      animation: slideInRight 0.5s ease-out;
+    ">
+      ✅ ${message}
+    </div>
+  `;
+  
+  document.body.appendChild(successDiv);
+  
+  setTimeout(() => {
+    successDiv.style.animation = 'slideOutRight 0.5s ease-out';
+    setTimeout(() => {
+      successDiv.remove();
+    }, 500);
+  }, 3000);
+}
+
+// Add slide animations for success messages
+const slideCSS = `
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(100px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOutRight {
+  from { opacity: 1; transform: translateX(0); }
+  to { opacity: 0; transform: translateX(100px); }
+}
+`;
+
+const slideStyle = document.createElement('style');
+slideStyle.textContent = slideCSS;
+document.head.appendChild(slideStyle);
+
+console.log('🎉 Sokappe Home Page Loaded Successfully! 🚀');
 </script>
+
+<!-- New Sections -->
+
+<!-- Stats Section -->
+<section style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); padding: 80px 0;">
+  <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <div class="section-title">
+      <h2>📊 أرقام تتحدث عن نفسها</h2>
+      <p>إحصائيات حقيقية تعكس نجاح منصة Sokappe</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-top: 50px;">
+      <div style="text-align: center; padding: 40px 20px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s ease; animation: fadeInUp 0.8s ease-out;">
+        <div style="font-size: 4rem; margin-bottom: 10px;">💼</div>
+        <div class="trust-number" style="font-size: 2.5rem; font-weight: 900; color: #3b82f6; margin-bottom: 10px;">25000</div>
+        <h4 style="color: #1f2937; margin: 0;">مشروع مكتمل</h4>
+      </div>
+      
+      <div style="text-align: center; padding: 40px 20px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s ease; animation: fadeInUp 0.8s ease-out 0.1s both;">
+        <div style="font-size: 4rem; margin-bottom: 10px;">⭐</div>
+        <div class="trust-number" style="font-size: 2.5rem; font-weight: 900; color: #10b981; margin-bottom: 10px;">12000</div>
+        <h4 style="color: #1f2937; margin: 0;">محترف نشط</h4>
+      </div>
+      
+      <div style="text-align: center; padding: 40px 20px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s ease; animation: fadeInUp 0.8s ease-out 0.2s both;">
+        <div style="font-size: 4rem; margin-bottom: 10px;">🎯</div>
+        <div class="trust-number" style="font-size: 2.5rem; font-weight: 900; color: #f59e0b; margin-bottom: 10px;">98</div>
+        <h4 style="color: #1f2937; margin: 0;">معدل الرضا</h4>
+      </div>
+      
+      <div style="text-align: center; padding: 40px 20px; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transition: all 0.3s ease; animation: fadeInUp 0.8s ease-out 0.3s both;">
+        <div style="font-size: 4rem; margin-bottom: 10px;">🚀</div>
+        <div class="trust-number" style="font-size: 2.5rem; font-weight: 900; color: #8b5cf6; margin-bottom: 10px;">48</div>
+        <h4 style="color: #1f2937; margin: 0;">ساعة متوسط التسليم</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Categories Section -->
+<section style="background: white; padding: 100px 0;">
+  <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <div class="section-title">
+      <h2>🎨 تخصصات متنوعة</h2>
+      <p>اكتشف مجالات العمل المختلفة المتاحة على منصة Sokappe</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-top: 60px;">
+      <div style="background: linear-gradient(135deg, #fef3c7, #fbbf24); padding: 30px; border-radius: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; animation: fadeInUp 0.8s ease-out;">
+        <div style="font-size: 3rem; margin-bottom: 15px;">💻</div>
+        <h4 style="color: #92400e; margin-bottom: 10px;">البرمجة والتطوير</h4>
+        <p style="color: #a16207; font-size: 0.9rem;">تطبيقات الويب، الجوال، وأنظمة إدارة المحتوى</p>
+      </div>
+      
+      <div style="background: linear-gradient(135deg, #dbeafe, #3b82f6); padding: 30px; border-radius: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; animation: fadeInUp 0.8s ease-out 0.1s both;">
+        <div style="font-size: 3rem; margin-bottom: 15px;">🎨</div>
+        <h4 style="color: white; margin-bottom: 10px;">التصميم والإبداع</h4>
+        <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">شعارات، هوية بصرية، وتصميم واجهات المستخدم</p>
+      </div>
+      
+      <div style="background: linear-gradient(135deg, #d1fae5, #10b981); padding: 30px; border-radius: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; animation: fadeInUp 0.8s ease-out 0.2s both;">
+        <div style="font-size: 3rem; margin-bottom: 15px;">📝</div>
+        <h4 style="color: white; margin-bottom: 10px;">الكتابة والترجمة</h4>
+        <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">محتوى إبداعي، ترجمة احترافية، وكتابة تقنية</p>
+      </div>
+      
+      <div style="background: linear-gradient(135deg, #fce7f3, #ec4899); padding: 30px; border-radius: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; animation: fadeInUp 0.8s ease-out 0.3s both;">
+        <div style="font-size: 3rem; margin-bottom: 15px;">📈</div>
+        <h4 style="color: white; margin-bottom: 10px;">التسويق الرقمي</h4>
+        <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">إدارة وسائل التواصل، SEO، والإعلانات المدفوعة</p>
+      </div>
+      
+      <div style="background: linear-gradient(135deg, #e0e7ff, #8b5cf6); padding: 30px; border-radius: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; animation: fadeInUp 0.8s ease-out 0.4s both;">
+        <div style="font-size: 3rem; margin-bottom: 15px;">📊</div>
+        <h4 style="color: white; margin-bottom: 10px;">الأعمال والاستشارات</h4>
+        <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">خطط أعمال، دراسات جدوى، واستشارات إدارية</p>
+      </div>
+      
+      <div style="background: linear-gradient(135deg, #f3e8ff, #7c3aed); padding: 30px; border-radius: 20px; text-align: center; transition: all 0.3s ease; cursor: pointer; animation: fadeInUp 0.8s ease-out 0.5s both;">
+        <div style="font-size: 3rem; margin-bottom: 15px;">🎬</div>
+        <h4 style="color: white; margin-bottom: 10px;">الفيديو والصوتيات</h4>
+        <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">مونتاج فيديو، تعليق صوتي، وإنتاج محتوى مرئي</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer" style="background: linear-gradient(135deg, #1f2937 0%, #111827 100%); color: white; padding: 60px 0 30px; position: relative;">
+  <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px;">
+      
+      <!-- Company Info -->
+      <div style="animation: fadeInUp 0.6s ease-out;">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+          <h4 style="margin: 0; font-size: 1.8rem; color: #3b82f6;">🚀 Sokappe</h4>
+        </div>
+        <p style="color: #d1d5db; line-height: 1.6; margin-bottom: 20px;">
+          منصة العمل الحر الرائدة في الوطن العربي. نربط بين أصحاب المشاريع والخبراء المحترفين بأحدث التقنيات.
+        </p>
+        <div style="display: flex; gap: 15px;">
+          <a href="#" style="width: 40px; height: 40px; background: rgba(59, 130, 246, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #3b82f6; text-decoration: none; transition: all 0.3s ease;">📘</a>
+          <a href="#" style="width: 40px; height: 40px; background: rgba(59, 130, 246, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #3b82f6; text-decoration: none; transition: all 0.3s ease;">🐦</a>
+          <a href="#" style="width: 40px; height: 40px; background: rgba(59, 130, 246, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #3b82f6; text-decoration: none; transition: all 0.3s ease;">📷</a>
+          <a href="#" style="width: 40px; height: 40px; background: rgba(59, 130, 246, 0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #3b82f6; text-decoration: none; transition: all 0.3s ease;">💼</a>
+        </div>
+      </div>
+      
+      <!-- For Freelancers -->
+      <div style="animation: fadeInUp 0.6s ease-out 0.1s both;">
+        <h4 style="color: white; margin-bottom: 20px; font-size: 1.2rem;">💼 للمحترفين</h4>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">🚀 كيف تبدأ</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">💡 نصائح للنجاح</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">🛠️ أدوات المحترف</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">❓ مركز المساعدة</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">📊 إحصائياتي</a></li>
+        </ul>
+      </div>
+      
+      <!-- For Clients -->
+      <div style="animation: fadeInUp 0.6s ease-out 0.2s both;">
+        <h4 style="color: white; margin-bottom: 20px; font-size: 1.2rem;">🎯 لأصحاب المشاريع</h4>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="margin-bottom: 12px;"><a href="{{ route('projects.create') }}" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">📝 انشر مشروعك</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">🔍 كيف تختار المحترف</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">✅ ضمانات الجودة</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">💰 الأسعار والعمولات</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">📈 مشاريعي</a></li>
+        </ul>
+      </div>
+      
+      <!-- Company -->
+      <div style="animation: fadeInUp 0.6s ease-out 0.3s both;">
+        <h4 style="color: white; margin-bottom: 20px; font-size: 1.2rem;">🏢 الشركة</h4>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">🌟 من نحن</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">📞 اتصل بنا</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">📋 الشروط والأحكام</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">🔒 سياسة الخصوصية</a></li>
+          <li style="margin-bottom: 12px;"><a href="#" style="color: #d1d5db; text-decoration: none; transition: color 0.3s ease; font-size: 0.95rem;">📰 المدونة</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Footer Bottom -->
+    <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+      <div style="color: #9ca3af; font-size: 0.9rem;">
+        &copy; 2025 Sokappe. جميع الحقوق محفوظة. 
+        <span style="color: #3b82f6;">صُنع بـ ❤️ في الوطن العربي</span>
+      </div>
+      
+      <div style="display: flex; align-items: center; gap: 20px; color: #9ca3af; font-size: 0.85rem;">
+        <div style="display: flex; align-items: center; gap: 5px;">
+          <span>🔒</span>
+          <span>SSL آمن</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 5px;">
+          <span>💳</span>
+          <span>دفع محمي</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 5px;">
+          <span>🏆</span>
+          <span>جودة مضمونة</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll to Top Button -->
+<button id="scrollToTop" onclick="scrollToTop()" style="position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, #3b82f6, #8b5cf6); border: none; color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); transition: all 0.3s ease; z-index: 1000; display: none;">
+  ⬆️
+</button>
+
 @endsection
