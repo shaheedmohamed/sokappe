@@ -34,16 +34,16 @@
                             <div style="display: flex; align-items: center; gap: 10px;">
                                 <div style="display: flex; align-items: center; gap: 8px;">
                                     <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #3b82f6, #8b5cf6); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 12px;">
-                                        {{ substr($conversation->buyer->name, 0, 1) }}
+                                        {{ substr($conversation->client->name ?? 'غ', 0, 1) }}
                                     </div>
-                                    <span style="font-size: 13px; color: #1e293b;">{{ $conversation->buyer->name }}</span>
+                                    <span style="font-size: 13px; color: #1e293b;">{{ $conversation->client->name ?? 'غير محدد' }}</span>
                                 </div>
                                 <span style="color: #64748b;">↔</span>
                                 <div style="display: flex; align-items: center; gap: 8px;">
                                     <div style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #059669); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 12px;">
-                                        {{ substr($conversation->seller->name, 0, 1) }}
+                                        {{ substr($conversation->freelancer->name ?? 'غ', 0, 1) }}
                                     </div>
-                                    <span style="font-size: 13px; color: #1e293b;">{{ $conversation->seller->name }}</span>
+                                    <span style="font-size: 13px; color: #1e293b;">{{ $conversation->freelancer->name ?? 'غير محدد' }}</span>
                                 </div>
                             </div>
                         </td>

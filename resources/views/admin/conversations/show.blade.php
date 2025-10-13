@@ -13,23 +13,23 @@
             
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px; padding: 12px; background: #f8fafc; border-radius: 8px;">
                 <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #3b82f6, #8b5cf6); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
-                    {{ substr($conversation->buyer->name, 0, 1) }}
+                    {{ substr($conversation->client->name ?? 'غ', 0, 1) }}
                 </div>
                 <div>
-                    <div style="font-weight: 600; color: #1e293b;">{{ $conversation->buyer->name }}</div>
+                    <div style="font-weight: 600; color: #1e293b;">{{ $conversation->client->name ?? 'غير محدد' }}</div>
                     <div style="font-size: 12px; color: #64748b;">العميل</div>
-                    <div style="font-size: 11px; color: #94a3b8;">{{ $conversation->buyer->email }}</div>
+                    <div style="font-size: 11px; color: #94a3b8;">{{ $conversation->client->email ?? 'غير محدد' }}</div>
                 </div>
             </div>
 
             <div style="display: flex; align-items: center; gap: 10px; padding: 12px; background: #f0fdf4; border-radius: 8px;">
                 <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #10b981, #059669); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">
-                    {{ substr($conversation->seller->name, 0, 1) }}
+                    {{ substr($conversation->freelancer->name ?? 'غ', 0, 1) }}
                 </div>
                 <div>
-                    <div style="font-weight: 600; color: #1e293b;">{{ $conversation->seller->name }}</div>
+                    <div style="font-weight: 600; color: #1e293b;">{{ $conversation->freelancer->name ?? 'غير محدد' }}</div>
                     <div style="font-size: 12px; color: #64748b;">المحترف</div>
-                    <div style="font-size: 11px; color: #94a3b8;">{{ $conversation->seller->email }}</div>
+                    <div style="font-size: 11px; color: #94a3b8;">{{ $conversation->freelancer->email ?? 'غير محدد' }}</div>
                 </div>
             </div>
         </div>

@@ -34,6 +34,12 @@ class Message extends Model
         return $this->belongsTo(User::class, 'sender_id');
     }
 
+    // Alias for sender (for compatibility)
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'sender_id');
+    }
+
     // Check if message is read
     public function isRead()
     {

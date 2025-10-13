@@ -11,12 +11,12 @@ class AdminConversationsController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Conversation::with(['buyer', 'seller', 'messages']);
+        $query = Conversation::with(['client', 'freelancer', 'messages']);
 
         if ($request->search) {
-            $query->whereHas('buyer', function($q) use ($request) {
+            $query->whereHas('client', function($q) use ($request) {
                 $q->where('name', 'like', '%' . $request->search . '%');
-            })->orWhereHas('seller', function($q) use ($request) {
+            })->orWhereHas('freelancer', function($q) use ($request) {
                 $q->where('name', 'like', '%' . $request->search . '%');
             });
         }
@@ -28,7 +28,7 @@ class AdminConversationsController extends Controller
 
     public function show(Conversation $conversation)
     {
-        $conversation->load(['buyer', 'seller', 'messages.user']);
+        $conversation->load(['client', 'freelancer', 'messages.user']);
         $messages = $conversation->messages()->with('user')->get();
         
         return view('admin.conversations.show', compact('conversation', 'messages'));

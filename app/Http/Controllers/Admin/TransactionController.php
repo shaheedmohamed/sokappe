@@ -304,12 +304,12 @@ class TransactionController extends Controller
             ->orderBy('month', 'desc')
             ->get();
 
-        // أكثر المستخدمين نشاطاً
-        $topUsers = User::withCount('transactions')
-            ->with(['transactions' => function($q) {
-                $q->where('status', 'completed');
-            }])
-            ->having('transactions_count', '>', 0)
+        // أكثر المستخدمين نشاطاً (متوافق مع SQLite)
+        $topUsers = User::select('users.*')
+            ->join('transactions', 'users.id', '=', 'transactions.user_id')
+            ->where('transactions.status', 'completed')
+            ->groupBy('users.id', 'users.name', 'users.email', 'users.created_at', 'users.updated_at')
+            ->selectRaw('users.*, COUNT(transactions.id) as transactions_count')
             ->orderBy('transactions_count', 'desc')
             ->limit(10)
             ->get();
