@@ -142,6 +142,30 @@ class User extends Authenticatable
         return $this->hasMany(DetailedRating::class, 'freelancer_id');
     }
 
+    /**
+     * العلاقة مع المحفظة
+     */
+    public function wallet()
+    {
+        return $this->hasOne(Wallet::class);
+    }
+
+    /**
+     * العلاقة مع المعاملات
+     */
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    /**
+     * التحقق من صلاحيات الإدارة
+     */
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
     public function getRatingsCountAttribute()
     {
         // Count detailed ratings first, then old ratings

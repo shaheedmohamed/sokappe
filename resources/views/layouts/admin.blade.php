@@ -350,30 +350,51 @@
                 </div>
 
                 <div class="nav-section">
-                    <div class="nav-section-title">المراقبة</div>
+                    <div class="nav-section-title">المالية</div>
                     <div class="nav-item">
-                        <a href="{{ route('admin.messages.index') }}" class="nav-link {{ request()->routeIs('admin.messages.*') ? 'active' : '' }}">
-                            <span class="nav-icon">💬</span>
-                            الرسائل
-                            <span class="nav-badge">{{ \App\Models\Conversation::count() }}</span>
+                        <a href="{{ route('admin.transactions.index') }}" class="nav-link {{ request()->routeIs('admin.transactions.*') ? 'active' : '' }}">
+                            <span class="nav-icon">💳</span>
+                            <span class="nav-text">المعاملات المالية</span>
                         </a>
                     </div>
                     <div class="nav-item">
-                        <a href="{{ route('admin.conversations.index') }}" class="nav-link {{ request()->routeIs('admin.conversations.*') ? 'active' : '' }}">
-                            <span class="nav-icon">🗨️</span>
-                            المحادثات القديمة
+                        <a href="{{ route('admin.transactions.index', ['status' => 'pending']) }}" class="nav-link">
+                            <span class="nav-icon">⏳</span>
+                            <span class="nav-text">المعاملات المعلقة</span>
                         </a>
                     </div>
                     <div class="nav-item">
-                        <a href="{{ route('admin.reports.index') }}" class="nav-link {{ request()->routeIs('admin.reports.*') ? 'active' : '' }}">
-                            <span class="nav-icon">🚨</span>
-                            البلاغات
+                        <a href="{{ route('admin.transactions.analytics') }}" class="nav-link">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">إحصائيات المعاملات</span>
                         </a>
                     </div>
                 </div>
 
                 <div class="nav-section">
-                    <div class="nav-section-title">الإعدادات</div>
+                    <div class="nav-section-title">المراقبة</div>
+                    <div class="nav-item">
+                        <a href="{{ route('admin.messages.index') }}" class="nav-link {{ request()->routeIs('admin.messages.*') ? 'active' : '' }}">
+                            <span class="nav-icon">💬</span>
+                            <span class="nav-text">الرسائل</span>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="{{ route('admin.conversations.index') }}" class="nav-link {{ request()->routeIs('admin.conversations.*') ? 'active' : '' }}">
+                            <span class="nav-icon">🗨️</span>
+                            <span class="nav-text">المحادثات</span>
+                        </a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="{{ route('admin.analytics') }}" class="nav-link {{ request()->routeIs('admin.analytics') ? 'active' : '' }}">
+                            <span class="nav-icon">📈</span>
+                            <span class="nav-text">التحليلات</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="nav-section">
+                    <div class="nav-section-title">إعدادات</div>
                     <div class="nav-item">
                         <a href="{{ route('admin.settings') }}" class="nav-link {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
                             <span class="nav-icon">⚙️</span>

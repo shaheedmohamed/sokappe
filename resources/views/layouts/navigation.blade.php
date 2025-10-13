@@ -34,6 +34,7 @@
               </a>
             @endif
             <a href="{{ route('profile.show', Auth::user()) }}" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border);">👤 الملف الشخصي</a>
+            <a href="{{ route('wallet.index') }}" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border);">💰 محفظتي</a>
             <a href="{{ route('profile.edit') }}" style="display: block; padding: 12px 16px; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border);">⚙️ الإعدادات</a>
             <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
               @csrf

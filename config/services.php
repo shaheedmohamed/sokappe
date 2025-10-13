@@ -18,8 +18,8 @@ return [
         'token' => env('POSTMARK_TOKEN'),
     ],
 
-    'resend' => [
-        'key' => env('RESEND_KEY'),
+    'postmark' => [
+        'token' => env('POSTMARK_TOKEN'),
     ],
 
     'ses' => [
@@ -28,11 +28,23 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'resend' => [
+        'key' => env('RESEND_KEY'),
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
+    ],
+
+    'opay' => [
+        'base_url' => env('OPAY_BASE_URL', 'https://sandboxapi.opaycheckout.com'),
+        'merchant_id' => env('OPAY_MERCHANT_ID'),
+        'public_key' => env('OPAY_PUBLIC_KEY'),
+        'secret_key' => env('OPAY_SECRET_KEY'),
+        'environment' => env('OPAY_ENVIRONMENT', 'sandbox'), // sandbox or live
     ],
 
 ];

@@ -80,6 +80,41 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects/{project}/rate', [\App\Http\Controllers\ProjectManagementController::class, 'showRatingForm'])->name('projects.rate');
     Route::post('/projects/{project}/rate', [\App\Http\Controllers\ProjectManagementController::class, 'storeRating'])->name('projects.rate.store');
     Route::post('/projects/{project}/message', [\App\Http\Controllers\ProjectManagementController::class, 'sendMessage'])->name('projects.message');
+    
+    // Wallet Routes
+    Route::prefix('wallet')->name('wallet.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\WalletController::class, 'index'])->name('index');
+        Route::get('/deposit', [\App\Http\Controllers\WalletController::class, 'deposit'])->name('deposit');
+        Route::post('/deposit', [\App\Http\Controllers\WalletController::class, 'processDeposit'])->name('deposit.process');
+        Route::get('/withdraw', [\App\Http\Controllers\WalletController::class, 'withdraw'])->name('withdraw');
+        Route::post('/withdraw', [\App\Http\Controllers\WalletController::class, 'processWithdraw'])->name('withdraw.process');
+        Route::get('/transaction/{transaction}', [\App\Http\Controllers\WalletController::class, 'showTransaction'])->name('transaction');
+        
+        // Admin routes
+        Route::middleware('admin')->group(function () {
+            Route::patch('/transaction/{transaction}/status', [\App\Http\Controllers\WalletController::class, 'updateTransactionStatus'])->name('transaction.status');
+        });
+    });
+    
+    // OPay Routes
+    Route::prefix('opay')->name('opay.')->group(function () {
+        Route::post('/callback', [\App\Http\Controllers\OPayController::class, 'handleCallback'])->name('callback');
+        Route::post('/verify', [\App\Http\Controllers\OPayController::class, 'verifyTransaction'])->name('verify');
+        Route::get('/banks', [\App\Http\Controllers\OPayController::class, 'getSupportedBanks'])->name('banks');
+    });
+
+    // Admin Transaction Routes
+    Route::middleware('admin')->prefix('admin')->name('admin.')->group(function () {
+        Route::prefix('transactions')->name('transactions.')->group(function () {
+            Route::get('/', [\App\Http\Controllers\Admin\TransactionController::class, 'index'])->name('index');
+            Route::get('/analytics', [\App\Http\Controllers\Admin\TransactionController::class, 'analytics'])->name('analytics');
+            Route::get('/export', [\App\Http\Controllers\Admin\TransactionController::class, 'export'])->name('export');
+            Route::get('/{transaction}', [\App\Http\Controllers\Admin\TransactionController::class, 'show'])->name('show');
+            Route::patch('/{transaction}/status', [\App\Http\Controllers\Admin\TransactionController::class, 'updateStatus'])->name('update-status');
+            Route::post('/{transaction}/approve', [\App\Http\Controllers\Admin\TransactionController::class, 'approve'])->name('approve');
+            Route::post('/{transaction}/reject', [\App\Http\Controllers\Admin\TransactionController::class, 'reject'])->name('reject');
+        });
+    });
 });
 
 Route::middleware('auth')->group(function () {

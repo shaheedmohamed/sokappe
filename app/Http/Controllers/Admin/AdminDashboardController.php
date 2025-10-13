@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Service;
 use App\Models\Bid;
 use App\Models\Conversation;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
@@ -22,6 +23,9 @@ class AdminDashboardController extends Controller
             'total_services' => Service::count(),
             'total_bids' => Bid::count(),
             'total_conversations' => Conversation::count(),
+            'total_transactions_volume' => Transaction::where('status', 'completed')->sum('amount'),
+            'pending_transactions' => Transaction::where('status', 'pending')->count(),
+            'pending_withdrawals' => Transaction::where('type', 'withdrawal')->where('status', 'pending')->count(),
         ];
 
         $recent_users = User::latest()->take(5)->get();

@@ -46,6 +46,28 @@
             <div style="font-size: 48px; opacity: 0.3;">💬</div>
         </div>
     </div>
+
+    <div class="admin-card" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h3 style="font-size: 32px; font-weight: 800; margin: 0;">${{ number_format($stats['total_transactions_volume'] ?? 0, 0) }}</h3>
+                <p style="margin: 5px 0 0; opacity: 0.9;">حجم المعاملات</p>
+                <small style="opacity: 0.7;">{{ $stats['pending_transactions'] ?? 0 }} معلقة</small>
+            </div>
+            <div style="font-size: 48px; opacity: 0.3;">💳</div>
+        </div>
+    </div>
+
+    <div class="admin-card" style="background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); color: white;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h3 style="font-size: 32px; font-weight: 800; margin: 0;">{{ $stats['pending_withdrawals'] ?? 0 }}</h3>
+                <p style="margin: 5px 0 0; opacity: 0.9;">طلبات سحب معلقة</p>
+                <small style="opacity: 0.7;">تحتاج مراجعة</small>
+            </div>
+            <div style="font-size: 48px; opacity: 0.3;">🏦</div>
+        </div>
+    </div>
 </div>
 
 <!-- Recent Activity -->
@@ -129,13 +151,21 @@
             <div style="font-size: 24px; margin-bottom: 10px;">📋</div>
             إدارة المشاريع
         </a>
+        <a href="{{ route('admin.transactions.index') }}" class="btn" style="background: #ef4444; color: white; padding: 20px; text-align: center; display: block;">
+            <div style="font-size: 24px; margin-bottom: 10px;">💳</div>
+            المعاملات المالية
+        </a>
+        <a href="{{ route('admin.transactions.index', ['status' => 'pending']) }}" class="btn" style="background: #f59e0b; color: white; padding: 20px; text-align: center; display: block;">
+            <div style="font-size: 24px; margin-bottom: 10px;">⏳</div>
+            المعاملات المعلقة
+        </a>
         <a href="{{ route('admin.conversations.index') }}" class="btn" style="background: #8b5cf6; color: white; padding: 20px; text-align: center; display: block;">
             <div style="font-size: 24px; margin-bottom: 10px;">💬</div>
             مراقبة المحادثات
         </a>
-        <a href="{{ route('admin.analytics') }}" class="btn" style="background: #f59e0b; color: white; padding: 20px; text-align: center; display: block;">
-            <div style="font-size: 24px; margin-bottom: 10px;">📈</div>
-            التحليلات
+        <a href="{{ route('admin.transactions.analytics') }}" class="btn" style="background: #06b6d4; color: white; padding: 20px; text-align: center; display: block;">
+            <div style="font-size: 24px; margin-bottom: 10px;">📊</div>
+            إحصائيات المعاملات
         </a>
     </div>
 </div>

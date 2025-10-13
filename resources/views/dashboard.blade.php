@@ -9,6 +9,13 @@
     
     <!-- Stats Cards -->
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 32px;">
+        <!-- Wallet Balance -->
+        <div style="background: linear-gradient(135deg, #10b981, #059669); padding: 20px; border-radius: 12px; text-align: center; color: white; position: relative;">
+            <div style="font-size: 28px; font-weight: 800; margin-bottom: 4px;">${{ number_format(Auth::user()->wallet->balance ?? 0, 2) }}</div>
+            <div style="font-size: 14px; font-weight: 600;">رصيد المحفظة (USD)</div>
+            <a href="{{ route('wallet.index') }}" style="position: absolute; top: 10px; left: 10px; color: rgba(255,255,255,0.8); text-decoration: none; font-size: 18px;">💰</a>
+        </div>
+        
         <div style="background: linear-gradient(135deg, #dbeafe, #3b82f6); padding: 20px; border-radius: 12px; text-align: center; color: white;">
             <div style="font-size: 28px; font-weight: 800; margin-bottom: 4px;">{{ $myBids->count() }}</div>
             <div style="font-size: 14px; font-weight: 600;">العروض المقدمة</div>
@@ -25,6 +32,21 @@
             <div style="font-size: 28px; font-weight: 800; margin-bottom: 4px;">{{ number_format($myBids->where('status', 'accepted')->sum('amount')) }}</div>
             <div style="font-size: 14px; font-weight: 600;">إجمالي الأرباح (ج)</div>
         </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div style="display: flex; gap: 15px; margin-bottom: 32px; justify-content: center; flex-wrap: wrap;">
+        <a href="{{ route('wallet.index') }}" style="padding: 12px 24px; background: linear-gradient(45deg, #10b981, #059669); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+            💰 إدارة المحفظة
+        </a>
+        <a href="{{ route('wallet.deposit') }}" style="padding: 12px 24px; background: linear-gradient(45deg, #3b82f6, #1d4ed8); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+            💳 شحن الرصيد
+        </a>
+        @if(Auth::user()->wallet && Auth::user()->wallet->balance >= 50)
+        <a href="{{ route('wallet.withdraw') }}" style="padding: 12px 24px; background: linear-gradient(45deg, #ef4444, #dc2626); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+            🏦 سحب الرصيد
+        </a>
+        @endif
     </div>
 
     <!-- My Bids Section -->
