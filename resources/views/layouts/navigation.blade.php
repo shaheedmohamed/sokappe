@@ -119,7 +119,7 @@
                 </a>
               @endif
               
-              <a href="{{ route('profile.show', Auth::user()) }}" style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: #374151; text-decoration: none; transition: all 0.3s ease; font-weight: 500;">
+              <a href="{{ route('profile.edit') }}" style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; color: #374151; text-decoration: none; transition: all 0.3s ease; font-weight: 500;">
                 <span style="font-size: 16px;">👤</span>
                 <span>الملف الشخصي</span>
               </a>
@@ -277,7 +277,7 @@
           </a>
         @endif
         
-        <a href="{{ route('profile.show', Auth::user()) }}" class="mobile-menu-item">
+        <a href="{{ route('profile.edit') }}" class="mobile-menu-item">
           <span class="mobile-menu-icon">👤</span>
           <span>الملف الشخصي</span>
         </a>

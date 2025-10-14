@@ -128,7 +128,7 @@
             <p style="margin: 0; opacity: 0.9; font-size: 14px;">ابحث عن مشاريع جديدة</p>
         </a>
         
-        <a href="{{ route('profile.show', Auth::user()) }}" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 24px; border-radius: 16px; text-align: center; color: white; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+        <a href="{{ route('profile.edit') }}" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); padding: 24px; border-radius: 16px; text-align: center; color: white; text-decoration: none; transition: all 0.3s;" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
             <div style="font-size: 48px; margin-bottom: 12px;">👤</div>
             <h3 style="margin: 0 0 8px; font-size: 18px; font-weight: 700;">ملفي الشخصي</h3>
             <p style="margin: 0; opacity: 0.9; font-size: 14px;">عرض وتحديث البيانات</p>

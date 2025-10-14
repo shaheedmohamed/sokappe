@@ -329,7 +329,7 @@
                         ⭐ التقييمات ({{ Auth::user()->ratings_count }})
                     </a>
                     
-                    <a href="{{ route('profile.show', Auth::user()) }}" style="display: block; width: 100%; padding: 12px; background: #8b5cf6; color: white; text-decoration: none; border-radius: 6px; text-align: center;">
+                    <a href="/u/{{ Auth::user()->id }}" style="display: block; width: 100%; padding: 12px; background: #8b5cf6; color: white; text-decoration: none; border-radius: 6px; text-align: center;">
                         👁️ عرض الملف العام
                     </a>
                 </div>
