@@ -23,10 +23,10 @@
     </div>
 
     <!-- Main Content with Sidebar -->
-    <div style="display: grid; grid-template-columns: 300px 1fr; gap: 30px; align-items: start;">
+    <div class="projects-layout" style="display: grid; grid-template-columns: 300px 1fr; gap: 30px; align-items: start;">
         
         <!-- Sidebar Filters -->
-        <div class="card" style="padding: 24px; position: sticky; top: 100px;">
+        <div class="projects-sidebar card" style="padding: 24px; position: sticky; top: 100px;">
             <h3 style="margin: 0 0 20px; color: var(--dark); font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
                 🔍 فلترة المشاريع
             </h3>
@@ -110,6 +110,14 @@
             </button>
         </div>
         
+        <!-- Mobile Filter Toggle Button -->
+        <div class="mobile-filter-toggle" style="display: none; margin-bottom: 20px;">
+            <button onclick="toggleMobileFilters()" style="width: 100%; background: linear-gradient(135deg, var(--primary), #8b5cf6); color: white; border: none; padding: 14px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; transition: all 0.3s; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <span id="filterToggleIcon">🔍</span>
+                <span id="filterToggleText">إظهار الفلاتر</span>
+            </button>
+        </div>
+
         <!-- Main Content -->
         <div>
 
@@ -418,23 +426,296 @@ style.textContent = `
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive design */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); max-height: 0; }
+    to { opacity: 1; transform: translateY(0); max-height: 1000px; }
+}
+
+@keyframes slideUp {
+    from { opacity: 1; transform: translateY(0); max-height: 1000px; }
+    to { opacity: 0; transform: translateY(-20px); max-height: 0; }
+}
+
+/* Mobile Responsive Design for Projects Page */
 @media (max-width: 768px) {
+    /* Container adjustments */
+    .container-full {
+        padding: 0 16px !important;
+    }
+    
+    /* Header section mobile */
     .container-full > div:first-child {
+        padding: 30px 20px !important;
+        margin-bottom: 20px !important;
+        border-radius: 16px !important;
+    }
+    
+    .container-full > div:first-child h1 {
+        font-size: 24px !important;
+        margin-bottom: 12px !important;
+    }
+    
+    .container-full > div:first-child p {
+        font-size: 16px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    /* Layout changes */
+    .projects-layout {
         grid-template-columns: 1fr !important;
         gap: 20px !important;
     }
     
-    .card[style*="position: sticky"] {
+    /* Mobile filter toggle */
+    .mobile-filter-toggle {
+        display: block !important;
+        order: 1;
+    }
+    
+    /* Sidebar becomes horizontal filters */
+    .projects-sidebar {
         position: relative !important;
         top: auto !important;
+        padding: 16px !important;
+        order: 2;
+        display: none !important;
+        animation: slideDown 0.3s ease-out;
+    }
+    
+    .projects-sidebar h3 {
+        font-size: 16px !important;
+        margin-bottom: 16px !important;
+    }
+    
+    /* Mobile filter layout */
+    .projects-sidebar > div {
+        margin-bottom: 16px !important;
+    }
+    
+    .projects-sidebar input[type="text"] {
+        min-height: 48px !important;
+        font-size: 16px !important;
+        padding: 12px 16px !important;
+    }
+    
+    .projects-sidebar button {
+        min-height: 48px !important;
+        font-size: 16px !important;
+        padding: 12px 20px !important;
+    }
+    
+    /* Stats grid mobile */
+    .container-full div[style*="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))"] {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .container-full div[style*="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))"] > div {
+        padding: 16px !important;
+        border-radius: 12px !important;
+    }
+    
+    .container-full div[style*="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))"] > div > div:first-child {
+        font-size: 20px !important;
+        margin-bottom: 4px !important;
+    }
+    
+    .container-full div[style*="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))"] > div > div:last-child {
+        font-size: 11px !important;
+    }
+    
+    /* Project cards mobile */
+    .card {
+        padding: 16px !important;
+        margin-bottom: 16px !important;
+    }
+    
+    /* Project header mobile */
+    .card div[style*="grid-template-columns: 1fr auto"] {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+    }
+    
+    .card h3 {
+        font-size: 18px !important;
+        line-height: 1.4 !important;
+        margin-bottom: 8px !important;
+    }
+    
+    /* Budget box mobile */
+    .card div[style*="text-align: center"][style*="background: linear-gradient(135deg, #f0f9ff, #e0f2fe)"] {
+        padding: 12px !important;
+        border-radius: 12px !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .card div[style*="text-align: center"][style*="background: linear-gradient(135deg, #f0f9ff, #e0f2fe)"] > div:first-child {
+        font-size: 18px !important;
+        margin-bottom: 4px !important;
+    }
+    
+    /* Project meta mobile */
+    .card div[style*="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))"] {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 12px !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .card div[style*="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))"] > div {
+        padding: 12px !important;
+        border-radius: 8px !important;
+    }
+    
+    .card div[style*="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))"] > div > div:first-child {
+        font-size: 18px !important;
+        margin-bottom: 4px !important;
+    }
+    
+    .card div[style*="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))"] > div > div:last-child {
+        font-size: 11px !important;
+    }
+    
+    /* Action buttons mobile */
+    .card div[style*="display: flex; gap: 12px"] {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    
+    .card .btn {
+        min-height: 48px !important;
+        padding: 14px 20px !important;
+        font-size: 16px !important;
+        text-align: center !important;
+    }
+    
+    /* Skills tags mobile */
+    .card div[style*="flex-wrap: wrap"] {
+        gap: 6px !important;
+    }
+    
+    .card div[style*="flex-wrap: wrap"] span {
+        padding: 4px 8px !important;
+        font-size: 11px !important;
+        border-radius: 16px !important;
+    }
+    
+    /* Client info mobile */
+    .card div[style*="background: linear-gradient(135deg, #f1f5f9, #e2e8f0)"] {
+        padding: 12px !important;
+        border-radius: 8px !important;
+        margin-bottom: 16px !important;
+    }
+    
+    .card div[style*="background: linear-gradient(135deg, #f1f5f9, #e2e8f0)"] div[style*="width: 40px"] {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 14px !important;
+    }
+    
+    /* CTA section mobile */
+    .container-full > div:last-child {
+        padding: 24px 20px !important;
+        margin-top: 24px !important;
+        border-radius: 16px !important;
+    }
+    
+    .container-full > div:last-child h2 {
+        font-size: 22px !important;
+        margin-bottom: 12px !important;
+    }
+    
+    .container-full > div:last-child p {
+        font-size: 14px !important;
+        margin-bottom: 20px !important;
+    }
+    
+    .container-full > div:last-child .btn {
+        min-height: 48px !important;
+        padding: 14px 24px !important;
+        font-size: 16px !important;
+    }
+    
+    /* Hide some elements on very small screens */
+    @media (max-width: 480px) {
+        .card div[style*="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr))"] {
+            grid-template-columns: 1fr !important;
+        }
+        
+        .container-full div[style*="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))"] {
+            grid-template-columns: 1fr !important;
+        }
+        
+        .card h3 {
+            font-size: 16px !important;
+        }
+        
+        .card .btn {
+            font-size: 14px !important;
+            padding: 12px 16px !important;
+        }
     }
 }
 `;
 
 document.head.appendChild(style);
 
-console.log('🔍 Project Filters Loaded Successfully!');
+// Mobile filter toggle functionality
+function toggleMobileFilters() {
+    const sidebar = document.querySelector('.projects-sidebar');
+    const toggleIcon = document.getElementById('filterToggleIcon');
+    const toggleText = document.getElementById('filterToggleText');
+    
+    if (sidebar.style.display === 'none' || !sidebar.style.display) {
+        sidebar.style.display = 'block';
+        sidebar.style.animation = 'slideDown 0.3s ease-out';
+        toggleIcon.textContent = '❌';
+        toggleText.textContent = 'إخفاء الفلاتر';
+    } else {
+        sidebar.style.animation = 'slideUp 0.3s ease-out';
+        setTimeout(() => {
+            sidebar.style.display = 'none';
+        }, 300);
+        toggleIcon.textContent = '🔍';
+        toggleText.textContent = 'إظهار الفلاتر';
+    }
+}
+
+// Initialize mobile layout
+function initializeMobileLayout() {
+    if (window.innerWidth <= 768) {
+        const sidebar = document.querySelector('.projects-sidebar');
+        const mobileToggle = document.querySelector('.mobile-filter-toggle');
+        
+        if (sidebar && mobileToggle) {
+            sidebar.style.display = 'none';
+            mobileToggle.style.display = 'block';
+        }
+    }
+}
+
+// Handle window resize
+window.addEventListener('resize', function() {
+    const sidebar = document.querySelector('.projects-sidebar');
+    const mobileToggle = document.querySelector('.mobile-filter-toggle');
+    
+    if (window.innerWidth <= 768) {
+        if (mobileToggle) mobileToggle.style.display = 'block';
+        if (sidebar && sidebar.style.display !== 'none') {
+            sidebar.style.display = 'none';
+            document.getElementById('filterToggleIcon').textContent = '🔍';
+            document.getElementById('filterToggleText').textContent = 'إظهار الفلاتر';
+        }
+    } else {
+        if (mobileToggle) mobileToggle.style.display = 'none';
+        if (sidebar) sidebar.style.display = 'block';
+    }
+});
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', initializeMobileLayout);
+
+console.log('🔍 Project Filters with Mobile Support Loaded Successfully!');
 </script>
 
 @endsection

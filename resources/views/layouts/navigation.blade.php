@@ -1,4 +1,5 @@
-<nav class="navbar" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(59, 130, 246, 0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.08); width: 100%; padding: 0;">
+<!-- Desktop Navigation -->
+<nav class="navbar desktop-nav" style="background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(59, 130, 246, 0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.08); width: 100%; padding: 0;">
   <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; max-width: 100%; width: 100%;">
     <!-- Brand -->
     <a class="brand" href="/" style="display: flex; align-items: center; gap: 8px; font-size: 24px; font-weight: 900; background: linear-gradient(45deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; flex-shrink: 0;">
@@ -155,6 +156,157 @@
     </div>
   </div>
 </nav>
+
+<!-- Mobile Bottom Navigation (YouTube Style) -->
+<nav class="mobile-bottom-nav" style="display: none;">
+  <div class="mobile-nav-container">
+    <!-- Home -->
+    <a href="{{ route('dashboard') }}" class="mobile-nav-item" data-label="الرئيسية">
+      <div class="mobile-nav-icon">🏠</div>
+      <span class="mobile-nav-label">الرئيسية</span>
+    </a>
+    
+    <!-- Projects -->
+    <a href="{{ route('projects.index') }}" class="mobile-nav-item" data-label="المشاريع">
+      <div class="mobile-nav-icon">💼</div>
+      <span class="mobile-nav-label">المشاريع</span>
+    </a>
+    
+    <!-- Services -->
+    <a href="{{ route('services.index') }}" class="mobile-nav-item" data-label="الخدمات">
+      <div class="mobile-nav-icon">⭐</div>
+      <span class="mobile-nav-label">الخدمات</span>
+    </a>
+    
+    <!-- Add New (Center Action) -->
+    @auth
+      <a href="{{ route('projects.create.new') }}" class="mobile-nav-item mobile-nav-center" data-label="إضافة">
+        <div class="mobile-nav-icon-center">➕</div>
+        <span class="mobile-nav-label">إضافة</span>
+      </a>
+    @else
+      <a href="{{ route('deals.index') }}" class="mobile-nav-item" data-label="العروض">
+        <div class="mobile-nav-icon">💎</div>
+        <span class="mobile-nav-label">العروض</span>
+      </a>
+    @endauth
+    
+    <!-- Messages -->
+    @auth
+      <div class="mobile-nav-item" onclick="toggleMobileMessages()" data-label="الرسائل">
+        <div class="mobile-nav-icon" style="position: relative;">
+          💬
+          <span id="mobileMessagesUnreadBadge" style="position: absolute; top: -8px; right: -8px; background: #ef4444; color: white; min-width: 16px; height: 16px; border-radius: 50%; font-size: 9px; font-weight: 700; display: none; align-items: center; justify-content: center; padding: 0 3px;">0</span>
+        </div>
+        <span class="mobile-nav-label">الرسائل</span>
+      </div>
+    @else
+      <a href="{{ route('login') }}" class="mobile-nav-item" data-label="دخول">
+        <div class="mobile-nav-icon">👤</div>
+        <span class="mobile-nav-label">دخول</span>
+      </a>
+    @endauth
+    
+    <!-- Profile/Menu -->
+    @auth
+      <div class="mobile-nav-item" onclick="toggleMobileProfile()" data-label="الملف">
+        <div class="mobile-nav-icon" style="position: relative;">
+          👤
+          <span id="mobileNotificationsUnreadBadge" style="position: absolute; top: -8px; right: -8px; background: #f59e0b; color: white; min-width: 16px; height: 16px; border-radius: 50%; font-size: 9px; font-weight: 700; display: none; align-items: center; justify-content: center; padding: 0 3px;">0</span>
+        </div>
+        <span class="mobile-nav-label">الملف</span>
+      </div>
+    @else
+      <a href="{{ route('register') }}" class="mobile-nav-item" data-label="تسجيل">
+        <div class="mobile-nav-icon">📝</div>
+        <span class="mobile-nav-label">تسجيل</span>
+      </a>
+    @endauth
+  </div>
+</nav>
+
+<!-- Mobile Messages Modal -->
+@auth
+<div id="mobileMessagesModal" class="mobile-modal" style="display: none;">
+  <div class="mobile-modal-overlay" onclick="closeMobileMessages()"></div>
+  <div class="mobile-modal-content">
+    <div class="mobile-modal-header">
+      <h3>💬 الرسائل</h3>
+      <button onclick="closeMobileMessages()" class="mobile-modal-close">×</button>
+    </div>
+    <div id="mobileMessagesContent" class="mobile-modal-body">
+      <div style="padding: 20px; text-align: center; color: #64748b;">
+        <div style="font-size: 24px; margin-bottom: 8px;">📭</div>
+        <div>جاري تحميل الرسائل...</div>
+      </div>
+    </div>
+    <div class="mobile-modal-footer">
+      <a href="{{ route('messages.index') }}" class="mobile-btn-primary">عرض جميع الرسائل</a>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Profile Modal -->
+<div id="mobileProfileModal" class="mobile-modal" style="display: none;">
+  <div class="mobile-modal-overlay" onclick="closeMobileProfile()"></div>
+  <div class="mobile-modal-content">
+    <div class="mobile-modal-header">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #3b82f6, #8b5cf6); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 16px;">
+          {{ substr(Auth::user()->name, 0, 1) }}
+        </div>
+        <div>
+          <div style="font-weight: 700; color: #1f2937;">{{ Auth::user()->name }}</div>
+          <div style="font-size: 12px; color: #64748b;">{{ Auth::user()->role === 'admin' ? '🛡️ مدير' : (Auth::user()->role === 'freelancer' ? '⭐ محترف' : '💼 عميل') }}</div>
+        </div>
+      </div>
+      <button onclick="closeMobileProfile()" class="mobile-modal-close">×</button>
+    </div>
+    <div class="mobile-modal-body">
+      <div class="mobile-menu-items">
+        <a href="{{ route('dashboard') }}" class="mobile-menu-item">
+          <span class="mobile-menu-icon">📊</span>
+          <span>لوحة التحكم</span>
+        </a>
+        
+        @if(Auth::user()->role === 'admin')
+          <a href="{{ route('admin.dashboard') }}" class="mobile-menu-item mobile-menu-item-premium">
+            <span class="mobile-menu-icon">🛡️</span>
+            <span>لوحة الإدارة</span>
+            <span class="mobile-menu-badge">VIP</span>
+          </a>
+        @endif
+        
+        <a href="{{ route('profile.show', Auth::user()) }}" class="mobile-menu-item">
+          <span class="mobile-menu-icon">👤</span>
+          <span>الملف الشخصي</span>
+        </a>
+        
+        <a href="{{ route('wallet.index') }}" class="mobile-menu-item">
+          <span class="mobile-menu-icon">💰</span>
+          <span>محفظتي</span>
+          <span class="mobile-menu-badge mobile-menu-badge-new">جديد</span>
+        </a>
+        
+        <a href="{{ route('profile.edit') }}" class="mobile-menu-item">
+          <span class="mobile-menu-icon">⚙️</span>
+          <span>الإعدادات</span>
+        </a>
+        
+        <div class="mobile-menu-divider"></div>
+        
+        <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
+          @csrf
+          <button type="submit" class="mobile-menu-item mobile-menu-item-danger">
+            <span class="mobile-menu-icon">🚪</span>
+            <span>تسجيل الخروج</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endauth
 
 <script>
 function toggleDropdown() {
@@ -343,48 +495,292 @@ style.textContent = `
   animation: pulse 2s infinite;
 }
 
+/* Mobile Bottom Navigation Styles */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(59, 130, 246, 0.1);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+}
+
+.mobile-nav-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 100%;
+  padding: 0 8px;
+}
+
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 4px;
+  text-decoration: none;
+  color: #64748b;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-width: 60px;
+  border-radius: 12px;
+  position: relative;
+}
+
+.mobile-nav-item:hover,
+.mobile-nav-item.active {
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+.mobile-nav-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  position: relative;
+}
+
+.mobile-nav-icon-center {
+  font-size: 18px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  margin-bottom: 4px;
+}
+
+.mobile-nav-center {
+  transform: translateY(-8px);
+}
+
+.mobile-nav-center:hover .mobile-nav-icon-center {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.mobile-nav-label {
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Mobile Modal Styles */
+.mobile-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.mobile-modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.mobile-modal-content {
+  background: white;
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+  position: relative;
+  animation: slideUpModal 0.3s ease-out;
+}
+
+.mobile-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid #f1f5f9;
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+}
+
+.mobile-modal-header h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.mobile-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.mobile-modal-close:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.mobile-modal-body {
+  padding: 0;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.mobile-modal-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #f1f5f9;
+  background: #f8fafc;
+}
+
+.mobile-btn-primary {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.mobile-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+/* Mobile Menu Items */
+.mobile-menu-items {
+  padding: 8px 0;
+}
+
+.mobile-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  color: #374151;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: right;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.mobile-menu-item:hover {
+  background: rgba(59, 130, 246, 0.05);
+  color: #3b82f6;
+}
+
+.mobile-menu-item-premium {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  color: #92400e;
+  margin: 4px 12px;
+  border-radius: 12px;
+}
+
+.mobile-menu-item-danger {
+  color: #ef4444;
+}
+
+.mobile-menu-item-danger:hover {
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.mobile-menu-icon {
+  font-size: 20px;
+  width: 24px;
+  text-align: center;
+}
+
+.mobile-menu-badge {
+  margin-right: auto;
+  font-size: 10px;
+  background: #f59e0b;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-weight: 700;
+}
+
+.mobile-menu-badge-new {
+  background: #10b981;
+}
+
+.mobile-menu-divider {
+  height: 1px;
+  background: #f1f5f9;
+  margin: 8px 20px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
-  .navbar {
-    padding: 8px 0 !important;
-  }
-  
-  .navbar > div {
-    padding: 8px 15px !important;
-    gap: 8px !important;
-  }
-  
-  .brand {
-    font-size: 20px !important;
-  }
-  
-  /* Hide text on small screens, keep only icons */
-  .nav-center a span:not(.emoji) {
-    display: none;
-  }
-  
-  .nav-center a {
-    padding: 8px 12px !important;
-    font-size: 18px;
-  }
-  
-  /* Make dropdowns responsive on mobile */
-  #messagesDropdown, #notificationsDropdown {
-    right: -100px !important;
-    width: 300px !important;
-    max-width: calc(100vw - 40px) !important;
-  }
-  
-  #userDropdown {
-    right: 0 !important;
-    width: 280px !important;
-    max-width: calc(100vw - 20px) !important;
-    transform: translateX(0) !important;
-  }
-  
-  /* Compact user profile */
-  .user-profile-text {
+  /* Hide desktop navigation */
+  .desktop-nav {
     display: none !important;
+  }
+  
+  /* Show mobile navigation */
+  .mobile-bottom-nav {
+    display: block !important;
+  }
+  
+  /* Add bottom padding to body to account for bottom nav */
+  body {
+    padding-bottom: 80px;
+  }
+}
+
+@media (min-width: 769px) {
+  /* Hide mobile navigation on desktop */
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}
+
+/* Animation keyframes */
+@keyframes slideUpModal {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -446,6 +842,7 @@ function toggleNotificationsDropdown() {
 
 // Load messages for dropdown
 function loadMessages() {
+  @auth
   fetch('/messages/unread-count')
     .then(response => response.json())
     .then(data => {
@@ -483,10 +880,12 @@ function loadMessages() {
     .catch(error => {
       console.error('Error loading messages:', error);
     });
+  @endauth
 }
 
 // Load notifications for dropdown
 function loadNotifications() {
+  @auth
   fetch('/notifications')
     .then(response => response.json())
     .then(data => {
@@ -549,6 +948,7 @@ function loadNotifications() {
     .catch(error => {
       console.error('Error loading notifications:', error);
     });
+  @endauth
 }
 
 // Handle notification click
@@ -647,6 +1047,7 @@ document.addEventListener('click', function(event) {
 
 // Load initial counts
 document.addEventListener('DOMContentLoaded', function() {
+  @auth
   // Load messages count
   fetch('/messages/unread-count')
     .then(response => response.json())
@@ -670,7 +1071,147 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     })
     .catch(error => console.error('Error loading notifications count:', error));
+  @endauth
 });
 
-console.log('🚀 Enhanced Navigation with Messages & Notifications Loaded Successfully!');
+// Mobile Navigation Functions
+function toggleMobileMessages() {
+  const modal = document.getElementById('mobileMessagesModal');
+  if (modal) {
+    modal.style.display = 'flex';
+    loadMobileMessages();
+  }
+}
+
+function closeMobileMessages() {
+  const modal = document.getElementById('mobileMessagesModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+function toggleMobileProfile() {
+  const modal = document.getElementById('mobileProfileModal');
+  if (modal) {
+    modal.style.display = 'flex';
+  }
+}
+
+function closeMobileProfile() {
+  const modal = document.getElementById('mobileProfileModal');
+  if (modal) {
+    modal.style.display = 'none';
+  }
+}
+
+// Load messages for mobile modal
+function loadMobileMessages() {
+  @auth
+  fetch('/messages/unread-count')
+    .then(response => response.json())
+    .then(data => {
+      const content = document.getElementById('mobileMessagesContent');
+      
+      if (data.count === 0) {
+        content.innerHTML = `
+          <div style="padding: 20px; text-align: center; color: #64748b;">
+            <div style="font-size: 24px; margin-bottom: 8px;">📭</div>
+            <div>لا توجد رسائل جديدة</div>
+          </div>
+        `;
+      } else {
+        content.innerHTML = `
+          <div style="padding: 16px;">
+            <div style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); padding: 12px; border-radius: 8px; text-align: center;">
+              <div style="font-size: 18px; margin-bottom: 4px;">💬</div>
+              <div style="font-weight: 600; color: #1e40af;">لديك ${data.count} رسائل غير مقروءة</div>
+            </div>
+          </div>
+        `;
+      }
+      
+      // Update mobile badge
+      const badge = document.getElementById('mobileMessagesUnreadBadge');
+      if (badge) {
+        if (data.count > 0) {
+          badge.textContent = data.count > 99 ? '99+' : data.count;
+          badge.style.display = 'flex';
+        } else {
+          badge.style.display = 'none';
+        }
+      }
+    })
+    .catch(error => {
+      console.error('Error loading mobile messages:', error);
+    });
+  @endauth
+}
+
+// Set active navigation item based on current page
+function setActiveNavItem() {
+  const currentPath = window.location.pathname;
+  const navItems = document.querySelectorAll('.mobile-nav-item');
+  
+  navItems.forEach(item => {
+    item.classList.remove('active');
+    const href = item.getAttribute('href');
+    if (href && currentPath.includes(href.split('/')[1])) {
+      item.classList.add('active');
+    }
+  });
+}
+
+// Initialize mobile navigation
+document.addEventListener('DOMContentLoaded', function() {
+  setActiveNavItem();
+  
+  @auth
+  // Load initial mobile badges
+  fetch('/messages/unread-count')
+    .then(response => response.json())
+    .then(data => {
+      const badge = document.getElementById('mobileMessagesUnreadBadge');
+      if (badge && data.count > 0) {
+        badge.textContent = data.count > 99 ? '99+' : data.count;
+        badge.style.display = 'flex';
+      }
+    })
+    .catch(error => console.error('Error loading mobile messages count:', error));
+  
+  fetch('/notifications')
+    .then(response => response.json())
+    .then(data => {
+      const badge = document.getElementById('mobileNotificationsUnreadBadge');
+      if (badge && data.unread_count > 0) {
+        badge.textContent = data.unread_count > 99 ? '99+' : data.unread_count;
+        badge.style.display = 'flex';
+      }
+    })
+    .catch(error => console.error('Error loading mobile notifications count:', error));
+  @endauth
+});
+
+// Handle mobile modal overlay clicks
+document.addEventListener('click', function(event) {
+  if (event.target.classList.contains('mobile-modal-overlay')) {
+    const modal = event.target.closest('.mobile-modal');
+    if (modal) {
+      modal.style.display = 'none';
+    }
+  }
+});
+
+// Add haptic feedback for mobile interactions (if supported)
+function addHapticFeedback() {
+  if ('vibrate' in navigator) {
+    navigator.vibrate(10);
+  }
+}
+
+// Add haptic feedback to mobile nav items
+document.querySelectorAll('.mobile-nav-item').forEach(item => {
+  item.addEventListener('touchstart', addHapticFeedback);
+});
+
+console.log('🚀 Enhanced Navigation with Mobile Bottom Nav Loaded Successfully!');
 </script>

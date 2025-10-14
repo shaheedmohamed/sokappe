@@ -6,6 +6,14 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Sokappe</title>
+        
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
             :root { 
@@ -14,7 +22,7 @@
                 --dark:#0f172a; --border:#e2e8f0; --shadow:0 4px 6px -1px rgb(0 0 0 / 0.1);
             }
             * { box-sizing: border-box; }
-            body { margin:0; font-family: 'Segoe UI', Tahoma, Arial, sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
+            body { margin:0; font-family: 'Inter', 'Segoe UI', Tahoma, Arial, sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
             a { color: var(--primary); text-decoration: none; transition: all 0.2s; }
             a:hover { color: var(--secondary); }
             .container { width:100%; margin-inline:auto; padding: 0 0px; }
@@ -131,6 +139,45 @@
                 .hero-buttons { flex-direction:column; align-items:center; }
                 .nav-links { gap:12px; }
                 .features-grid { grid-template-columns: 1fr; }
+                
+                /* Add bottom padding for mobile navigation */
+                body {
+                    padding-bottom: 80px !important;
+                }
+                
+                /* Improve mobile spacing */
+                .container {
+                    padding: 0 16px;
+                }
+                
+                /* Mobile-friendly buttons */
+                .btn {
+                    min-height: 44px;
+                    padding: 12px 20px;
+                    font-size: 16px;
+                }
+                
+                /* Better mobile forms */
+                .form-input {
+                    min-height: 44px;
+                    font-size: 16px; /* Prevents zoom on iOS */
+                }
+                
+                /* Mobile-optimized cards */
+                .card {
+                    margin-bottom: 16px;
+                }
+                
+                /* Mobile hero adjustments */
+                .hero {
+                    padding: 60px 0;
+                }
+                
+                /* Mobile grid improvements */
+                .grid {
+                    grid-template-columns: 1fr;
+                    gap: 16px;
+                }
             }
             
             /* Tab System */
