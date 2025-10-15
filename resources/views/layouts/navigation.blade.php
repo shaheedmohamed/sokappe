@@ -180,8 +180,8 @@
     
     <!-- Add New (Center Action) -->
     @auth
-      <a href="{{ route('projects.create.new') }}" class="mobile-nav-item mobile-nav-center" data-label="إضافة">
-        <div class="mobile-nav-icon-center">➕</div>
+      <a href="{{ route('projects.create.new') }}" class="mobile-nav-item" data-label="إضافة">
+        <div class="mobile-nav-icon">➕</div>
         <span class="mobile-nav-label">إضافة</span>
       </a>
     @else

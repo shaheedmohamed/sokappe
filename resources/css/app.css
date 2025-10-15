@@ -58,25 +58,7 @@
   position: relative;
 }
 
-.mobile-nav-icon-center {
-  font-size: 24px;
-  color: #10b981;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 4px;
-  transition: all 0.3s ease;
-}
-
-/* Mobile nav center item - no special styling needed */
-
-.mobile-nav-center:hover .mobile-nav-icon-center,
-.mobile-nav-center.active .mobile-nav-icon-center {
-  color: #3b82f6;
-  transform: scale(1.1);
-}
+/* All mobile nav icons now use consistent styling */
 
 .mobile-nav-label {
   font-size: 10px;
@@ -258,6 +240,7 @@
     opacity: 0;
     transform: translateY(100%);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -266,16 +249,17 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
   /* Hide desktop navigation */
   .desktop-nav {
     display: none !important;
   }
-  
+
   /* Show mobile navigation */
   .mobile-bottom-nav {
     display: block !important;
   }
-  
+
   /* Add bottom padding to body to account for bottom nav */
   body {
     padding-bottom: 80px !important;
@@ -287,7 +271,7 @@
     padding: 12px 20px !important;
     font-size: 16px !important;
   }
-  
+
   /* Better mobile forms */
   input[type="text"],
   input[type="email"],
@@ -297,16 +281,17 @@
   textarea,
   select {
     min-height: 48px !important;
-    font-size: 16px !important; /* Prevents iOS zoom */
+    font-size: 16px !important;
+    /* Prevents iOS zoom */
     padding: 12px 16px !important;
     border-radius: 8px !important;
   }
-  
+
   /* Container improvements */
   .container {
     padding: 0 16px !important;
   }
-  
+
   /* Grid improvements */
   .grid,
   .features-grid {
@@ -316,6 +301,7 @@
 }
 
 @media (min-width: 769px) {
+
   /* Hide mobile navigation on desktop */
   .mobile-bottom-nav {
     display: none !important;
