@@ -410,6 +410,20 @@
   .video-card p { 
     font-size: 0.85rem !important; 
   }
+  
+  /* Comparison Table Mobile */
+  .comparison-table {
+    display: block !important;
+  }
+  .comparison-table > div {
+    display: block !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    padding: 15px !important;
+  }
+  .comparison-table > div:nth-child(3n+1) {
+    font-weight: 700 !important;
+    background: #f8fafc !important;
+  }
 }
 </style>
 
@@ -498,6 +512,244 @@
         <div class="trust-number">✓</div>
         <h4 style="margin: 10px 0; color: #1f2937;">محترفون موثقون</h4>
         <p style="color: #64748b; font-size: 0.9rem;">جميع المحترفين تم التحقق من هويتهم ومهاراتهم</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Low Commission Section -->
+<section style="padding: 100px 0; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); position: relative; overflow: hidden;">
+  <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: linear-gradient(45deg, #10b981, #059669); border-radius: 50%; opacity: 0.1; animation: float 8s ease-in-out infinite;"></div>
+  <div style="position: absolute; bottom: -30px; left: -30px; width: 150px; height: 150px; background: linear-gradient(45deg, #3b82f6, #1d4ed8); border-radius: 50%; opacity: 0.1; animation: float 6s ease-in-out infinite reverse;"></div>
+  
+  <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2;">
+    <div class="section-title" style="text-align: center; margin-bottom: 60px;">
+      <h2 style="font-size: 3.5rem; font-weight: 900; color: #065f46; margin-bottom: 20px;">💰 أقل عمولة في السوق!</h2>
+      <p style="font-size: 1.3rem; color: #047857; font-weight: 600;">وفر أموالك مع عمولة منخفضة جداً مقارنة بالمنافسين</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-bottom: 60px;">
+      <!-- Sokappe Commission -->
+      <div class="sokappe-commission" style="background: white; padding: 40px 30px; border-radius: 25px; text-align: center; box-shadow: 0 15px 40px rgba(16, 185, 129, 0.15); border: 3px solid #10b981; position: relative; overflow: hidden; animation: pulse 2s infinite; transition: all 0.5s ease;">
+        <div style="position: absolute; top: -10px; right: -10px; background: #ef4444; color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; transform: rotate(15deg);">الأفضل!</div>
+        <div style="font-size: 4rem; margin-bottom: 20px;">🏆</div>
+        <h3 style="color: #065f46; font-size: 2rem; font-weight: 800; margin-bottom: 15px;">Sokappe</h3>
+        <div style="font-size: 4rem; font-weight: 900; color: #10b981; margin-bottom: 15px;">5%</div>
+        <p style="color: #047857; font-size: 1.1rem; font-weight: 600;">عمولة فقط على المشاريع المكتملة</p>
+        <div style="margin-top: 25px; padding: 20px; background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-radius: 15px;">
+          <p style="color: #065f46; font-weight: 600; margin: 0;">✅ أول 3 مشاريع مجاناً تماماً!</p>
+        </div>
+      </div>
+      
+      <!-- Competitors -->
+      <div class="competitor-commission" style="background: #f8fafc; padding: 40px 30px; border-radius: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 2px solid #e2e8f0; opacity: 0.8; transition: all 0.5s ease;">
+        <div style="font-size: 4rem; margin-bottom: 20px;">😔</div>
+        <h3 style="color: #64748b; font-size: 2rem; font-weight: 800; margin-bottom: 15px;">المنافسون</h3>
+        <div style="font-size: 4rem; font-weight: 900; color: #ef4444; margin-bottom: 15px;">15-20%</div>
+        <p style="color: #64748b; font-size: 1.1rem;">عمولة عالية + رسوم إضافية</p>
+        <div style="margin-top: 25px; padding: 20px; background: #fee2e2; border-radius: 15px;">
+          <p style="color: #dc2626; font-weight: 600; margin: 0;">❌ رسوم مخفية ومعقدة</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Savings Calculator -->
+    <div style="background: white; padding: 50px 40px; border-radius: 25px; text-align: center; box-shadow: 0 20px 50px rgba(16, 185, 129, 0.1); border: 2px solid #10b981;">
+      <h3 style="color: #065f46; font-size: 2.5rem; font-weight: 800; margin-bottom: 30px;">💡 احسب توفيرك معنا</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px;">
+        <div class="savings-card" style="padding: 25px; background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-radius: 15px; transition: all 0.3s ease;">
+          <div style="font-size: 1.5rem; color: #065f46; font-weight: 700;">مشروع بـ 1000$</div>
+          <div class="success-number" style="font-size: 1.2rem; color: #10b981; margin-top: 10px;">توفر: 150$ 💰</div>
+        </div>
+        <div class="savings-card" style="padding: 25px; background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-radius: 15px; transition: all 0.3s ease;">
+          <div style="font-size: 1.5rem; color: #065f46; font-weight: 700;">مشروع بـ 5000$</div>
+          <div class="success-number" style="font-size: 1.2rem; color: #10b981; margin-top: 10px;">توفر: 750$ 💰</div>
+        </div>
+        <div class="savings-card" style="padding: 25px; background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-radius: 15px; transition: all 0.3s ease;">
+          <div style="font-size: 1.5rem; color: #065f46; font-weight: 700;">مشروع بـ 10000$</div>
+          <div class="success-number" style="font-size: 1.2rem; color: #10b981; margin-top: 10px;">توفر: 1500$ 💰</div>
+        </div>
+      </div>
+      <p style="color: #047857; font-size: 1.2rem; font-weight: 600;">كلما زاد حجم مشروعك، كلما وفرت أكثر معنا!</p>
+    </div>
+    
+    <!-- Quick Comparison Table -->
+    <div style="margin-top: 80px; background: white; border-radius: 25px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.1);">
+      <div style="background: linear-gradient(135deg, #065f46, #047857); color: white; padding: 30px; text-align: center;">
+        <h3 style="margin: 0; font-size: 2rem; font-weight: 800;">⚡ مقارنة سريعة</h3>
+        <p style="margin: 10px 0 0; opacity: 0.9;">شاهد الفرق بنفسك!</p>
+      </div>
+      
+      <div class="comparison-table" style="display: grid; grid-template-columns: 1fr 1fr 1fr; text-align: center;">
+        <!-- Header -->
+        <div style="padding: 20px; background: #f8fafc; font-weight: 700; color: #1f2937; border-bottom: 2px solid #e2e8f0;">المميزة</div>
+        <div style="padding: 20px; background: linear-gradient(135deg, #ecfdf5, #d1fae5); font-weight: 700; color: #065f46; border-bottom: 2px solid #10b981;">🏆 Sokappe</div>
+        <div style="padding: 20px; background: #fee2e2; font-weight: 700; color: #dc2626; border-bottom: 2px solid #ef4444;">😔 المنافسون</div>
+        
+        <!-- Commission -->
+        <div style="padding: 20px; background: #f8fafc; color: #64748b; border-bottom: 1px solid #e2e8f0;">العمولة</div>
+        <div style="padding: 20px; background: #ecfdf5; color: #065f46; font-weight: 700; font-size: 1.2rem; border-bottom: 1px solid #d1fae5;">5% فقط ✅</div>
+        <div style="padding: 20px; background: #fef2f2; color: #dc2626; font-weight: 700; font-size: 1.2rem; border-bottom: 1px solid #fecaca;">15-20% ❌</div>
+        
+        <!-- Free Projects -->
+        <div style="padding: 20px; background: #f8fafc; color: #64748b; border-bottom: 1px solid #e2e8f0;">مشاريع مجانية</div>
+        <div style="padding: 20px; background: #ecfdf5; color: #065f46; font-weight: 700; border-bottom: 1px solid #d1fae5;">أول 3 مشاريع ✅</div>
+        <div style="padding: 20px; background: #fef2f2; color: #dc2626; font-weight: 700; border-bottom: 1px solid #fecaca;">لا يوجد ❌</div>
+        
+        <!-- Hidden Fees -->
+        <div style="padding: 20px; background: #f8fafc; color: #64748b; border-bottom: 1px solid #e2e8f0;">رسوم مخفية</div>
+        <div style="padding: 20px; background: #ecfdf5; color: #065f46; font-weight: 700; border-bottom: 1px solid #d1fae5;">لا توجد ✅</div>
+        <div style="padding: 20px; background: #fef2f2; color: #dc2626; font-weight: 700; border-bottom: 1px solid #fecaca;">موجودة ❌</div>
+        
+        <!-- Support -->
+        <div style="padding: 20px; background: #f8fafc; color: #64748b; border-bottom: 1px solid #e2e8f0;">الدعم الفني</div>
+        <div style="padding: 20px; background: #ecfdf5; color: #065f46; font-weight: 700; border-bottom: 1px solid #d1fae5;">24/7 عربي ✅</div>
+        <div style="padding: 20px; background: #fef2f2; color: #dc2626; font-weight: 700; border-bottom: 1px solid #fecaca;">محدود ❌</div>
+        
+        <!-- Quality -->
+        <div style="padding: 20px; background: #f8fafc; color: #64748b;">ضمان الجودة</div>
+        <div style="padding: 20px; background: #ecfdf5; color: #065f46; font-weight: 700;">30 يوم ✅</div>
+        <div style="padding: 20px; background: #fef2f2; color: #dc2626; font-weight: 700;">محدود ❌</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section style="padding: 100px 0; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; position: relative; overflow: hidden;">
+  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><defs><pattern id=\"stars\" width=\"50\" height=\"50\" patternUnits=\"userSpaceOnUse\"><circle cx=\"25\" cy=\"25\" r=\"2\" fill=\"%23ffffff\" opacity=\"0.1\"/></pattern></defs><rect width=\"100\" height=\"100\" fill=\"url(%23stars)\"/></svg>') repeat;"></div>
+  
+  <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2;">
+    <div class="section-title" style="text-align: center; margin-bottom: 80px;">
+      <h2 style="font-size: 3.5rem; font-weight: 900; color: white; margin-bottom: 20px;">🌟 لماذا نحن الأفضل؟</h2>
+      <p style="font-size: 1.3rem; color: rgba(255,255,255,0.8);">مميزات حصرية تجعلنا الخيار الأول للعملاء والمحترفين</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+      <!-- Feature 1 -->
+      <div style="background: rgba(255,255,255,0.1); padding: 40px 30px; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; text-align: center;" onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+        <div style="font-size: 4rem; margin-bottom: 25px;">⚡</div>
+        <h3 style="color: #fbbf24; font-size: 1.8rem; font-weight: 800; margin-bottom: 20px;">تسليم فوري</h3>
+        <p style="color: rgba(255,255,255,0.9); line-height: 1.7; font-size: 1.1rem;">خدمات سريعة تبدأ من 24 ساعة مع ضمان الجودة والاحترافية في كل مشروع</p>
+        <div style="margin-top: 20px; padding: 15px; background: rgba(251, 191, 36, 0.2); border-radius: 10px;">
+          <span style="color: #fbbf24; font-weight: 700;">⏰ متوسط التسليم: 3 أيام</span>
+        </div>
+      </div>
+      
+      <!-- Feature 2 -->
+      <div style="background: rgba(255,255,255,0.1); padding: 40px 30px; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; text-align: center;" onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+        <div style="font-size: 4rem; margin-bottom: 25px;">🛡️</div>
+        <h3 style="color: #10b981; font-size: 1.8rem; font-weight: 800; margin-bottom: 20px;">ضمان شامل</h3>
+        <p style="color: rgba(255,255,255,0.9); line-height: 1.7; font-size: 1.1rem;">ضمان استرداد كامل للأموال + تعديلات مجانية + حماية قانونية للطرفين</p>
+        <div style="margin-top: 20px; padding: 15px; background: rgba(16, 185, 129, 0.2); border-radius: 10px;">
+          <span style="color: #10b981; font-weight: 700;">✅ ضمان 30 يوم</span>
+        </div>
+      </div>
+      
+      <!-- Feature 3 -->
+      <div style="background: rgba(255,255,255,0.1); padding: 40px 30px; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; text-align: center;" onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+        <div style="font-size: 4rem; margin-bottom: 25px;">🎯</div>
+        <h3 style="color: #3b82f6; font-size: 1.8rem; font-weight: 800; margin-bottom: 20px;">دقة في الاختيار</h3>
+        <p style="color: rgba(255,255,255,0.9); line-height: 1.7; font-size: 1.1rem;">خوارزمية ذكية لمطابقة المشاريع مع أنسب المحترفين حسب الخبرة والتخصص</p>
+        <div style="margin-top: 20px; padding: 15px; background: rgba(59, 130, 246, 0.2); border-radius: 10px;">
+          <span style="color: #3b82f6; font-weight: 700;">🎯 دقة 95%</span>
+        </div>
+      </div>
+      
+      <!-- Feature 4 -->
+      <div style="background: rgba(255,255,255,0.1); padding: 40px 30px; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; text-align: center;" onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+        <div style="font-size: 4rem; margin-bottom: 25px;">💎</div>
+        <h3 style="color: #8b5cf6; font-size: 1.8rem; font-weight: 800; margin-bottom: 20px;">جودة مضمونة</h3>
+        <p style="color: rgba(255,255,255,0.9); line-height: 1.7; font-size: 1.1rem;">فحص دقيق لكل محترف + اختبارات مهارات + تقييمات حقيقية من العملاء</p>
+        <div style="margin-top: 20px; padding: 15px; background: rgba(139, 92, 246, 0.2); border-radius: 10px;">
+          <span style="color: #8b5cf6; font-weight: 700;">⭐ تقييم 4.9/5</span>
+        </div>
+      </div>
+      
+      <!-- Feature 5 -->
+      <div style="background: rgba(255,255,255,0.1); padding: 40px 30px; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; text-align: center;" onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+        <div style="font-size: 4rem; margin-bottom: 25px;">🤝</div>
+        <h3 style="color: #ef4444; font-size: 1.8rem; font-weight: 800; margin-bottom: 20px;">دعم مستمر</h3>
+        <p style="color: rgba(255,255,255,0.9); line-height: 1.7; font-size: 1.1rem;">فريق دعم عربي متخصص متاح 24/7 لحل أي مشكلة أو استفسار فوراً</p>
+        <div style="margin-top: 20px; padding: 15px; background: rgba(239, 68, 68, 0.2); border-radius: 10px;">
+          <span style="color: #ef4444; font-weight: 700;">📞 رد خلال 5 دقائق</span>
+        </div>
+      </div>
+      
+      <!-- Feature 6 -->
+      <div style="background: rgba(255,255,255,0.1); padding: 40px 30px; border-radius: 25px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease; text-align: center;" onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+        <div style="font-size: 4rem; margin-bottom: 25px;">🚀</div>
+        <h3 style="color: #06b6d4; font-size: 1.8rem; font-weight: 800; margin-bottom: 20px;">تقنية متطورة</h3>
+        <p style="color: rgba(255,255,255,0.9); line-height: 1.7; font-size: 1.1rem;">منصة حديثة بأحدث التقنيات لتجربة سلسة وآمنة مع واجهة سهلة الاستخدام</p>
+        <div style="margin-top: 20px; padding: 15px; background: rgba(6, 182, 212, 0.2); border-radius: 10px;">
+          <span style="color: #06b6d4; font-weight: 700;">🔧 تحديثات أسبوعية</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Success Stories Section -->
+<section style="padding: 100px 0; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); position: relative;">
+  <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <div class="section-title" style="text-align: center; margin-bottom: 60px;">
+      <h2 style="font-size: 3.5rem; font-weight: 900; color: #92400e; margin-bottom: 20px;">🏆 قصص نجاح حقيقية</h2>
+      <p style="font-size: 1.3rem; color: #b45309;">عملاء حققوا أهدافهم وتوفيرات مذهلة معنا</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+      <!-- Success Story 1 -->
+      <div style="background: white; padding: 40px 30px; border-radius: 20px; box-shadow: 0 15px 40px rgba(146, 64, 14, 0.1); border-left: 5px solid #f59e0b; position: relative;">
+        <div style="position: absolute; top: -10px; right: 20px; background: #10b981; color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem; font-weight: 700;">وفر 80%</div>
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&q=80" style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid #f59e0b;" alt="Client">
+          <div>
+            <h4 style="color: #92400e; margin: 0; font-size: 1.2rem;">أحمد الشريف</h4>
+            <p style="color: #b45309; margin: 0; font-size: 0.9rem;">مدير شركة تقنية</p>
+          </div>
+        </div>
+        <p style="color: #374151; line-height: 1.7; font-style: italic; margin-bottom: 20px;">
+          "كنت أدفع 20% عمولة في المنصات الأخرى، مع Sokappe وفرت آلاف الدولارات! الجودة ممتازة والأسعار معقولة جداً."
+        </p>
+        <div style="background: #fef3c7; padding: 15px; border-radius: 10px; text-align: center;">
+          <span style="color: #92400e; font-weight: 700;">💰 وفر 8,000$ في 6 أشهر</span>
+        </div>
+      </div>
+      
+      <!-- Success Story 2 -->
+      <div style="background: white; padding: 40px 30px; border-radius: 20px; box-shadow: 0 15px 40px rgba(146, 64, 14, 0.1); border-left: 5px solid #10b981; position: relative;">
+        <div style="position: absolute; top: -10px; right: 20px; background: #3b82f6; color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem; font-weight: 700;">نمو 300%</div>
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+          <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&q=80" style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid #10b981;" alt="Client">
+          <div>
+            <h4 style="color: #92400e; margin: 0; font-size: 1.2rem;">سارة محمد</h4>
+            <p style="color: #b45309; margin: 0; font-size: 0.9rem;">رائدة أعمال</p>
+          </div>
+        </div>
+        <p style="color: #374151; line-height: 1.7; font-style: italic; margin-bottom: 20px;">
+          "بدأت بمشروع صغير وبفضل المحترفين هنا نمت شركتي 300%! العمولة المنخفضة ساعدتني أستثمر أكثر في التطوير."
+        </p>
+        <div style="background: #ecfdf5; padding: 15px; border-radius: 10px; text-align: center;">
+          <span style="color: #065f46; font-weight: 700;">📈 نمو من 10K إلى 40K شهرياً</span>
+        </div>
+      </div>
+      
+      <!-- Success Story 3 -->
+      <div style="background: white; padding: 40px 30px; border-radius: 20px; box-shadow: 0 15px 40px rgba(146, 64, 14, 0.1); border-left: 5px solid #8b5cf6; position: relative;">
+        <div style="position: absolute; top: -10px; right: 20px; background: #ef4444; color: white; padding: 5px 15px; border-radius: 15px; font-size: 0.8rem; font-weight: 700;">توفير مذهل</div>
+        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=80&q=80" style="width: 60px; height: 60px; border-radius: 50%; border: 3px solid #8b5cf6;" alt="Client">
+          <div>
+            <h4 style="color: #92400e; margin: 0; font-size: 1.2rem;">خالد العتيبي</h4>
+            <p style="color: #b45309; margin: 0; font-size: 0.9rem;">مؤسس ستارت أب</p>
+          </div>
+        </div>
+        <p style="color: #374151; line-height: 1.7; font-style: italic; margin-bottom: 20px;">
+          "المنصة غيرت مفهومي عن العمل الحر! جودة عالية، أسعار منافسة، وعمولة قليلة. أنصح كل رائد أعمال بتجربتها."
+        </p>
+        <div style="background: #f3e8ff; padding: 15px; border-radius: 10px; text-align: center;">
+          <span style="color: #6b21a8; font-weight: 700;">⭐ 50+ مشروع ناجح</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1572,6 +1824,69 @@ function toggleFAQ(element) {
   }
 }
 
+// Savings Calculator Animation
+function animateSavings() {
+  const savingsCards = document.querySelectorAll('.savings-card');
+  savingsCards.forEach((card, index) => {
+    setTimeout(() => {
+      card.style.transform = 'scale(1.05)';
+      card.style.boxShadow = '0 25px 60px rgba(16, 185, 129, 0.2)';
+      setTimeout(() => {
+        card.style.transform = 'scale(1)';
+        card.style.boxShadow = '0 15px 40px rgba(16, 185, 129, 0.1)';
+      }, 300);
+    }, index * 200);
+  });
+}
+
+// Commission Comparison Animation
+function animateCommissionCards() {
+  const sokappeCard = document.querySelector('.sokappe-commission');
+  const competitorCard = document.querySelector('.competitor-commission');
+  
+  if (sokappeCard && competitorCard) {
+    // Animate Sokappe card (winner)
+    setTimeout(() => {
+      sokappeCard.style.transform = 'scale(1.1) rotate(2deg)';
+      sokappeCard.style.boxShadow = '0 25px 60px rgba(16, 185, 129, 0.3)';
+    }, 500);
+    
+    // Animate competitor card (loser)
+    setTimeout(() => {
+      competitorCard.style.transform = 'scale(0.95)';
+      competitorCard.style.opacity = '0.7';
+    }, 800);
+    
+    // Reset animations
+    setTimeout(() => {
+      sokappeCard.style.transform = 'scale(1) rotate(0deg)';
+      sokappeCard.style.boxShadow = '0 15px 40px rgba(16, 185, 129, 0.15)';
+      competitorCard.style.transform = 'scale(1)';
+      competitorCard.style.opacity = '0.8';
+    }, 2000);
+  }
+}
+
+// Success Stories Counter Animation
+function animateSuccessNumbers() {
+  const successNumbers = document.querySelectorAll('.success-number');
+  successNumbers.forEach(number => {
+    const finalValue = parseInt(number.textContent.replace(/[^0-9]/g, ''));
+    let currentValue = 0;
+    const increment = finalValue / 50;
+    
+    const counter = setInterval(() => {
+      currentValue += increment;
+      if (currentValue >= finalValue) {
+        number.textContent = finalValue.toLocaleString() + (number.textContent.includes('$') ? '$' : '');
+        clearInterval(counter);
+      } else {
+        number.textContent = Math.floor(currentValue).toLocaleString() + (number.textContent.includes('$') ? '$' : '');
+      }
+    }, 50);
+  });
+}
+
 // Initialize animations when sections come into view
 const sectionObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -1579,16 +1894,33 @@ const sectionObserver = new IntersectionObserver((entries) => {
       if (entry.target.querySelector('.animated-counter')) {
         animateCounters();
       }
+      if (entry.target.querySelector('.savings-card')) {
+        animateSavings();
+      }
+      if (entry.target.querySelector('.sokappe-commission')) {
+        animateCommissionCards();
+      }
+      if (entry.target.querySelector('.success-number')) {
+        animateSuccessNumbers();
+      }
     }
   });
-}, { threshold: 0.5 });
+}, { threshold: 0.3 });
 
-// Observe statistics section
+// Observe all animated sections
 document.addEventListener('DOMContentLoaded', function() {
-  const statsSection = document.querySelector('section:has(.animated-counter)');
-  if (statsSection) {
-    sectionObserver.observe(statsSection);
-  }
+  const animatedSections = document.querySelectorAll('section');
+  animatedSections.forEach(section => {
+    if (section.querySelector('.animated-counter') || 
+        section.querySelector('.savings-card') || 
+        section.querySelector('.sokappe-commission') ||
+        section.querySelector('.success-number')) {
+      sectionObserver.observe(section);
+    }
+  });
+  
+  // Auto-animate commission comparison every 5 seconds
+  setInterval(animateCommissionCards, 5000);
 });
 
 // Video Player Functions
