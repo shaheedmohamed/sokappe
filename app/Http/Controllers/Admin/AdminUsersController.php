@@ -262,9 +262,8 @@ class AdminUsersController extends Controller
         return back()->with('success', '✅ تم إلغاء حظر المستخدم بنجاح');
     }
 
-    public function toggleStatus($userId)
+    public function toggleStatus(User $user)
     {
-        $user = User::findOrFail($userId);
         
         if ($user->role === 'admin') {
             return back()->with('error', 'لا يمكن تعديل حالة مدير النظام');
