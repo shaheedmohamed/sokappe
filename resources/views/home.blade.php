@@ -358,6 +358,58 @@
   .features-grid { grid-template-columns: 1fr; }
   .steps-grid { grid-template-columns: 1fr; }
   .testimonials-grid { grid-template-columns: 1fr; }
+  
+  /* Video Sections Responsive */
+  .video-card { margin-bottom: 30px; }
+  .demo-grid { 
+    grid-template-columns: 1fr !important; 
+    gap: 40px !important; 
+  }
+  .demo-container { 
+    padding: 25px !important; 
+    margin-bottom: 30px; 
+  }
+  .demo-screen { 
+    min-height: 250px !important; 
+    padding: 20px !important; 
+  }
+  
+  /* Timeline Responsive */
+  .timeline-item { 
+    flex-direction: column !important; 
+    text-align: center !important; 
+  }
+  .timeline-item > div { 
+    padding: 0 !important; 
+    margin-bottom: 20px; 
+  }
+  
+  /* Skills Responsive */
+  .skills-container { 
+    justify-content: center !important; 
+  }
+  .skill-tag { 
+    font-size: 0.9rem !important; 
+    padding: 10px 20px !important; 
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title h2 { font-size: 1.8rem !important; }
+  .section-title p { font-size: 1rem !important; }
+  .hero-buttons { flex-direction: column !important; }
+  .hero-buttons a { width: 100% !important; text-align: center !important; }
+  
+  /* Video Cards Mobile */
+  .video-card { 
+    margin: 0 10px 20px 10px; 
+  }
+  .video-card h4 { 
+    font-size: 1.1rem !important; 
+  }
+  .video-card p { 
+    font-size: 0.85rem !important; 
+  }
 }
 </style>
 
@@ -570,6 +622,70 @@
   </div>
 </section>
 
+<!-- Statistics & Analytics Section -->
+<section style="padding: 100px 0; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: white; position: relative; overflow: hidden;">
+  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><defs><pattern id=\"dots\" width=\"20\" height=\"20\" patternUnits=\"userSpaceOnUse\"><circle cx=\"10\" cy=\"10\" r=\"1\" fill=\"%23ffffff\" opacity=\"0.1\"/></pattern></defs><rect width=\"100\" height=\"100\" fill=\"url(%23dots)\"/></svg>') repeat;"></div>
+  
+  <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2;">
+    <div class="section-title" style="text-align: center; margin-bottom: 60px;">
+      <h2 style="font-size: 3rem; font-weight: 800; color: white; margin-bottom: 20px;">📊 إحصائيات مذهلة</h2>
+      <p style="font-size: 1.2rem; color: rgba(255,255,255,0.8);">أرقام حقيقية تعكس نجاح منصتنا</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
+      <div class="stat-card" style="text-align: center; padding: 40px 20px; background: rgba(255,255,255,0.1); border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+        <div class="animated-counter" data-target="25000" style="font-size: 4rem; font-weight: 900; color: #fbbf24; margin-bottom: 15px;">0</div>
+        <h4 style="color: white; margin: 10px 0; font-size: 1.3rem;">مشروع مكتمل</h4>
+        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">بنجاح وجودة عالية</p>
+      </div>
+      
+      <div class="stat-card" style="text-align: center; padding: 40px 20px; background: rgba(255,255,255,0.1); border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+        <div class="animated-counter" data-target="12000" style="font-size: 4rem; font-weight: 900; color: #10b981; margin-bottom: 15px;">0</div>
+        <h4 style="color: white; margin: 10px 0; font-size: 1.3rem;">محترف نشط</h4>
+        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">من جميع أنحاء العالم العربي</p>
+      </div>
+      
+      <div class="stat-card" style="text-align: center; padding: 40px 20px; background: rgba(255,255,255,0.1); border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+        <div class="animated-counter" data-target="98" style="font-size: 4rem; font-weight: 900; color: #3b82f6; margin-bottom: 15px;">0</div>
+        <h4 style="color: white; margin: 10px 0; font-size: 1.3rem;">معدل الرضا %</h4>
+        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">من العملاء راضون تماماً</p>
+      </div>
+      
+      <div class="stat-card" style="text-align: center; padding: 40px 20px; background: rgba(255,255,255,0.1); border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.background='rgba(255,255,255,0.1)'">
+        <div class="animated-counter" data-target="150" style="font-size: 4rem; font-weight: 900; color: #8b5cf6; margin-bottom: 15px;">0</div>
+        <h4 style="color: white; margin: 10px 0; font-size: 1.3rem;">تخصص متاح</h4>
+        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">في مختلف المجالات</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Skills Showcase -->
+<section style="padding: 100px 0; background: white; position: relative;">
+  <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <div class="section-title" style="text-align: center; margin-bottom: 60px;">
+      <h2 style="font-size: 3rem; font-weight: 800; color: #1f2937; margin-bottom: 20px;">🎨 مهارات متنوعة</h2>
+      <p style="font-size: 1.2rem; color: #64748b;">اكتشف المهارات المطلوبة واختر ما يناسب مشروعك</p>
+    </div>
+    
+    <div class="skills-container" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-bottom: 50px;">
+      <div class="skill-tag" style="padding: 12px 25px; background: linear-gradient(45deg, #3b82f6, #1d4ed8); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);" onclick="showSkillInfo('web')" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 25px rgba(59, 130, 246, 0.4)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(59, 130, 246, 0.3)'">💻 تطوير الويب</div>
+      
+      <div class="skill-tag" style="padding: 12px 25px; background: linear-gradient(45deg, #10b981, #059669); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);" onclick="showSkillInfo('design')" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 25px rgba(16, 185, 129, 0.4)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(16, 185, 129, 0.3)'">🎨 التصميم الجرافيكي</div>
+      
+      <div class="skill-tag" style="padding: 12px 25px; background: linear-gradient(45deg, #f59e0b, #d97706); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);" onclick="showSkillInfo('marketing')" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 25px rgba(245, 158, 11, 0.4)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(245, 158, 11, 0.3)'">📈 التسويق الرقمي</div>
+      
+      <div class="skill-tag" style="padding: 12px 25px; background: linear-gradient(45deg, #8b5cf6, #7c3aed); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);" onclick="showSkillInfo('writing')" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 25px rgba(139, 92, 246, 0.4)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(139, 92, 246, 0.3)'">✍️ كتابة المحتوى</div>
+      
+      <div class="skill-tag" style="padding: 12px 25px; background: linear-gradient(45deg, #ef4444, #dc2626); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);" onclick="showSkillInfo('mobile')" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 25px rgba(239, 68, 68, 0.4)'" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 15px rgba(239, 68, 68, 0.3)'">📱 تطبيقات الجوال</div>
+    </div>
+    
+    <div id="skill-info" style="background: linear-gradient(135deg, #f8fafc, #e2e8f0); padding: 40px; border-radius: 20px; text-align: center; min-height: 200px; display: flex; align-items: center; justify-content: center; transition: all 0.5s ease;">
+      <p style="color: #64748b; font-size: 1.1rem;">اضغط على أي مهارة لمعرفة المزيد عنها</p>
+    </div>
+  </div>
+</section>
+
 <!-- CTA Section -->
 <section class="cta-section">
   <div class="cta-content">
@@ -609,6 +725,298 @@
   </div>
 </section>
 
+<!-- Live Projects Feed -->
+<section style="padding: 100px 0; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); position: relative;">
+  <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <div class="section-title" style="text-align: center; margin-bottom: 60px;">
+      <h2 style="font-size: 3rem; font-weight: 800; color: #1f2937; margin-bottom: 20px;">🔥 مشاريع حية</h2>
+      <p style="font-size: 1.2rem; color: #64748b;">شاهد المشاريع الجديدة التي يتم نشرها الآن</p>
+    </div>
+    
+    <div class="live-projects" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+      <div class="project-card" style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)'">
+        <div style="position: absolute; top: 0; right: 0; background: linear-gradient(45deg, #10b981, #059669); color: white; padding: 5px 15px; border-radius: 0 15px 0 15px; font-size: 0.8rem; font-weight: 600;">🔥 جديد</div>
+        <h4 style="color: #1f2937; margin: 0 0 15px; font-size: 1.3rem;">تطوير متجر إلكتروني</h4>
+        <p style="color: #64748b; margin: 0 0 20px; line-height: 1.6;">مطلوب تطوير متجر إلكتروني متكامل بنظام دفع آمن وإدارة المخزون</p>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="color: #10b981; font-weight: 700; font-size: 1.1rem;">$2,500</span>
+          <span style="color: #64748b; font-size: 0.9rem;">⏰ منذ 5 دقائق</span>
+        </div>
+      </div>
+      
+      <div class="project-card" style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)'">
+        <div style="position: absolute; top: 0; right: 0; background: linear-gradient(45deg, #f59e0b, #d97706); color: white; padding: 5px 15px; border-radius: 0 15px 0 15px; font-size: 0.8rem; font-weight: 600;">⚡ عاجل</div>
+        <h4 style="color: #1f2937; margin: 0 0 15px; font-size: 1.3rem;">تصميم هوية بصرية</h4>
+        <p style="color: #64748b; margin: 0 0 20px; line-height: 1.6;">تصميم شعار وهوية بصرية كاملة لشركة ناشئة في مجال التكنولوجيا</p>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="color: #10b981; font-weight: 700; font-size: 1.1rem;">$800</span>
+          <span style="color: #64748b; font-size: 0.9rem;">⏰ منذ 12 دقيقة</span>
+        </div>
+      </div>
+      
+      <div class="project-card" style="background: white; padding: 30px; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); transition: all 0.3s ease; position: relative; overflow: hidden;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 35px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)'">
+        <h4 style="color: #1f2937; margin: 0 0 15px; font-size: 1.3rem;">كتابة محتوى تسويقي</h4>
+        <p style="color: #64748b; margin: 0 0 20px; line-height: 1.6;">كتابة محتوى تسويقي لمواقع التواصل الاجتماعي وحملات إعلانية</p>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="color: #10b981; font-weight: 700; font-size: 1.1rem;">$400</span>
+          <span style="color: #64748b; font-size: 0.9rem;">⏰ منذ 18 دقيقة</span>
+        </div>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 50px;">
+      <a href="{{ route('projects.index') }}" style="display: inline-block; padding: 15px 40px; background: linear-gradient(45deg, #3b82f6, #1d4ed8); color: white; text-decoration: none; border-radius: 25px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 15px 35px rgba(59, 130, 246, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 25px rgba(59, 130, 246, 0.3)'">
+        🔍 استكشف جميع المشاريع
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Success Stories Timeline -->
+<section style="padding: 100px 0; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; position: relative; overflow: hidden;">
+  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><defs><pattern id=\"stars\" width=\"50\" height=\"50\" patternUnits=\"userSpaceOnUse\"><circle cx=\"25\" cy=\"25\" r=\"2\" fill=\"%23ffffff\" opacity=\"0.1\"/></pattern></defs><rect width=\"100\" height=\"100\" fill=\"url(%23stars)\"/></svg>') repeat;"></div>
+  
+  <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2;">
+    <div class="section-title" style="text-align: center; margin-bottom: 60px;">
+      <h2 style="font-size: 3rem; font-weight: 800; color: white; margin-bottom: 20px;">🏆 قصص نجاح</h2>
+      <p style="font-size: 1.2rem; color: rgba(255,255,255,0.8);">رحلة نجاح حقيقية من بداية المشروع حتى التسليم</p>
+    </div>
+    
+    <div class="timeline" style="position: relative; max-width: 800px; margin: 0 auto;">
+      <div style="position: absolute; left: 50%; top: 0; bottom: 0; width: 4px; background: rgba(255,255,255,0.3); transform: translateX(-50%);"></div>
+      
+      <div class="timeline-item" style="display: flex; align-items: center; margin-bottom: 50px; position: relative;">
+        <div style="flex: 1; text-align: right; padding-right: 30px;">
+          <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+            <h4 style="color: white; margin: 0 0 10px;">📝 نشر المشروع</h4>
+            <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">أحمد ينشر مشروع تطوير تطبيق جوال</p>
+          </div>
+        </div>
+        <div style="width: 20px; height: 20px; background: #fbbf24; border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); z-index: 3;"></div>
+        <div style="flex: 1; padding-left: 30px;"></div>
+      </div>
+      
+      <div class="timeline-item" style="display: flex; align-items: center; margin-bottom: 50px; position: relative;">
+        <div style="flex: 1; padding-right: 30px;"></div>
+        <div style="width: 20px; height: 20px; background: #10b981; border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); z-index: 3;"></div>
+        <div style="flex: 1; text-align: left; padding-left: 30px;">
+          <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+            <h4 style="color: white; margin: 0 0 10px;">🤝 اختيار المحترف</h4>
+            <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">تم اختيار سارة المطورة المتخصصة</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="timeline-item" style="display: flex; align-items: center; margin-bottom: 50px; position: relative;">
+        <div style="flex: 1; text-align: right; padding-right: 30px;">
+          <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+            <h4 style="color: white; margin: 0 0 10px;">⚡ بدء العمل</h4>
+            <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">سارة تبدأ تطوير التطبيق بأحدث التقنيات</p>
+          </div>
+        </div>
+        <div style="width: 20px; height: 20px; background: #3b82f6; border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); z-index: 3;"></div>
+        <div style="flex: 1; padding-left: 30px;"></div>
+      </div>
+      
+      <div class="timeline-item" style="display: flex; align-items: center; position: relative;">
+        <div style="flex: 1; padding-right: 30px;"></div>
+        <div style="width: 20px; height: 20px; background: #8b5cf6; border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); z-index: 3;"></div>
+        <div style="flex: 1; text-align: left; padding-left: 30px;">
+          <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; backdrop-filter: blur(10px);">
+            <h4 style="color: white; margin: 0 0 10px;">🎉 التسليم والنجاح</h4>
+            <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">تسليم التطبيق بجودة عالية وتقييم 5 نجوم</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Video Showcase Section -->
+<section style="padding: 100px 0; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; position: relative; overflow: hidden;">
+  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><defs><pattern id=\"video-bg\" width=\"30\" height=\"30\" patternUnits=\"userSpaceOnUse\"><circle cx=\"15\" cy=\"15\" r=\"1.5\" fill=\"%23ffffff\" opacity=\"0.05\"/></pattern></defs><rect width=\"100\" height=\"100\" fill=\"url(%23video-bg)\"/></svg>') repeat;"></div>
+  
+  <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2;">
+    <div class="section-title" style="text-align: center; margin-bottom: 60px;">
+      <h2 style="font-size: 3rem; font-weight: 800; color: white; margin-bottom: 20px;">🎬 شاهد كيف نعمل</h2>
+      <p style="font-size: 1.2rem; color: rgba(255,255,255,0.8);">فيديوهات توضيحية تشرح كيفية استخدام المنصة وقصص نجاح حقيقية</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px;">
+      <!-- Main Feature Video -->
+      <div class="video-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+        <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #3b82f6, #8b5cf6); display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="playVideo('main-video')">
+            <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='scale(1)'">
+              <div style="width: 0; height: 0; border-left: 25px solid white; border-top: 15px solid transparent; border-bottom: 15px solid transparent; margin-left: 5px;"></div>
+            </div>
+          </div>
+          <iframe id="main-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none;" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div style="padding: 25px;">
+          <h4 style="color: white; margin: 0 0 15px; font-size: 1.3rem;">🚀 كيف تبدأ مشروعك الأول</h4>
+          <p style="color: rgba(255,255,255,0.8); margin: 0; line-height: 1.6; font-size: 0.95rem;">شرح مفصل لكيفية نشر مشروعك واختيار المحترف المناسب في 5 دقائق فقط</p>
+          <div style="margin-top: 15px; display: flex; align-items: center; gap: 15px; font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+            <span>⏱️ 5:30 دقيقة</span>
+            <span>👁️ 12.5K مشاهدة</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Success Story Video -->
+      <div class="video-card" style="background: rgba(255,255,255,0.1); border-radius: 20px; overflow: hidden; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-10px)'; this.style.boxShadow='0 20px 40px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+        <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #10b981, #059669); display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="playVideo('success-video')">
+            <div style="width: 80px; height: 80px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='scale(1)'">
+              <div style="width: 0; height: 0; border-left: 25px solid white; border-top: 15px solid transparent; border-bottom: 15px solid transparent; margin-left: 5px;"></div>
+            </div>
+          </div>
+          <iframe id="success-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none;" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <div style="padding: 25px;">
+          <h4 style="color: white; margin: 0 0 15px; font-size: 1.3rem;">🏆 قصة نجاح أحمد</h4>
+          <p style="color: rgba(255,255,255,0.8); margin: 0; line-height: 1.6; font-size: 0.95rem;">كيف حقق أحمد نجاحاً باهراً في مشروعه وحصل على تطبيق احترافي بأقل التكاليف</p>
+          <div style="margin-top: 15px; display: flex; align-items: center; gap: 15px; font-size: 0.9rem; color: rgba(255,255,255,0.7);">
+            <span>⏱️ 3:45 دقيقة</span>
+            <span>👁️ 8.2K مشاهدة</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Video Playlist -->
+    <div style="margin-top: 60px; text-align: center;">
+      <h3 style="color: white; margin: 0 0 30px; font-size: 1.8rem;">📚 المزيد من الفيديوهات</h3>
+      <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+        <button class="playlist-btn" onclick="playVideo('tutorial-1')" style="padding: 12px 25px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+          🎯 نصائح للعملاء
+        </button>
+        <button class="playlist-btn" onclick="playVideo('tutorial-2')" style="padding: 12px 25px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+          💼 دليل المحترفين
+        </button>
+        <button class="playlist-btn" onclick="playVideo('tutorial-3')" style="padding: 12px 25px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: white; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9rem;" onmouseover="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'; this.style.transform='translateY(0)'">
+          🔒 الأمان والحماية
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Demo Section -->
+<section style="padding: 100px 0; background: white; position: relative;">
+  <div class="container-full" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <div class="section-title" style="text-align: center; margin-bottom: 60px;">
+      <h2 style="font-size: 3rem; font-weight: 800; color: #1f2937; margin-bottom: 20px;">🎮 جرب المنصة الآن</h2>
+      <p style="font-size: 1.2rem; color: #64748b;">تجربة تفاعلية مباشرة لاستكشاف مميزات المنصة</p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;" class="demo-grid">
+      <!-- Interactive Demo -->
+      <div class="demo-container" style="background: linear-gradient(135deg, #f8fafc, #e2e8f0); border-radius: 20px; padding: 40px; position: relative; overflow: hidden;">
+        <div style="position: absolute; top: -50px; right: -50px; width: 100px; height: 100px; background: linear-gradient(45deg, #3b82f6, #8b5cf6); border-radius: 50%; opacity: 0.1;"></div>
+        
+        <div class="demo-screen" id="demo-screen" style="background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); min-height: 300px; position: relative;">
+          <div class="demo-content" id="demo-content">
+            <div style="text-align: center; padding: 40px 20px;">
+              <div style="font-size: 4rem; margin-bottom: 20px;">🚀</div>
+              <h4 style="color: #1f2937; margin: 0 0 15px;">مرحباً بك في Sokappe</h4>
+              <p style="color: #64748b; margin: 0;">اختر أحد الخيارات لتجربة المنصة</p>
+            </div>
+          </div>
+        </div>
+        
+        <div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+          <button onclick="showDemo('client')" style="padding: 12px 25px; background: linear-gradient(45deg, #3b82f6, #1d4ed8); color: white; border: none; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-weight: 600;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(59, 130, 246, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            👤 كعميل
+          </button>
+          <button onclick="showDemo('freelancer')" style="padding: 12px 25px; background: linear-gradient(45deg, #10b981, #059669); color: white; border: none; border-radius: 25px; cursor: pointer; transition: all 0.3s ease; font-weight: 600;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 25px rgba(16, 185, 129, 0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+            💼 كمحترف
+          </button>
+        </div>
+      </div>
+      
+      <!-- Video Tutorial -->
+      <div class="tutorial-video" style="position: relative;">
+        <div class="video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1);">
+          <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; cursor: pointer;" onclick="playVideo('demo-video')">
+            <div style="text-align: center; color: white;">
+              <div style="width: 100px; height: 100px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.3)'; this.style.transform='scale(1.1)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.transform='scale(1)'">
+                <div style="width: 0; height: 0; border-left: 35px solid white; border-top: 20px solid transparent; border-bottom: 20px solid transparent; margin-left: 8px;"></div>
+              </div>
+              <h4 style="margin: 0 0 10px; font-size: 1.5rem;">🎥 شاهد العرض التوضيحي</h4>
+              <p style="margin: 0; opacity: 0.9; font-size: 1rem;">تعلم كيفية استخدام المنصة في 3 دقائق</p>
+            </div>
+          </div>
+          <iframe id="demo-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none;" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+        
+        <!-- Video Stats -->
+        <div style="margin-top: 25px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+          <div style="text-align: center;">
+            <div style="font-size: 1.5rem; font-weight: 700; color: #3b82f6;">25K+</div>
+            <div style="color: #64748b; font-size: 0.9rem;">مشاهدة</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 1.5rem; font-weight: 700; color: #10b981;">4.9/5</div>
+            <div style="color: #64748b; font-size: 0.9rem;">تقييم</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 1.5rem; font-weight: 700; color: #f59e0b;">3:15</div>
+            <div style="color: #64748b; font-size: 0.9rem;">مدة الفيديو</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive FAQ Section -->
+<section style="padding: 100px 0; background: white; position: relative;">
+  <div class="container-full" style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
+    <div class="section-title" style="text-align: center; margin-bottom: 60px;">
+      <h2 style="font-size: 3rem; font-weight: 800; color: #1f2937; margin-bottom: 20px;">❓ أسئلة شائعة</h2>
+      <p style="font-size: 1.2rem; color: #64748b;">إجابات على أكثر الأسئلة تكراراً</p>
+    </div>
+    
+    <div class="faq-container">
+      <div class="faq-item" style="margin-bottom: 20px; border: 1px solid #e2e8f0; border-radius: 15px; overflow: hidden; transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+        <div class="faq-question" onclick="toggleFAQ(this)" style="padding: 25px; background: linear-gradient(135deg, #f8fafc, #e2e8f0); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease;">
+          <h4 style="margin: 0; color: #1f2937; font-size: 1.1rem;">كيف يمكنني ضمان جودة العمل؟</h4>
+          <span class="faq-icon" style="font-size: 1.5rem; color: #3b82f6; transition: transform 0.3s ease;">+</span>
+        </div>
+        <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+          <div style="padding: 25px; background: white;">
+            <p style="margin: 0; color: #64748b; line-height: 1.6;">نوفر نظام تقييمات شامل، ومراجعة أعمال المحترفين السابقة، وضمان استرداد الأموال في حالة عدم الرضا عن الجودة.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item" style="margin-bottom: 20px; border: 1px solid #e2e8f0; border-radius: 15px; overflow: hidden; transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+        <div class="faq-question" onclick="toggleFAQ(this)" style="padding: 25px; background: linear-gradient(135deg, #f8fafc, #e2e8f0); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease;">
+          <h4 style="margin: 0; color: #1f2937; font-size: 1.1rem;">ما هي طرق الدفع المتاحة؟</h4>
+          <span class="faq-icon" style="font-size: 1.5rem; color: #3b82f6; transition: transform 0.3s ease;">+</span>
+        </div>
+        <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+          <div style="padding: 25px; background: white;">
+            <p style="margin: 0; color: #64748b; line-height: 1.6;">نقبل جميع البطاقات الائتمانية، PayPal، التحويل البنكي، والمحافظ الرقمية مع حماية كاملة للمعاملات.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item" style="margin-bottom: 20px; border: 1px solid #e2e8f0; border-radius: 15px; overflow: hidden; transition: all 0.3s ease;" onmouseover="this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)'" onmouseout="this.style.boxShadow='none'">
+        <div class="faq-question" onclick="toggleFAQ(this)" style="padding: 25px; background: linear-gradient(135deg, #f8fafc, #e2e8f0); cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: all 0.3s ease;">
+          <h4 style="margin: 0; color: #1f2937; font-size: 1.1rem;">كم يستغرق تنفيذ المشروع؟</h4>
+          <span class="faq-icon" style="font-size: 1.5rem; color: #3b82f6; transition: transform 0.3s ease;">+</span>
+        </div>
+        <div class="faq-answer" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease;">
+          <div style="padding: 25px; background: white;">
+            <p style="margin: 0; color: #64748b; line-height: 1.6;">يختلف حسب نوع وحجم المشروع. المشاريع البسيطة تستغرق 1-3 أيام، والمعقدة قد تحتاج أسابيع. يتم تحديد المدة مسبقاً.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <script>
 // Scroll to top functionality
@@ -1046,5 +1454,288 @@ console.log('🎉 Sokappe Home Page Loaded Successfully! 🚀');
 <button id="scrollToTop" onclick="scrollToTop()" style="position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(45deg, #3b82f6, #8b5cf6); border: none; color: white; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); transition: all 0.3s ease; z-index: 1000; display: none;">
   ⬆️
 </button>
+
+<script>
+// Interactive Functions for New Sections
+
+// Animated Counter for Statistics
+function animateCounters() {
+  const counters = document.querySelectorAll('.animated-counter');
+  
+  counters.forEach(counter => {
+    const target = parseInt(counter.getAttribute('data-target'));
+    const increment = target / 100;
+    let current = 0;
+    
+    const updateCounter = () => {
+      if (current < target) {
+        current += increment;
+        counter.textContent = Math.floor(current);
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = target;
+      }
+    };
+    
+    updateCounter();
+  });
+}
+
+// Skills Showcase Interaction
+function showSkillInfo(skill) {
+  const skillInfo = document.getElementById('skill-info');
+  
+  const skillData = {
+    web: {
+      title: '💻 تطوير الويب',
+      description: 'تطوير مواقع ويب حديثة وتطبيقات ويب تفاعلية باستخدام أحدث التقنيات مثل React, Vue, Laravel, Node.js',
+      projects: '5,200+ مشروع',
+      avgPrice: '$1,200',
+      color: '#3b82f6'
+    },
+    design: {
+      title: '🎨 التصميم الجرافيكي',
+      description: 'تصميم هويات بصرية، شعارات، مطبوعات، وتصاميم رقمية احترافية تعبر عن علامتك التجارية',
+      projects: '3,800+ مشروع',
+      avgPrice: '$450',
+      color: '#10b981'
+    },
+    marketing: {
+      title: '📈 التسويق الرقمي',
+      description: 'استراتيجيات تسويق رقمي شاملة، إدارة حملات إعلانية، وتحسين محركات البحث لزيادة المبيعات',
+      projects: '2,900+ مشروع',
+      avgPrice: '$800',
+      color: '#f59e0b'
+    },
+    writing: {
+      title: '✍️ كتابة المحتوى',
+      description: 'كتابة محتوى تسويقي، مقالات، نصوص إعلانية، ومحتوى مواقع التواصل الاجتماعي باللغة العربية',
+      projects: '4,100+ مشروع',
+      avgPrice: '$300',
+      color: '#8b5cf6'
+    },
+    mobile: {
+      title: '📱 تطبيقات الجوال',
+      description: 'تطوير تطبيقات جوال أصلية ومتقاطعة للأندرويد و iOS بأحدث التقنيات والمعايير',
+      projects: '1,600+ مشروع',
+      avgPrice: '$2,800',
+      color: '#ef4444'
+    }
+  };
+  
+  const data = skillData[skill];
+  
+  skillInfo.innerHTML = `
+    <div style="text-align: center;">
+      <h3 style="color: ${data.color}; margin: 0 0 20px; font-size: 2rem;">${data.title}</h3>
+      <p style="color: #64748b; margin: 0 0 30px; font-size: 1.1rem; line-height: 1.6;">${data.description}</p>
+      <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: ${data.color};">${data.projects}</div>
+          <div style="color: #64748b; font-size: 0.9rem;">مشاريع مكتملة</div>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 1.5rem; font-weight: 700; color: ${data.color};">${data.avgPrice}</div>
+          <div style="color: #64748b; font-size: 0.9rem;">متوسط السعر</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// FAQ Toggle Function
+function toggleFAQ(element) {
+  const faqItem = element.parentElement;
+  const answer = faqItem.querySelector('.faq-answer');
+  const icon = element.querySelector('.faq-icon');
+  
+  // Close all other FAQs
+  document.querySelectorAll('.faq-item').forEach(item => {
+    if (item !== faqItem) {
+      const otherAnswer = item.querySelector('.faq-answer');
+      const otherIcon = item.querySelector('.faq-icon');
+      otherAnswer.style.maxHeight = '0';
+      otherIcon.textContent = '+';
+      otherIcon.style.transform = 'rotate(0deg)';
+    }
+  });
+  
+  // Toggle current FAQ
+  if (answer.style.maxHeight === '0px' || !answer.style.maxHeight) {
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+    icon.textContent = '−';
+    icon.style.transform = 'rotate(180deg)';
+  } else {
+    answer.style.maxHeight = '0';
+    icon.textContent = '+';
+    icon.style.transform = 'rotate(0deg)';
+  }
+}
+
+// Initialize animations when sections come into view
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      if (entry.target.querySelector('.animated-counter')) {
+        animateCounters();
+      }
+    }
+  });
+}, { threshold: 0.5 });
+
+// Observe statistics section
+document.addEventListener('DOMContentLoaded', function() {
+  const statsSection = document.querySelector('section:has(.animated-counter)');
+  if (statsSection) {
+    sectionObserver.observe(statsSection);
+  }
+});
+
+// Video Player Functions
+function playVideo(videoId) {
+  const videoElement = document.getElementById(videoId);
+  const placeholder = videoElement.previousElementSibling;
+  
+  // Sample video URLs - replace with actual video URLs
+  const videoUrls = {
+    'main-video': 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
+    'success-video': 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
+    'demo-video': 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
+    'tutorial-1': 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
+    'tutorial-2': 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1',
+    'tutorial-3': 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1'
+  };
+  
+  if (videoUrls[videoId]) {
+    videoElement.src = videoUrls[videoId];
+    placeholder.style.display = 'none';
+    videoElement.style.display = 'block';
+  }
+}
+
+// Interactive Demo Functions
+function showDemo(type) {
+  const demoContent = document.getElementById('demo-content');
+  
+  const demoData = {
+    client: {
+      title: '👤 تجربة العميل',
+      content: `
+        <div style="text-align: right; padding: 20px;">
+          <h4 style="color: #1f2937; margin: 0 0 20px; text-align: center;">لوحة تحكم العميل</h4>
+          <div style="background: #f8fafc; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-right: 4px solid #3b82f6;">
+            <h5 style="margin: 0 0 10px; color: #3b82f6;">📋 نشر مشروع جديد</h5>
+            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">اكتب تفاصيل مشروعك وحدد الميزانية</p>
+          </div>
+          <div style="background: #f8fafc; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-right: 4px solid #10b981;">
+            <h5 style="margin: 0 0 10px; color: #10b981;">👥 استقبال العروض</h5>
+            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">راجع عروض المحترفين واختر الأنسب</p>
+          </div>
+          <div style="background: #f8fafc; padding: 15px; border-radius: 10px; border-right: 4px solid #f59e0b;">
+            <h5 style="margin: 0 0 10px; color: #f59e0b;">🎯 متابعة التقدم</h5>
+            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">تابع سير العمل والتواصل المباشر</p>
+          </div>
+        </div>
+      `
+    },
+    freelancer: {
+      title: '💼 تجربة المحترف',
+      content: `
+        <div style="text-align: right; padding: 20px;">
+          <h4 style="color: #1f2937; margin: 0 0 20px; text-align: center;">لوحة تحكم المحترف</h4>
+          <div style="background: #f8fafc; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-right: 4px solid #10b981;">
+            <h5 style="margin: 0 0 10px; color: #10b981;">🔍 استكشاف المشاريع</h5>
+            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">ابحث عن المشاريع المناسبة لمهاراتك</p>
+          </div>
+          <div style="background: #f8fafc; padding: 15px; border-radius: 10px; margin-bottom: 15px; border-right: 4px solid #3b82f6;">
+            <h5 style="margin: 0 0 10px; color: #3b82f6;">💡 تقديم العروض</h5>
+            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">اكتب عرضاً مميزاً يبرز خبرتك</p>
+          </div>
+          <div style="background: #f8fafc; padding: 15px; border-radius: 10px; border-right: 4px solid #8b5cf6;">
+            <h5 style="margin: 0 0 10px; color: #8b5cf6;">🚀 تنفيذ المشاريع</h5>
+            <p style="margin: 0; color: #64748b; font-size: 0.9rem;">ابدأ العمل واحصل على أجرك</p>
+          </div>
+        </div>
+      `
+    }
+  };
+  
+  const data = demoData[type];
+  demoContent.innerHTML = data.content;
+  
+  // Add animation
+  demoContent.style.opacity = '0';
+  setTimeout(() => {
+    demoContent.style.transition = 'opacity 0.5s ease';
+    demoContent.style.opacity = '1';
+  }, 100);
+}
+
+// Add video loading animation
+function addVideoLoadingEffect() {
+  const videoCards = document.querySelectorAll('.video-card');
+  
+  videoCards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+    
+    setTimeout(() => {
+      card.style.transition = 'all 0.6s ease';
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, index * 200);
+  });
+}
+
+// Initialize video effects when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  // Add loading effect to video cards
+  const videoSection = document.querySelector('section:has(.video-card)');
+  if (videoSection) {
+    const videoObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          addVideoLoadingEffect();
+          videoObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    videoObserver.observe(videoSection);
+  }
+  
+  // Add hover effects to playlist buttons
+  document.querySelectorAll('.playlist-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Remove active class from all buttons
+      document.querySelectorAll('.playlist-btn').forEach(b => {
+        b.style.background = 'rgba(255,255,255,0.1)';
+        b.style.transform = 'translateY(0)';
+      });
+      
+      // Add active class to clicked button
+      this.style.background = 'rgba(255,255,255,0.3)';
+      this.style.transform = 'translateY(-2px)';
+    });
+  });
+});
+
+// Add responsive video handling
+function handleVideoResize() {
+  const videos = document.querySelectorAll('.video-container');
+  
+  videos.forEach(video => {
+    const iframe = video.querySelector('iframe');
+    if (iframe && iframe.style.display !== 'none') {
+      // Ensure video maintains aspect ratio on resize
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+    }
+  });
+}
+
+// Listen for window resize
+window.addEventListener('resize', handleVideoResize);
+</script>
 
 @endsection
